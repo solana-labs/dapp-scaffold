@@ -15,3 +15,12 @@ code {
 .ant-row {
   min-width: 100%;
 }
+
+.builton {
+  background-image: url("components/builton.svg");
+  width: 185px;
+  height: 23px;
+  background-size: 185px;
+  background-repeat: no-repeat;
+  margin: 0 auto 0 auto;
+}
