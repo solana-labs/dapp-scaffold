@@ -46,6 +46,9 @@ export const HomeView = () => {
           <Button>Faucet</Button>
         </Link>
       </Col>
+      <Col span={24}>
+        <div className="builton" />
+      </Col>
     </Row>
   );
 };
