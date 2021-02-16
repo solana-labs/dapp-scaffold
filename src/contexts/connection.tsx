@@ -24,6 +24,7 @@ export const ENDPOINTS = [
   {
     name: "mainnet-beta" as ENV,
     endpoint: "https://solana-api.projectserum.com/",
+  },
   { name: "testnet" as ENV, endpoint: clusterApiUrl("testnet") },
   { name: "devnet" as ENV, endpoint: clusterApiUrl("devnet") },
   { name: "localnet" as ENV, endpoint: "http://127.0.0.1:8899" },

@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useConnection } from "./connection";
 import { useWallet } from "./wallet";
 import {
@@ -18,10 +13,7 @@ import { TokenAccount } from "./../models";
 import { chunks } from "./../utils/utils";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
-import {
-  WRAPPED_SOL_MINT,
-  programIds,
-} from "../utils/ids";
+import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
 
 const AccountsContext = React.createContext<any>(null);
 

@@ -1,5 +1,5 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { Button } from "antd";
+import { Button, Col, Row } from "antd";
 import React, { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ConnectButton } from "../../components/ConnectButton";
@@ -13,12 +13,13 @@ export const HomeView = () => {
   const { tokenMap } = useConnectionConfig();
   const { account } = useNativeAccount();
 
-  const balance = useMemo(() => formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL), [account]);
+  const balance = useMemo(
+    () => formatNumber.format((account?.lamports || 0) / LAMPORTS_PER_SOL),
+    [account]
+  );
 
   useEffect(() => {
-    const refreshTotal = () => {
-      
-    };
+    const refreshTotal = () => {};
 
     const dispose = marketEmitter.onMarket(() => {
       refreshTotal();
@@ -32,15 +33,19 @@ export const HomeView = () => {
   }, [marketEmitter, midPriceInUSD, tokenMap]);
 
   return (
-    <div className="flexColumn">
-      TODO:
-      Your balance: {balance} SOL
+    <Row gutter={[16, 16]} align="middle">
+      <Col span={24}>
+        <h2>Your balance: {balance} SOL</h2>
+      </Col>
 
-      <ConnectButton />
-      <Link to="/faucet">
-        <Button>Faucet</Button>
-      </Link>
-      2. Link to faucet
-    </div>
+      <Col span={12}>
+        <ConnectButton />
+      </Col>
+      <Col span={12}>
+        <Link to="/faucet">
+          <Button>Faucet</Button>
+        </Link>
+      </Col>
+    </Row>
   );
 };
