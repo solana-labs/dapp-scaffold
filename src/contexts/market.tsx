@@ -1,8 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
-import {
-  STABLE_COINS,
-} from "./../utils/utils";
+import { STABLE_COINS } from "./../utils/utils";
 import { useConnectionConfig } from "./connection";
 import { cache, getMultipleAccounts } from "./accounts";
 import { Market, MARKETS, Orderbook, TOKEN_MINTS } from "@project-serum/serum";

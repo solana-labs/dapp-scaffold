@@ -6,10 +6,7 @@ import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
-import {
-  FaucetView,
-  HomeView,
-} from "./views";
+import { FaucetView, HomeView } from "./views";
 
 export function Routes() {
   return (
@@ -19,12 +16,12 @@ export function Routes() {
           <WalletProvider>
             <AccountsProvider>
               <MarketProvider>
-                  <AppLayout>
-                    <Switch>
-                      <Route exact path="/" component={() => <HomeView />} />
-                      <Route exact path="/faucet" children={<FaucetView />} />
-                    </Switch>
-                  </AppLayout>
+                <AppLayout>
+                  <Switch>
+                    <Route exact path="/" component={() => <HomeView />} />
+                    <Route exact path="/faucet" children={<FaucetView />} />
+                  </Switch>
+                </AppLayout>
               </MarketProvider>
             </AccountsProvider>
           </WalletProvider>
