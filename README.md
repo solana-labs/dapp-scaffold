@@ -27,10 +27,10 @@ npm start
 
 ## program
 
-Solana program template in Rust by @mvines
+Solana program template in Rust
 
 ### src/lib.rs
-
+* process_instruction function is used to run all calls issued to the smart contract
 
 ## src/actions
 
@@ -53,5 +53,5 @@ Generic react hooks to interact with token program:
 
 ## src/views
 
-* home - 
+* home - main page for your app
 * faucet - airdrops SOL on Testnet and Devnet
