@@ -1,0 +1,380 @@
+@import "~antd/dist/antd.dark.less";
+@import "./ant-custom.less";
+
+body {
+  --row-highlight: @background-color-base;
+}
+
+.App-logo {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjZDgzYWViIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTQwLjM2LDUwLjkxYzAuMDA3LTguMTc0LDMuODM2LTExLjUyNSw3LjA0OC0xMi44OThjNi41NTEtMi44MDEsMTYuNzksMC4xNDEsMjMuODA5LDYuODQyICBjMS4yNDYsMS4xODksMi4zNjEsMi4zMDksMy4zNjUsMy4zNjhjLTUuNjg0LTguMzcyLTE1LjAyNS0xNy41NjYtMjkuMDY0LTE4Ljg1OWMtNy43OTQtMC43MTYtMTMuNzk0LDIuNzk5LTE2LjAzMyw5LjQwOCAgYy0yLjY0OSw3LjgyMSwwLjM0MSwxOS4zMDUsMTEuMTgxLDI2LjEyMmM2LjE1MywzLjg2OSwxMi4zLDYuODY5LDE3LjM0MSw5LjA0NWMtMC41NTEtMC4zNTQtMS4xMDUtMC43MTYtMS42Ni0xLjA5MSAgQzQ1LjczMyw2NS42NjIsNDAuMzU0LDU4LjI4MSw0MC4zNiw1MC45MXoiPjwvcGF0aD48cGF0aCBkPSJNNjAuMDI3LDYzLjc2MWMtMC4wNzgtNC43MTUsMS44OTgtOC4yNSw1LjQyMi05LjY5OGM0LjEzOS0xLjcsOS40OS0wLjAwNCwxMy42MzMsNC4zMjMgIGMwLjY5MSwwLjcyMywxLjMwMywxLjQ1MywxLjg3NSwyLjE4NGMtMS42NzQtMy42OTktNC41MS03Ljk1OC0xMS4xMjEtMTQuMjY5Yy02LjM3MS02LjA4MS0xNS44NzktOC45MTItMjEuNjQyLTYuNDUgIGMtMy44MTIsMS42MjktNS44MjksNS40NTQtNS44MzQsMTEuMDYxYy0wLjAxLDExLjgxNSwxNi4zMTIsMjEuNjQ2LDI1LjA3MiwyNi4wNzJDNjMuNzc1LDczLjc0Niw2MC4xMTUsNjkuMTY4LDYwLjAyNyw2My43NjF6Ij48L3BhdGg+PHBhdGggZD0iTTI3LjU5MSwzOC4xM2MyLjU1Ni03LjU0NSw5LjMzMS0xMS41NjgsMTguMTExLTEwLjc1OGMxMS41MjksMS4wNjEsMjAuMDE1LDcuMTQ4LDI2LjAxMywxMy45MiAgQzYxLjUsMjYuMDU0LDQ4Ljk2MywyMC4zMzksNDguODE3LDIwLjI3NGMtMy4yOTYtMS42ODgtNi43OTctMi41MzEtMTAuNDU3LTIuNTMxYy0xMi43NzQsMC0yMy4xNjcsMTAuNTgtMjMuMTY3LDIzLjU4MyAgYzAsNy45NjEsNC4yMDEsMTUuNTIxLDExLjIzOCwyMC4yMjJjMy43ODksMi41MywxMS40ODgsNS44MjQsMjAuMDQ2LDkuMDM4Yy0yLjI1NC0xLjIxNS00LjU2NC0yLjU0Ny02Ljg3NS00ICBDMjcuODg1LDU5LjIxOSwyNC42OSw0Ni42OTQsMjcuNTkxLDM4LjEzeiI+PC9wYXRoPjxwYXRoIGQ9Ik03Ny42MzcsNTkuNzY5Yy0zLjU2OC0zLjcyOS04LjA1Ny01LjI0Mi0xMS40MjgtMy44NTVjLTIuNzIxLDEuMTE4LTQuMjQ2LDMuOTY3LTQuMTgyLDcuODE0ICBjMC4xNDgsOS4wMzUsMTEuMzEzLDE1LjMxOCwxMy41ODgsMTYuNTkyYzMuNDg5LDEuOTU0LDcuNjI1LDIuMDg3LDcuOTA0LDEuOTM4czAuMjc5LTAuMTQ5LDAuNTMxLTAuNjUxICBjMC42Ni0xLjMwOSwxLjA1My00LjI3NSwwLjM2MS04Ljk2NkM4My43NzcsNjkuNDg5LDgyLjA5Niw2NC40MjcsNzcuNjM3LDU5Ljc2OXoiPjwvcGF0aD48L3N2Zz4=");
+  height: 32px;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 32px;
+  width: 32px;
+}
+
+.footer {
+  background-color: black;
+  color: lightgray;
+  padding: 10px 10px;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-spinner {
+  position: absolute;
+  right: 5px;
+}
+
+.Banner {
+  min-height: 30px;
+  width: 100%;
+  background-color: #fff704;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // z-index: 10;
+}
+
+.Banner-description {
+  color: black;
+  text-align: center;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  height: 100%;
+}
+
+.App-Bar {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  top: 0px;
+  position: relative;
+  padding: 1rem;
+  z-index: 2;
+
+  .ant-menu-horizontal {
+    border-bottom-color: transparent;
+    background-color: transparent;
+    line-height: inherit;
+    font-size: 16px;
+    margin: 0 10px;
+
+    .ant-menu-item {
+      margin: 0 10px;
+      color: lightgrey;
+      height: 35px;
+      line-height: 35px;
+      border-width: 0px !important;
+    }
+
+    .ant-menu-item:hover {
+      color: white;
+      border-width: 0px !important;
+    }
+
+    .ant-menu-item-selected {
+      font-weight: bold;
+    }
+  }
+}
+
+.App-Bar-left {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  width: fit-content;
+}
+
+.App-Bar-right {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-self: flex-end;
+}
+
+.ant-tabs-nav-scroll {
+  display: flex;
+  justify-content: center;
+}
+
+.discord {
+  font-size: 30px;
+  color: #7289da;
+}
+
+.discord:hover {
+  color: #8ea1e1;
+}
+
+.telegram {
+  color: #32afed;
+  font-size: 28px;
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  width: 27px;
+  height: 27px;
+}
+
+em {
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.telegram:hover {
+  color: #2789de !important;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.social-buttons {
+  margin-top: auto;
+  margin-left: auto;
+  margin-bottom: 0.5rem;
+  margin-right: 1rem;
+  gap: 0.3rem;
+  display: flex;
+}
+
+.wallet-wrapper {
+  padding-left: 0.7rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.wallet-key {
+  padding: 0.1rem 0.5rem 0.1rem 0.7rem;
+  margin-left: 0.3rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.flash-positive {
+  color: rgba(0, 255, 0, 0.6);
+}
+
+.flash-negative {
+  color: rgba(255, 0, 0, 0.6);
+}
+
+.ant-pro-basicLayout {
+  min-height: calc(100% - 30px) !important;
+}
+
+.ant-table-cell {
+  padding: 6px 16px !important;
+}
+
+.ant-table {
+  margin: 0px 30px;
+}
+
+.ant-menu-inline-collapsed > .ant-menu-item {
+  padding-left: 16px !important;
+}
+
+.ant-pagination-options {
+  display: none;
+}
+
+.ant-table-container table > thead > tr th {
+  text-align: center;
+}
+
+.ant-notification {
+  a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.ant-layout-content {
+  display: flex;
+  overflow: auto;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-fill {
+  height: 100%;
+}
+
+.card-row {
+  box-sizing: border-box;
+  margin: 5px 0px;
+  min-width: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+
+  .card-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    box-sizing: border-box;
+    text-align: left;
+    margin: 0px;
+    min-width: 0px;
+    font-size: 14px;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .small {
+    font-size: 11px;
+  }
+}
+
+.ant-slider {
+  margin: 20px 15px 40px 15px;
+}
+
+.ant-pro-sider.ant-layout-sider-collapsed .ant-pro-sider-logo {
+  padding: 8px 8px;
+}
+
+.ant-pro-global-header {
+  .ant-pro-global-header-logo a h1 {
+    color: white !important;
+  }
+
+  background-color: black !important;
+  color: white !important;
+
+  .ant-btn {
+    color: white !important;
+  }
+}
+
+.ant-statistic {
+  user-select: none;
+}
+
+.ant-statistic-content {
+  font-weight: bold;
+}
+
+.ant-select-selection-item {
+  .token-balance {
+    display: none;
+  };
+};
+
+.token-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid grey;
+  padding: 0px 10px;
+  margin: 5px 0px;
+}
+
+.token-balance {
+  margin-left: auto;
+  margin-right: 5px;
+  color: @text-color-secondary;
+}
+
+[class="ant-layout-header"] {
+  height: 16px !important;
+}
+
+.dashboard-amount-quote {
+  font-size: 10px;
+  font-style: normal;
+  text-align: right;
+}
+
+.small-statisitc {
+  .ant-statistic-title {
+    font-size: 12px;
+  }
+
+  .ant-statistic-content {
+    max-height: 20px;
+    line-height: 2px;;
+  }
+
+  .ant-statistic-content-value-int {
+    font-size: 12px;
+  }
+
+  .ant-statistic-content-value-decimal {
+    font-size: 10px;
+  }
+}
+
+.links {
+  position: relative;
+  height: 100%;
+
+  .bottom-links {
+    position: absolute;
+    bottom: 0px;
+  }
+}
+
+.ant-pro-sider {
+  background: transparent !important;
+
+  .ant-menu {
+    background: transparent !important;
+  }
+}
+
+.dashboard-amount-quote-stat {
+  font-size: 10px;
+  font-style: normal;
+  text-align: center;
+  font-weight: normal;
+}
+
+@media only screen and (max-width: 600px) {
+  .exchange-card {
+    width: 360px;
+  }
+}
