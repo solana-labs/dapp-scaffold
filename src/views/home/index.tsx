@@ -1,4 +1,3 @@
-import { Card } from "antd";
 import React, { useEffect } from "react";
 import { useConnectionConfig } from "../../contexts/connection";
 import { useMarkets } from "../../contexts/market";
@@ -25,10 +24,9 @@ export const HomeView = () => {
 
   return (
     <div className="flexColumn">
-
-      <Card>
-
-      </Card>
+      TODO:
+      1. Add wallet and value in $
+      2. Link to faucet
     </div>
   );
 };
