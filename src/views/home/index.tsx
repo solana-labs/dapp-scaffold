@@ -1,5 +1,8 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Button } from "antd";
 import React, { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { ConnectButton } from "../../components/ConnectButton";
 import { useNativeAccount } from "../../contexts/accounts";
 import { useConnectionConfig } from "../../contexts/connection";
 import { useMarkets } from "../../contexts/market";
@@ -32,6 +35,11 @@ export const HomeView = () => {
     <div className="flexColumn">
       TODO:
       Your balance: {balance} SOL
+
+      <ConnectButton />
+      <Link to="/faucet">
+        <Button>Faucet</Button>
+      </Link>
       2. Link to faucet
     </div>
   );
