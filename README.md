@@ -1,28 +1,38 @@
-# Solana App Scaffold
+# 🏗 Solana App Scaffold
 Scaffolding for a dapp built on Solana
+
+# Quickstart
+
+```bash
+git clone https://github.com/solana-labs/dapp-scaffold.git
+
+cd dapp-scaffold
+```
+
+```bash
+
+npm install
+
+```
+
+```bash
+
+npm start
+
+```
 
 # Environment Setup
 1. Install Rust from https://rustup.rs/
 2. Install Solana v1.5.0 or later from https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool
 3. Install Node
 4. Install NPM
-5. Run
-```
-npm install
-```
+
 # Build Smart Contract (compiled for BPF)
 
-```
+```bash
 $ cargo build-bpf
 $ cargo test-bpf
 ```
-
-# Run dapp
-
-`
-npm start
-`
-
 # Directory structure
 
 ## program
