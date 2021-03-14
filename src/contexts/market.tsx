@@ -53,7 +53,7 @@ export function MarketProvider({ children = null as any }) {
 
       const marketAddress = MINT_TO_MARKET[mintAddress];
       const marketName = `${SERUM_TOKEN?.name}/USDC`;
-      const marketInfo = MARKETS.find(
+      const marketInfo = MARKETS.filter(m => !m.deprecated).find(
         (m) => m.name === marketName || m.address.toBase58() === marketAddress
       );
 

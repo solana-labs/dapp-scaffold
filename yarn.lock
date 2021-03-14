@@ -1600,19 +1600,19 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@project-serum/serum@^0.13.11":
-  version "0.13.11"
-  resolved "https://registry.yarnpkg.com/@project-serum/serum/-/serum-0.13.11.tgz#c55c830cbfb28cdc2b4e4076b1367d45ad19175d"
-  integrity sha512-kE9PhXuryP7afJFkZrKkLzNxeRETHgPvN5Jl3BZIDH5oyHLUfmj3OQreMPwIqJXnMkLwCHewG5JFJALwit+3Wg==
+"@project-serum/serum@^0.13.25":
+  version "0.13.25"
+  resolved "https://registry.yarnpkg.com/@project-serum/serum/-/serum-0.13.25.tgz#40cbeaed03bb69e6a8c3e9117359b70ef155042e"
+  integrity sha512-IdK768TwM3tJHDPpt3iJ9AR7sMECrXD5B5i+oZhHR2+06Mun9djx/PtTTVYik161PjJXkuQozfWVk2a003s0CQ==
   dependencies:
-    "@solana/web3.js" "0.86.1"
+    "@solana/web3.js" "^0.90.0"
     bn.js "^5.1.2"
     buffer-layout "^1.2.0"
 
-"@project-serum/sol-wallet-adapter@^0.1.4":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@project-serum/sol-wallet-adapter/-/sol-wallet-adapter-0.1.4.tgz#dfcc2339bdcc352b16deab5055d0b818b1da1e3e"
-  integrity sha512-bjcBx2iEEqIZUNgOkfEpqgzsEha8lU0IbzWZWVkRdIpdZnTguomHmarZ7Z9zvZvjI2M9fZ8wA/0m/s2GXYoQVQ==
+"@project-serum/sol-wallet-adapter@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@project-serum/sol-wallet-adapter/-/sol-wallet-adapter-0.1.5.tgz#b8376addcb5e364f0621be639692d1c3b6d28622"
+  integrity sha512-g2ugWI3mZu/+aXWA/hpDRly0lTwjfTeOQXUs5DNuZCbxXRdNXe1LLfjzzoZEMpURavqO725UwBkKxC5acvgoMw==
   dependencies:
     bs58 "^4.0.1"
     eventemitter3 "^4.0.4"
@@ -1626,6 +1626,13 @@
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.3.tgz#5405ee8e444ed212db44e79351f0c70a582aae25"
   integrity sha512-DetpxZw1fzPD5xUBrIAoplLChO2VB8DlL5Gg+I1IR9b2wPqYIca2WSUxL5g1vLeR4MsQq1NeWriXAVffV+U1Fw==
+
+"@solana/spl-token-registry@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@solana/spl-token-registry/-/spl-token-registry-0.2.2.tgz#3537a0f4b5016e888d39e50661fb15d5df8d5c78"
+  integrity sha512-XpUm7FwXLQ5jOCbvJ4KIHcbVYPUwDmP8O07+CUusxhjxQfyUv5ajlQtymlcaV1zvzGuQENU5nIlCoy9PzKIWmA==
+  dependencies:
+    cross-fetch "^3.0.6"
 
 "@solana/spl-token-swap@0.0.2":
   version "0.0.2"
@@ -1651,29 +1658,6 @@
     buffer-layout "^1.2.0"
     dotenv "8.2.0"
     mkdirp "1.0.4"
-
-"@solana/web3.js@0.86.1":
-  version "0.86.1"
-  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-0.86.1.tgz#034a2cef742569f74dfc9960dfbcabc92e674b08"
-  integrity sha512-9mjWs17ym7PIm7bHA37wnnYyD7rIVHwkx1RI6BzGhMO5h8E+HlZM8ISLgOx+NItg8XRCfFhlrVgJTzK4om1s0g==
-  dependencies:
-    "@babel/runtime" "^7.3.1"
-    bn.js "^5.0.0"
-    bs58 "^4.0.1"
-    buffer "^5.4.3"
-    buffer-layout "^1.2.0"
-    crypto-hash "^1.2.2"
-    esdoc-inject-style-plugin "^1.0.0"
-    jayson "^3.0.1"
-    keccak "^3.0.1"
-    mz "^2.7.0"
-    node-fetch "^2.2.0"
-    npm-run-all "^4.1.5"
-    rpc-websockets "^7.4.2"
-    secp256k1 "^4.0.2"
-    superstruct "^0.8.3"
-    tweetnacl "^1.0.0"
-    ws "^7.0.0"
 
 "@solana/web3.js@^0.78.0":
   version "0.78.4"
@@ -1705,6 +1689,29 @@
     bn.js "^5.0.0"
     bs58 "^4.0.1"
     buffer "^5.4.3"
+    buffer-layout "^1.2.0"
+    crypto-hash "^1.2.2"
+    esdoc-inject-style-plugin "^1.0.0"
+    jayson "^3.0.1"
+    keccak "^3.0.1"
+    mz "^2.7.0"
+    node-fetch "^2.2.0"
+    npm-run-all "^4.1.5"
+    rpc-websockets "^7.4.2"
+    secp256k1 "^4.0.2"
+    superstruct "^0.8.3"
+    tweetnacl "^1.0.0"
+    ws "^7.0.0"
+
+"@solana/web3.js@^0.90.0":
+  version "0.90.5"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-0.90.5.tgz#5be7d78a19f0b5e01bf82c52e3cbf0bb72a38cfd"
+  integrity sha512-2elnwfIkdtrUjLdTBKu7Rc3mTv95k2cn+JtNtmO2fY/PFRZm7mnGS/gk/wWzGCpBVLiqz2o6o21oONqyDtLG/w==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    bn.js "^5.0.0"
+    bs58 "^4.0.1"
+    buffer "^6.0.1"
     buffer-layout "^1.2.0"
     crypto-hash "^1.2.2"
     esdoc-inject-style-plugin "^1.0.0"
@@ -1930,26 +1937,12 @@
   dependencies:
     base-x "^3.0.6"
 
-"@types/chart.js@^2.9.29":
-  version "2.9.29"
-  resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.9.29.tgz#73bf7f02387402943f29946012492f10bde7ed43"
-  integrity sha512-WOZMitUU3gHDM0oQsCsVivX+oDsIki93szcTmmUPBm39cCvAELBjokjSDVOoA3xiIEbb+jp17z/3S2tIqruwOQ==
-  dependencies:
-    moment "^2.10.2"
-
 "@types/connect@^3.4.33":
   version "3.4.33"
   resolved "https://registry.yarnpkg.com/@types/connect/-/connect-3.4.33.tgz#31610c901eca573b8713c3330abc6e6b9f588546"
   integrity sha512-2+FrkXY4zllzTNfJth7jOqEHC+enpLeGslEhpnTAkg21GkRrWV4SsAtqchtT4YS9/nODBU2/ZfsBY2X4J/dX7A==
   dependencies:
     "@types/node" "*"
-
-"@types/echarts@^4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@types/echarts/-/echarts-4.9.0.tgz#e133ea5429ada1d814f9cc1deae855421dcdd2ef"
-  integrity sha512-9QIAUe6cxM5GyGNCIhlEwf7l5oclZDVM0HNRfehPx3dDUt1Jfhbvp/U2wfgwtL/IDqyASBVs1zu4qyaCsuJINA==
-  dependencies:
-    "@types/zrender" "*"
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
@@ -2169,11 +2162,6 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/zrender@*":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/zrender/-/zrender-4.0.0.tgz#a6806f12ec4eccaaebd9b0d816f049aca6188fbd"
-  integrity sha512-s89GOIeKFiod2KSqHkfd2rzx+T2DVu7ihZCBEBnhFrzvQPUmzvDSBot9Fi1DfMQm9Odg+rTqoMGC38RvrwJK2w==
-
 "@typescript-eslint/eslint-plugin@^2.10.0":
   version "2.34.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.34.0.tgz#6f8ce8a46c7dea4a6f1d171d2bb8fbae6dac2be9"
@@ -2372,13 +2360,6 @@
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
-
-"@welldone-software/why-did-you-render@^6.0.5":
-  version "6.0.5"
-  resolved "https://registry.yarnpkg.com/@welldone-software/why-did-you-render/-/why-did-you-render-6.0.5.tgz#a8df3509ed612770bb21b5fa0ad61634acc61f38"
-  integrity sha512-8fWib+bKoAmnJHZPU8/qpEXKG8piB3oaoKj78fXNAdYd3x8ryde1pC7D5tKff5Mart2iOJUvYNxxcYlbtT9tow==
-  dependencies:
-    lodash "^4"
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -3317,6 +3298,14 @@ buffer@^5.4.3:
     base64-js "^1.3.1"
     ieee754 "^1.1.13"
 
+buffer@^6.0.1:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
+  integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
+  dependencies:
+    base64-js "^1.3.1"
+    ieee754 "^1.2.1"
+
 bufferutil@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/bufferutil/-/bufferutil-4.0.1.tgz#3a177e8e5819a1243fe16b63a199951a7ad8d4a7"
@@ -4049,6 +4038,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+cross-fetch@^3.0.6:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.0.tgz#6447c13cc8887fa2a66caef92888d7fdaab6e0d1"
+  integrity sha512-a+yso9lSpXQI9DH+YjAu/m0dVfP8IVoZDPBLLFcvGpeq3KHNdikkekTOdkHiXEuTq4GBOeO0MfWkE40yzF1w7g==
+  dependencies:
+    node-fetch "2.6.1"
+
 cross-spawn@7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.1.tgz#0ab56286e0f7c24e153d04cc2aa027e43a9a5d14"
@@ -4715,13 +4711,6 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
-
-echarts@^4.9.0:
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/echarts/-/echarts-4.9.0.tgz#a9b9baa03f03a2a731e6340c55befb57a9e1347d"
-  integrity sha512-+ugizgtJ+KmsJyyDPxaw2Br5FqzuBnyOWwcxPKO6y0gc5caYcfnEUIlNStx02necw8jmKmTafmpHhGo4XDtEIA==
-  dependencies:
-    zrender "4.3.2"
 
 ee-first@1.1.1:
   version "1.1.1"
@@ -6226,6 +6215,11 @@ ieee754@^1.1.13, ieee754@^1.1.4:
   version "1.1.13"
   resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.13.tgz#ec168558e95aa181fd87d37f55c32bbcb6708b84"
   integrity sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==
+
+ieee754@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
+  integrity sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==
 
 iferr@^0.1.5:
   version "0.1.5"
@@ -7774,7 +7768,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
+"lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.5:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
@@ -8268,7 +8262,7 @@ node-addon-api@^2.0.0:
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-2.0.2.tgz#432cfa82962ce494b132e9d72a15b29f71ff5d32"
   integrity sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==
 
-node-fetch@^2.2.0:
+node-fetch@2.6.1, node-fetch@^2.2.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
@@ -12911,8 +12905,3 @@ yargs@^13.3.0, yargs@^13.3.2:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.2"
-
-zrender@4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/zrender/-/zrender-4.3.2.tgz#ec7432f9415c82c73584b6b7b8c47e1b016209c6"
-  integrity sha512-bIusJLS8c4DkIcdiK+s13HiQ/zjQQVgpNohtd8d94Y2DnJqgM1yjh/jpDb8DoL6hd7r8Awagw8e3qK/oLaWr3g==
