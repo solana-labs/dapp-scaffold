@@ -2,6 +2,7 @@ import { Button, Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ConnectButton } from "../../components/ConnectButton";
+import { TokenIcon } from "../../components/TokenIcon";
 import { useConnectionConfig } from "../../contexts/connection";
 import { useMarkets } from "../../contexts/market";
 import { useUserBalance } from "../../hooks";
@@ -11,7 +12,8 @@ import { formatUSD } from "../../utils/utils";
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
   const { tokenMap } = useConnectionConfig();
-  const SRM = useUserBalance('SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt');
+  const SRM_ADDRESS = 'SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt';
+  const SRM = useUserBalance(SRM_ADDRESS);
   const SOL = useUserBalance(WRAPPED_SOL_MINT);
 
   useEffect(() => {
@@ -33,7 +35,9 @@ export const HomeView = () => {
       <Col span={24}>
         <h2>Your balances:</h2>
         <h2>SOL: {SOL.balance} ({formatUSD.format(SOL.balanceInUSD)})</h2>
-        <h2>SRM: {SRM?.balance} ({formatUSD.format(SRM?.balanceInUSD)})</h2>
+        <h2 style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <TokenIcon mintAddress={SRM_ADDRESS} /> SRM: {SRM?.balance} ({formatUSD.format(SRM?.balanceInUSD)})
+        </h2>
       </Col>
 
       <Col span={12}>
