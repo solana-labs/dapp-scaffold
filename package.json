@@ -6,7 +6,7 @@
     "@ant-design/icons": "^4.5.0",
     "@craco/craco": "^5.7.0",
     "@ledgerhq/hw-transport-webusb": "^5.41.0",
-    "@project-serum/serum": "^0.13.25",
+    "@project-serum/serum": "^0.13.29",
     "@project-serum/sol-wallet-adapter": "^0.1.5",
     "@solana/spl-token": "0.0.11",
     "@solana/spl-token-registry": "^0.2.2",

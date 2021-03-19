@@ -14,7 +14,6 @@ import { chunks } from "./../utils/utils";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
-import { useMarkets } from "./market";
 
 const AccountsContext = React.createContext<any>(null);
 
@@ -333,7 +332,6 @@ const precacheUserTokenAccounts = async (
 export function AccountsProvider({ children = null as any }) {
   const connection = useConnection();
   const { publicKey, wallet, connected } = useWallet();
-  const { precacheMarkets } = useMarkets();
   const [tokenAccounts, setTokenAccounts] = useState<TokenAccount[]>([]);
   const [userAccounts, setUserAccounts] = useState<TokenAccount[]>([]);
   const { nativeAccount } = UseNativeAccount();
@@ -410,10 +408,6 @@ export function AccountsProvider({ children = null as any }) {
       };
     }
   }, [connection, connected, publicKey, selectUserAccounts]);
-
-  useEffect(() => {
-    precacheMarkets(tokenAccounts.map(a => a.info.mint.toBase58()));
-  }, [tokenAccounts, precacheMarkets]);
 
   return (
     <AccountsContext.Provider

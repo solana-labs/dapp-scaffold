@@ -50,8 +50,6 @@ export function useUserBalance(
       updateBalance();
     });
 
-    debugger;
-
     updateBalance();
 
     return () => {
