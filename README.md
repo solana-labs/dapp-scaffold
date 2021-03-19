@@ -58,7 +58,7 @@ Generic react hooks to interact with token program:
     - balanceLamports
     - balanceInUSD
 * useUserTotalBalance - aggregates user balance across all token accounts and returns value in USD
-    - blanaceInUSD
+    - balanceInUSD
 * useAccountByMint
 * useTokenName
 * useUserAccounts
