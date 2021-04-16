@@ -28,6 +28,7 @@ yarn start
 4. Install NPM, Yarn
 
 # Build Smart Contract (compiled for BPF)
+Run the following from the program/ subdirectory:
 
 ```bash
 $ cargo build-bpf
