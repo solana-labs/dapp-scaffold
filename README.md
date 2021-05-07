@@ -23,7 +23,7 @@ yarn start
 
 # Environment Setup
 1. Install Rust from https://rustup.rs/
-2. Install Solana v1.5.11 or later from https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool
+2. Install Solana v1.6.7 or later from https://docs.solana.com/cli/install-solana-cli-tools#use-solanas-install-tool
 3. Install Node
 4. Install NPM, Yarn
 
