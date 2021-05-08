@@ -14,16 +14,16 @@ export function Routes() {
       <HashRouter basename={"/"}>
         <ConnectionProvider>
           <WalletProvider>
-            <AccountsProvider>
-              <MarketProvider>
-                <AppLayout>
-                  <Switch>
-                    <Route exact path="/" component={() => <HomeView />} />
-                    <Route exact path="/faucet" children={<FaucetView />} />
-                  </Switch>
-                </AppLayout>
-              </MarketProvider>
-            </AccountsProvider>
+              <AccountsProvider>
+                <MarketProvider>
+                  <AppLayout>
+                    <Switch>
+                      <Route exact path="/" component={() => <HomeView />} />
+                      <Route exact path="/faucet" children={<FaucetView />} />
+                    </Switch>
+                  </AppLayout>
+                  </MarketProvider>
+              </AccountsProvider>
           </WalletProvider>
         </ConnectionProvider>
       </HashRouter>

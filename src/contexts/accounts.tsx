@@ -19,8 +19,6 @@ const AccountsContext = React.createContext<any>(null);
 
 const pendingCalls = new Map<string, Promise<ParsedAccountBase>>();
 const genericCache = new Map<string, ParsedAccountBase>();
-const pendingMintCalls = new Map<string, Promise<MintInfo>>();
-const mintCache = new Map<string, MintInfo>();
 const transactionCache = new Map<string, ParsedLocalTransaction | null>();
 
 export interface ParsedLocalTransaction {
@@ -43,17 +41,6 @@ export type AccountParser = (
 export interface ParsedAccount<T> extends ParsedAccountBase {
   info: T;
 }
-
-const getMintInfo = async (connection: Connection, pubKey: PublicKey) => {
-  const info = await connection.getAccountInfo(pubKey);
-  if (info === null) {
-    throw new Error("Failed to find mint account");
-  }
-
-  const data = Buffer.from(info.data);
-
-  return deserializeMint(data);
-};
 
 export const MintParser = (pubKey: PublicKey, info: AccountInfo<Buffer>) => {
   const buffer = Buffer.from(info.data);
@@ -220,51 +207,6 @@ export const cache = {
 
     return pubkey;
   },
-  queryMint: async (connection: Connection, pubKey: string | PublicKey) => {
-    let id: PublicKey;
-    if (typeof pubKey === "string") {
-      id = new PublicKey(pubKey);
-    } else {
-      id = pubKey;
-    }
-
-    const address = id.toBase58();
-    let mint = mintCache.get(address);
-    if (mint) {
-      return mint;
-    }
-
-    let query = pendingMintCalls.get(address);
-    if (query) {
-      return query;
-    }
-
-    query = getMintInfo(connection, id).then((data) => {
-      pendingMintCalls.delete(address);
-
-      mintCache.set(address, data);
-      return data;
-    }) as Promise<MintInfo>;
-    pendingMintCalls.set(address, query as any);
-
-    return query;
-  },
-  getMint: (pubKey: string | PublicKey) => {
-    let key: string;
-    if (typeof pubKey !== "string") {
-      key = pubKey.toBase58();
-    } else {
-      key = pubKey;
-    }
-
-    return mintCache.get(key);
-  },
-  addMint: (pubKey: PublicKey, obj: AccountInfo<Buffer>) => {
-    const mint = deserializeMint(obj.data);
-    const id = pubKey.toBase58();
-    mintCache.set(id, mint);
-    return mint;
-  },
   addTransaction: (signature: string, tx: ParsedLocalTransaction | null) => {
     transactionCache.set(signature, tx);
     return tx;
@@ -284,7 +226,6 @@ export const cache = {
   },
   clear: () => {
     genericCache.clear();
-    mintCache.clear();
     transactionCache.clear();
     cache.emitter.raiseCacheCleared();
   },
@@ -308,6 +249,7 @@ function wrapNativeAccount(
     pubkey: pubkey,
     account,
     info: {
+      address: pubkey,
       mint: WRAPPED_SOL_MINT,
       owner: pubkey,
       amount: new u64(account.lamports),
