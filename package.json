@@ -36,7 +36,7 @@
     "program:build": "cd program && cargo build-bpf",
     "program:test": "cd program && cargo test-bpf",
     "localnet:up": "solana-test-validator --bpf-program BpfProgram1111111111111111111111111111111111 program/target/deploy/bpf_program_template.so --reset",
-    "localnet:logs": "solana logs",
+    "localnet:logs": "solana logs -u localhost",
     "predeploy": "git pull --ff-only && yarn && yarn build",
     "deploy": "gh-pages -d build",
     "deploy:ar": "arweave deploy-dir build --key-file ",
