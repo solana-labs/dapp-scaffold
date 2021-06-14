@@ -12,22 +12,18 @@
     "@solana/spl-token-registry": "^0.2.131",
     "@solana/spl-token-swap": "0.1.0",
     "@solana/web3.js": "^1.18.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.16.2",
     "bn.js": "^5.2.0",
     "bs58": "^4.0.1",
     "buffer-layout": "^1.2.1",
-    "craco-less": "^1.17.1",
     "eventemitter3": "^4.0.7",
     "jazzicon": "^1.5.0",
     "react": "^17.0.2",
     "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
-    "typescript": "^4.3.2"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "craco start",
@@ -64,6 +60,8 @@
   },
   "homepage": ".",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
     "@types/bn.js": "^5.1.0",
     "@types/bs58": "^4.0.1",
     "@types/jest": "^26.0.23",
@@ -71,7 +69,9 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "arweave-deploy": "^1.9.1",
+    "craco-less": "^1.17.1",
     "gh-pages": "^3.2.0",
-    "prettier": "^2.3.1"
+    "prettier": "^2.3.1",
+    "typescript": "^4.3.2"
   }
 }
