@@ -1,12 +1,7 @@
-import {
-  DEFAULT_NETWORK_CONFIG_MAP,
-  useConnectionContext,
-  useWallet,
-} from "@saberhq/use-solana";
+import { useConnectionContext, useWallet, solana } from "@saberhq/use-solana";
 import { Button, Select } from "antd";
-import React from "react";
 
-const NETWORKS = Object.entries(DEFAULT_NETWORK_CONFIG_MAP);
+const NETWORKS = Object.entries(solana.DEFAULT_NETWORK_CONFIG_MAP);
 
 export const Settings = () => {
   const { connected, wallet } = useWallet();

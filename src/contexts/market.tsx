@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
 import { STABLE_COINS } from "./../utils/utils";
-import { useConnectionConfig } from "./connection";
 import { cache, getMultipleAccounts } from "./accounts";
 import { Market, MARKETS, Orderbook, TOKEN_MINTS } from "@project-serum/serum";
 import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
@@ -13,11 +12,6 @@ import { useUserAccounts } from "../hooks";
 import { useConnectionContext } from "@saberhq/use-solana";
 
 export const BONFIDA_POOL_INTERVAL = 30 * 60_000; // 30 min
-
-interface RecentPoolData {
-  pool_identifier: string;
-  volume24hA: number;
-}
 
 export interface MarketsContextState {
   midPriceInUSD: (mint: string) => number;

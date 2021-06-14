@@ -69,7 +69,10 @@ export function WalletProvider({ children = null as any }) {
           const mustInstall = provider.isInstalled?.() === false;
           const icon =
             typeof provider.icon === "string" ? (
-              <img src={provider.icon} />
+              <img
+                src={provider.icon}
+                alt={`Icon of provider ${provider.name}`}
+              />
             ) : (
               <provider.icon />
             );
