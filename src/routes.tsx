@@ -7,11 +7,7 @@ import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
 import { FaucetView, HomeView } from "./views";
-import {
-  ConnectedWallet,
-  SolanaProvider,
-  WalletAdapter,
-} from "@saberhq/use-solana";
+import { ConnectedWallet, SolanaProvider } from "@saberhq/use-solana";
 import { notify } from "./utils/notifications";
 
 const onConnect = (wallet: ConnectedWallet) => {
@@ -30,7 +26,7 @@ const onConnect = (wallet: ConnectedWallet) => {
   });
 };
 
-const onDisconnect = (wallet: WalletAdapter) => {
+const onDisconnect = () => {
   notify({
     message: "Wallet update",
     description: "Disconnected from wallet",

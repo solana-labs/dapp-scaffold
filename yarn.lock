@@ -1647,10 +1647,10 @@
     tiny-invariant "^1.1.0"
     tslib "^2.3.0"
 
-"@saberhq/use-solana@0.1.0-beta.11":
-  version "0.1.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@saberhq/use-solana/-/use-solana-0.1.0-beta.11.tgz#7a021316c6ed2ecafd1cd54db017df1eef8c0198"
-  integrity sha512-hhkhYFJakPGWVI/j5Y3ipiR6dI1Vdmi/ijxFfOMvOgXkMSlnJC/Huh0hkqAgWz7yFJBrGFfMGc2tBtBMoGt0cg==
+"@saberhq/use-solana@^0.1.0-beta.12":
+  version "0.1.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@saberhq/use-solana/-/use-solana-0.1.0-beta.12.tgz#853dbc4aaae7e20bcc4e2280df7f71d1d468aacb"
+  integrity sha512-Zazp9nLXQi1gAPGQABUVz6Ng9UjNCwoxdw6XlA1zPKASJMx9YsNzeEekt7K4KMtvRTtOuSWVJ5ta3crwhs6XZg==
   dependencies:
     "@ledgerhq/hw-transport" "^5.51.1"
     "@ledgerhq/hw-transport-webusb" "^5.53.1"

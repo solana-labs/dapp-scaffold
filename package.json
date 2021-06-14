@@ -7,7 +7,7 @@
     "@craco/craco": "^6.1.2",
     "@project-serum/serum": "^0.13.38",
     "@saberhq/solana": "0.1.0-beta.11",
-    "@saberhq/use-solana": "0.1.0-beta.11",
+    "@saberhq/use-solana": "^0.1.0-beta.12",
     "@solana/spl-token": "0.1.5",
     "@solana/spl-token-registry": "^0.2.131",
     "@solana/spl-token-swap": "0.1.0",

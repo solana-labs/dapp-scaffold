@@ -8,6 +8,7 @@ import {
 import { Button, Modal } from "antd";
 import React, { useCallback, useContext, useState } from "react";
 import { isMobile } from "react-device-detect";
+import { notify } from "../utils/notifications";
 
 const SORTED_WALLET_PROVIDERS: readonly [
   WalletType,
@@ -62,7 +63,15 @@ export function WalletProvider({ children = null as any }) {
               window.open(provider.url, "_blank", "noopener noreferrer");
               return;
             }
-            activate(walletType);
+            try {
+              activate(walletType);
+            } catch (e) {
+              notify({
+                type: "error",
+                message: "Error connecting wallet",
+                description: `${provider.name}: ${e.message}`,
+              });
+            }
             close();
           };
 
@@ -81,14 +90,16 @@ export function WalletProvider({ children = null as any }) {
 
           return (
             <Button
+              key={provider.url}
               size="large"
               type={activeProvider?.url === provider.url ? "primary" : "ghost"}
               onClick={onClick}
               icon={icon}
               style={{
-                display: "block",
                 width: "100%",
-                textAlign: "left",
+                display: "flex",
+                gap: 8,
+                alignItems: "center",
                 marginBottom: 8,
               }}
             >
