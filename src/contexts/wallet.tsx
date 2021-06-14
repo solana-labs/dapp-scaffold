@@ -1,167 +1,50 @@
-import type { PublicKey } from "@solana/web3.js";
-
-import Wallet from "@project-serum/sol-wallet-adapter";
-import { Transaction } from "@solana/web3.js";
+import {
+  useSolana,
+  useWallet,
+  WalletProviderInfo,
+  WalletType,
+  WALLET_PROVIDERS,
+} from "@saberhq/use-solana";
 import { Button, Modal } from "antd";
-import EventEmitter from "eventemitter3";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { notify } from "./../utils/notifications";
-import { useConnectionConfig } from "./connection";
-import { useLocalStorageState } from "./../utils/utils";
-import { LedgerWalletAdapter } from "../wallet-adapters/ledger";
-import { SolongWalletAdapter } from "../wallet-adapters/solong";
-import { PhantomWalletAdapter } from "../wallet-adapters/phantom";
+import React, { useCallback, useContext, useState } from "react";
+import { isMobile } from "react-device-detect";
 
-const ASSETS_URL =
-  "https://raw.githubusercontent.com/solana-labs/oyster/main/assets/wallets/";
-export const WALLET_PROVIDERS = [
-  {
-    name: "Sollet",
-    url: "https://www.sollet.io",
-    icon: `${ASSETS_URL}sollet.svg`,
-  },
-  {
-    name: "Solong",
-    url: "https://solongwallet.com",
-    icon: `${ASSETS_URL}solong.png`,
-    adapter: SolongWalletAdapter,
-  },
-  {
-    name: "Solflare",
-    url: "https://solflare.com/access-wallet",
-    icon: `${ASSETS_URL}solflare.svg`,
-  },
-  {
-    name: "MathWallet",
-    url: "https://mathwallet.org",
-    icon: `${ASSETS_URL}mathwallet.svg`,
-  },
-  {
-    name: "Ledger",
-    url: "https://www.ledger.com",
-    icon: `${ASSETS_URL}ledger.svg`,
-    adapter: LedgerWalletAdapter,
-  },
-  {
-    name: "Phantom",
-    url: "https://phantom.app/",
-    icon: `https://raydium.io/_nuxt/img/phantom.d9e3c61.png`,
-    adapter: PhantomWalletAdapter,
-  },
-];
-
-export interface WalletAdapter extends EventEmitter {
-  publicKey: PublicKey | null;
-  signTransaction: (transaction: Transaction) => Promise<Transaction>;
-  connect: () => any;
-  disconnect: () => any;
-}
+const SORTED_WALLET_PROVIDERS: readonly [
+  WalletType,
+  WalletProviderInfo
+][] = (Object.entries(WALLET_PROVIDERS) as readonly [
+  WalletType,
+  WalletProviderInfo
+][])
+  .filter(([, p]) => (isMobile ? p.isMobile : true))
+  .slice()
+  .sort(([, a], [, b]) =>
+    (a.isInstalled?.() ?? true) === (b.isInstalled?.() ?? true)
+      ? a.name < b.name
+        ? -1
+        : 1
+      : a.isInstalled?.() ?? true
+      ? -1
+      : 1
+  );
 
 const WalletContext = React.createContext<{
-  wallet: WalletAdapter | undefined;
-  connected: boolean;
   select: () => void;
-  provider: typeof WALLET_PROVIDERS[number] | undefined;
 }>({
-  wallet: undefined,
-  connected: false,
   select() {},
-  provider: undefined,
 });
 
 export function WalletProvider({ children = null as any }) {
-  const { endpoint } = useConnectionConfig();
-
-  const [autoConnect, setAutoConnect] = useState(false);
-  const [providerUrl, setProviderUrl] = useLocalStorageState("walletProvider");
-
-  const provider = useMemo(
-    () => WALLET_PROVIDERS.find(({ url }) => url === providerUrl),
-    [providerUrl]
-  );
-
-  const wallet = useMemo(
-    function () {
-      if (provider) {
-        return new (provider.adapter || Wallet)(
-          providerUrl,
-          endpoint
-        ) as WalletAdapter;
-      }
-    },
-    [provider, providerUrl, endpoint]
-  );
-
-  const [connected, setConnected] = useState(false);
-
-  useEffect(() => {
-    if (wallet) {
-      wallet.on("connect", () => {
-        if (wallet.publicKey) {
-          setConnected(true);
-          const walletPublicKey = wallet.publicKey.toBase58();
-          const keyToDisplay =
-            walletPublicKey.length > 20
-              ? `${walletPublicKey.substring(
-                  0,
-                  7
-                )}.....${walletPublicKey.substring(
-                  walletPublicKey.length - 7,
-                  walletPublicKey.length
-                )}`
-              : walletPublicKey;
-
-          notify({
-            message: "Wallet update",
-            description: "Connected to wallet " + keyToDisplay,
-          });
-        }
-      });
-
-      wallet.on("disconnect", () => {
-        setConnected(false);
-        notify({
-          message: "Wallet update",
-          description: "Disconnected from wallet",
-        });
-      });
-    }
-
-    return () => {
-      setConnected(false);
-      if (wallet) {
-        wallet.disconnect();
-      }
-    };
-  }, [wallet]);
-
-  useEffect(() => {
-    if (wallet && autoConnect) {
-      wallet.connect();
-      setAutoConnect(false);
-    }
-
-    return () => {};
-  }, [wallet, autoConnect]);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const select = useCallback(() => setIsModalVisible(true), []);
   const close = useCallback(() => setIsModalVisible(false), []);
+  const { activate, provider: activeProvider } = useSolana();
 
   return (
     <WalletContext.Provider
       value={{
-        wallet,
-        connected,
         select,
-        provider,
       }}
     >
       {children}
@@ -173,27 +56,30 @@ export function WalletProvider({ children = null as any }) {
         onCancel={close}
         width={400}
       >
-        {WALLET_PROVIDERS.map((provider) => {
+        {SORTED_WALLET_PROVIDERS.map(([walletType, provider]) => {
           const onClick = function () {
-            setProviderUrl(provider.url);
-            setAutoConnect(true);
+            if (mustInstall) {
+              window.open(provider.url, "_blank", "noopener noreferrer");
+              return;
+            }
+            activate(walletType);
             close();
           };
+
+          const mustInstall = provider.isInstalled?.() === false;
+          const icon =
+            typeof provider.icon === "string" ? (
+              <img src={provider.icon} />
+            ) : (
+              <provider.icon />
+            );
 
           return (
             <Button
               size="large"
-              type={providerUrl === provider.url ? "primary" : "ghost"}
+              type={activeProvider?.url === provider.url ? "primary" : "ghost"}
               onClick={onClick}
-              icon={
-                <img
-                  alt={`${provider.name}`}
-                  width={20}
-                  height={20}
-                  src={provider.icon}
-                  style={{ marginRight: 8 }}
-                />
-              }
+              icon={icon}
               style={{
                 display: "block",
                 width: "100%",
@@ -201,7 +87,7 @@ export function WalletProvider({ children = null as any }) {
                 marginBottom: 8,
               }}
             >
-              {provider.name}
+              {mustInstall ? `Install ${provider.name}` : provider.name}
             </Button>
           );
         })}
@@ -210,19 +96,14 @@ export function WalletProvider({ children = null as any }) {
   );
 }
 
-export function useWallet() {
-  const { wallet, connected, provider, select } = useContext(WalletContext);
+export function useWalletSelector() {
+  const { select } = useContext(WalletContext);
+  const { wallet } = useWallet();
   return {
-    wallet,
-    connected,
-    provider,
     select,
     publicKey: wallet?.publicKey,
     connect() {
       wallet ? wallet.connect() : select();
-    },
-    disconnect() {
-      wallet?.disconnect();
     },
   };
 }

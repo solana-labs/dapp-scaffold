@@ -1,11 +1,11 @@
 import React from "react";
 import { Button, Popover } from "antd";
-import { useWallet } from "../../contexts/wallet";
 import { CurrentUserBadge } from "../CurrentUserBadge";
 import { SettingOutlined } from "@ant-design/icons";
 import { Settings } from "../Settings";
 import { LABELS } from "../../constants";
 import { ConnectButton } from "../ConnectButton";
+import { useWallet } from "@saberhq/use-solana";
 
 export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
   const { connected } = useWallet();

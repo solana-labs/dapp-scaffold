@@ -1,14 +1,14 @@
 import React, { useCallback } from "react";
-import { useConnection } from "../../contexts/connection";
-import { useWallet } from "../../contexts/wallet";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { notify } from "../../utils/notifications";
 import { ConnectButton } from "./../../components/ConnectButton";
 import { LABELS } from "../../constants";
+import { useConnection, useWallet } from "@saberhq/use-solana";
 
 export const FaucetView = () => {
   const connection = useConnection();
-  const { publicKey } = useWallet();
+  const { wallet } = useWallet();
+  const publicKey = wallet?.publicKey;
 
   const airdrop = useCallback(() => {
     if (!publicKey) {

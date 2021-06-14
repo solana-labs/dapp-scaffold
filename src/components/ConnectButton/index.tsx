@@ -1,8 +1,9 @@
+import { useWallet } from "@saberhq/use-solana";
 import { Button, Dropdown, Menu } from "antd";
 import { ButtonProps } from "antd/lib/button";
 import React from "react";
 import { LABELS } from "../../constants";
-import { useWallet } from "../../contexts/wallet";
+import { useWalletSelector } from "../../contexts/wallet";
 
 export interface ConnectButtonProps
   extends ButtonProps,
@@ -11,7 +12,8 @@ export interface ConnectButtonProps
 }
 
 export const ConnectButton = (props: ConnectButtonProps) => {
-  const { connected, connect, select, provider } = useWallet();
+  const { connected, provider } = useWallet();
+  const { connect, select } = useWalletSelector();
   const { onClick, children, disabled, allowWalletChange, ...rest } = props;
 
   // only show if wallet selected or user connected

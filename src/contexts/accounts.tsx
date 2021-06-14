@@ -1,6 +1,4 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { useConnection } from "./connection";
-import { useWallet } from "./wallet";
 import {
   AccountInfo,
   ConfirmedSignatureInfo,
@@ -14,6 +12,7 @@ import { chunks } from "./../utils/utils";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
+import { useConnection, useWallet } from "@saberhq/use-solana";
 
 const AccountsContext = React.createContext<any>(null);
 
@@ -266,7 +265,8 @@ function wrapNativeAccount(
 
 const UseNativeAccount = () => {
   const connection = useConnection();
-  const { wallet, publicKey } = useWallet();
+  const { wallet } = useWallet();
+  const publicKey = wallet?.publicKey;
 
   const [nativeAccount, setNativeAccount] = useState<AccountInfo<Buffer>>();
 
@@ -332,7 +332,8 @@ const precacheUserTokenAccounts = async (
 
 export function AccountsProvider({ children = null as any }) {
   const connection = useConnection();
-  const { publicKey, wallet, connected } = useWallet();
+  const { wallet, connected } = useWallet();
+  const publicKey = wallet?.publicKey;
   const [tokenAccounts, setTokenAccounts] = useState<TokenAccount[]>([]);
   const [userAccounts, setUserAccounts] = useState<TokenAccount[]>([]);
   const { nativeAccount } = UseNativeAccount();

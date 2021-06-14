@@ -1,3 +1,4 @@
+import { Network } from "@saberhq/solana";
 import { PublicKey } from "@solana/web3.js";
 
 export const WRAPPED_SOL_MINT = new PublicKey(
@@ -30,8 +31,8 @@ export const PROGRAM_IDS = [
   },
 ];
 
-export const setProgramIds = (envName: string) => {
-  let instance = PROGRAM_IDS.find((env) => env.name === envName);
+export const setProgramIds = (network: Network) => {
+  let instance = PROGRAM_IDS.find((env) => env.name === network);
   if (!instance) {
     return;
   }
