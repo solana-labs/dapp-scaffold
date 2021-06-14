@@ -72,9 +72,11 @@ export function WalletProvider({ children = null as any }) {
               <img
                 src={provider.icon}
                 alt={`Icon of provider ${provider.name}`}
+                width={20}
+                height={20}
               />
             ) : (
-              <provider.icon />
+              <provider.icon width={20} height={20} />
             );
 
           return (
