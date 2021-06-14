@@ -11,6 +11,10 @@ env:
   SOLANA_VERSION: "1.6.11"
   RUST_TOOLCHAIN: nightly-2021-06-09
 
+defaults:
+  run:
+    working-directory: ./program
+
 jobs:
   lint:
     runs-on: ubuntu-latest
