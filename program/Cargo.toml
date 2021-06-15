@@ -14,7 +14,7 @@ test-bpf = ["solana-validator"]
 [dev-dependencies]
 assert_matches = "1.4.0"
 solana-program-test = "1.6.12"
-solana-validator = "1.6.12"
+solana-validator = { version = "1.6.12", optional = true }
 solana-sdk = "1.6.12"
 
 [lib]
