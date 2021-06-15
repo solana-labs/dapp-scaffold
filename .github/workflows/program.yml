@@ -9,7 +9,7 @@ on:
 env:
   CARGO_TERM_COLOR: always
   SOLANA_VERSION: "1.6.11"
-  RUST_TOOLCHAIN: nightly-2021-06-09
+  RUST_TOOLCHAIN: stable
 
 defaults:
   run:
