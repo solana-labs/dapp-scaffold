@@ -6,7 +6,7 @@ use {
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },
-    solana_sdk::transaction::Transaction,
+    solana_sdk::{signature::Signer, transaction::Transaction},
     solana_validator::test_validator::*,
 };
 

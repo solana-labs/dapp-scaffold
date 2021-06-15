@@ -9,7 +9,7 @@ publish = false
 solana-program = "1.6.12"
 
 [features]
-test-bpf = []
+test-bpf = ["solana-validator"]
 
 [dev-dependencies]
 assert_matches = "1.4.0"
