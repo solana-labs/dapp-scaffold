@@ -1,23 +1,24 @@
-#![cfg(feature = "test-bpf")]
-
 use {
-    assert_matches::*,
+    bpf_program_template::process_instruction,
+    assert_matches::assert_matches,
     solana_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },
     solana_sdk::{signature::Signer, transaction::Transaction},
-    solana_validator::test_validator::*,
+    solana_program_test::{processor, tokio, ProgramTest}
 };
 
-#[test]
-fn test_validator_transaction() {
+#[tokio::test]
+async fn test_transaction() {
     let program_id = Pubkey::new_unique();
+    let pt = ProgramTest::new(
+        "bpf_program_template",
+        program_id,
+        processor!(process_instruction),
+    );
 
-    let (test_validator, payer) = TestValidatorGenesis::default()
-        .add_program("bpf_program_template", program_id)
-        .start();
-    let (rpc_client, recent_blockhash, _fee_calculator) = test_validator.rpc_client();
+    let (mut banks_client, payer, recent_blockhash) = pt.start().await;
 
     let mut transaction = Transaction::new_with_payer(
         &[Instruction {
@@ -29,5 +30,5 @@ fn test_validator_transaction() {
     );
     transaction.sign(&[&payer], recent_blockhash);
 
-    assert_matches!(rpc_client.send_and_confirm_transaction(&transaction), Ok(_));
+    assert_matches!(banks_client.process_transaction(transaction).await, Ok(()));
 }
