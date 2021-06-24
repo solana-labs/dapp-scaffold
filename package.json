@@ -7,7 +7,7 @@
     "@craco/craco": "^5.7.0",
     "@ledgerhq/hw-transport-webusb": "^5.41.0",
     "@project-serum/serum": "^0.13.34",
-    "@project-serum/sol-wallet-adapter": "^0.2.0",
+    "@project-serum/sol-wallet-adapter": "^0.2.4",
     "@solana/spl-token": "0.1.3",
     "@solana/spl-token-registry": "^0.2.64",
     "@solana/spl-token-swap": "0.1.0",
@@ -74,5 +74,13 @@
     "arweave-deploy": "^1.9.1",
     "gh-pages": "^3.1.0",
     "prettier": "^2.1.2"
+  },
+  "jest": {
+    "transform": {
+      "(@project-serum/sol-wallet-adapter).+\\.js$": "<rootDir>/node_modules/react-scripts/node_modules/babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!@project-serum/sol-wallet-adapter)"
+    ]
   }
 }
