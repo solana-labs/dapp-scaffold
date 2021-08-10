@@ -1,6 +1,6 @@
 import { useLocalStorageState } from "./../utils/utils";
 import {
-  Account,
+  Keypair,
   clusterApiUrl,
   Connection,
   PublicKey,
@@ -11,9 +11,9 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { notify } from "./../utils/notifications";
 import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
-import { WalletAdapter } from "./wallet";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
 import { TokenListProvider, ENV as ChainID, TokenInfo } from "@solana/spl-token-registry";
+import { WalletAdapter } from "@solana/wallet-adapter-base";
 
 export type ENV =
   | "mainnet-beta"
@@ -130,7 +130,7 @@ export function ConnectionProvider({ children = undefined as any }) {
   // is empty after opening its first time, preventing subsequent subscriptions from receiving responses.
   // This is a hack to prevent the list from every getting empty
   useEffect(() => {
-    const id = connection.onAccountChange(new Account().publicKey, () => {});
+    const id = connection.onAccountChange(new Keypair().publicKey, () => {});
     return () => {
       connection.removeAccountChangeListener(id);
     };
@@ -145,7 +145,7 @@ export function ConnectionProvider({ children = undefined as any }) {
 
   useEffect(() => {
     const id = sendConnection.onAccountChange(
-      new Account().publicKey,
+      new Keypair().publicKey,
       () => {}
     );
     return () => {
@@ -234,7 +234,7 @@ export const sendTransaction = async (
   connection: Connection,
   wallet: WalletAdapter,
   instructions: TransactionInstruction[],
-  signers: Account[],
+  signers: Keypair[],
   awaitConfirmation = true
 ) => {
   if (!wallet?.publicKey) {

@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useConnection } from "./connection";
-import { useWallet } from "./wallet";
 import {
   AccountInfo,
   ConfirmedSignatureInfo,
@@ -14,6 +13,7 @@ import { chunks } from "./../utils/utils";
 import { EventEmitter } from "./../utils/eventEmitter";
 import { useUserAccounts } from "../hooks/useUserAccounts";
 import { WRAPPED_SOL_MINT, programIds } from "../utils/ids";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const AccountsContext = React.createContext<any>(null);
 

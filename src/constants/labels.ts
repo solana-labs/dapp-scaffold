@@ -9,6 +9,7 @@ export const LABELS = {
   FAUCET_INFO:
     "This faucet will help you fund your accounts outside of Solana main network.",
   ACCOUNT_FUNDED: "Account funded.",
+  AIRDROP_FAIL: "Airdrop failed, please check you're not on mainnet or your localnet is running.",
   REPAY_QUESTION: "How much would you like to repay?",
   REPAY_ACTION: "Repay",
   RESERVE_STATUS_TITLE: "Reserve Status & Configuration",
@@ -30,7 +31,7 @@ export const LABELS = {
   MENU_FAUCET: "Faucet",
   MENU_TRANSACTION: "Transactions",
   MARGIN_TRADING: "Margin Trading",
-  APP_TITLE: "Oyster Lending",
+  APP_TITLE: "Solana DAPP",
   CONNECT_BUTTON: "Connect",
   WALLET_TOOLTIP: "Wallet public key",
   WALLET_BALANCE: "Wallet balance",

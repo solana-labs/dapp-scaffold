@@ -1,19 +1,48 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
-import React from "react";
-import { WalletProvider } from "./contexts/wallet";
+import React, { useMemo } from "react";
+import { WalletProvider } from "@solana/wallet-adapter-react";
 import { ConnectionProvider } from "./contexts/connection";
 import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
 
 import { FaucetView, HomeView } from "./views";
+import {
+  getLedgerWallet,
+  getMathWallet,
+  getPhantomWallet,
+  getSolflareWallet,
+  getSolletWallet,
+  getSolongWallet,
+} from "@solana/wallet-adapter-wallets";
+import { createTheme, ThemeProvider } from "@material-ui/core";
+import { theme } from "./theme/material";
 
 export function Routes() {
+  const wallets = useMemo(
+    () => [
+      getPhantomWallet(),
+      getSolflareWallet(),
+      // TODO: Get tor.us wallet client Id
+      // getTorusWallet({
+      //   options: {
+      //     clientId: "Go to https://developer.tor.us and create a client ID",
+      //   },
+      // }),
+      getLedgerWallet(),
+      getSolongWallet(),
+      getMathWallet(),
+      getSolletWallet(),
+    ],
+    []
+  );
+
   return (
     <>
       <HashRouter basename={"/"}>
         <ConnectionProvider>
-          <WalletProvider>
+          <ThemeProvider theme={createTheme(theme)}>
+            <WalletProvider wallets={wallets} autoConnect>
               <AccountsProvider>
                 <MarketProvider>
                   <AppLayout>
@@ -22,9 +51,10 @@ export function Routes() {
                       <Route exact path="/faucet" children={<FaucetView />} />
                     </Switch>
                   </AppLayout>
-                  </MarketProvider>
+                </MarketProvider>
               </AccountsProvider>
-          </WalletProvider>
+            </WalletProvider>
+          </ThemeProvider>
         </ConnectionProvider>
       </HashRouter>
     </>
