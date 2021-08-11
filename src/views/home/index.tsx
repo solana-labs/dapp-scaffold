@@ -1,4 +1,4 @@
-import { WalletMultiButton } from "@solana/wallet-adapter-material-ui";
+import { WalletMultiButton } from "@solana/wallet-adapter-ant-design";
 import { Button, Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";

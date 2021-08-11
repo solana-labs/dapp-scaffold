@@ -15,8 +15,6 @@ import {
   getSolletWallet,
   getSolongWallet,
 } from "@solana/wallet-adapter-wallets";
-import { createTheme, ThemeProvider } from "@material-ui/core";
-import { theme } from "./theme/material";
 
 export function Routes() {
   const wallets = useMemo(
@@ -41,20 +39,18 @@ export function Routes() {
     <>
       <HashRouter basename={"/"}>
         <ConnectionProvider>
-          <ThemeProvider theme={createTheme(theme)}>
-            <WalletProvider wallets={wallets} autoConnect>
-              <AccountsProvider>
-                <MarketProvider>
-                  <AppLayout>
-                    <Switch>
-                      <Route exact path="/" component={() => <HomeView />} />
-                      <Route exact path="/faucet" children={<FaucetView />} />
-                    </Switch>
-                  </AppLayout>
-                </MarketProvider>
-              </AccountsProvider>
-            </WalletProvider>
-          </ThemeProvider>
+          <WalletProvider wallets={wallets} autoConnect>
+            <AccountsProvider>
+              <MarketProvider>
+                <AppLayout>
+                  <Switch>
+                    <Route exact path="/" component={() => <HomeView />} />
+                    <Route exact path="/faucet" children={<FaucetView />} />
+                  </Switch>
+                </AppLayout>
+              </MarketProvider>
+            </AccountsProvider>
+          </WalletProvider>
         </ConnectionProvider>
       </HashRouter>
     </>

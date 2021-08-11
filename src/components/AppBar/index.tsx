@@ -6,7 +6,7 @@ import { LABELS } from "../../constants";
 import {
   WalletDisconnectButton,
   WalletMultiButton,
-} from "@solana/wallet-adapter-material-ui";
+} from "@solana/wallet-adapter-ant-design";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {

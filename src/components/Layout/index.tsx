@@ -2,9 +2,7 @@ import React from "react";
 import "./../../App.less";
 import { Layout } from "antd";
 import { Link } from "react-router-dom";
-import {
-  WalletDialogProvider,
-} from "@solana/wallet-adapter-material-ui";
+import { WalletModalProvider } from "@solana/wallet-adapter-ant-design";
 
 import { LABELS } from "../../constants";
 import { AppBar } from "../AppBar";
@@ -14,7 +12,7 @@ const { Header, Content } = Layout;
 export const AppLayout = React.memo(({ children }) => {
   return (
     <>
-      <WalletDialogProvider>
+      <WalletModalProvider>
         <div className="App wormhole-bg">
           <Layout title={LABELS.APP_TITLE}>
             <Header className="App-Bar">
@@ -28,7 +26,7 @@ export const AppLayout = React.memo(({ children }) => {
             <Content style={{ padding: "0 50px" }}>{children}</Content>
           </Layout>
         </div>
-      </WalletDialogProvider>
+      </WalletModalProvider>
     </>
   );
 });
