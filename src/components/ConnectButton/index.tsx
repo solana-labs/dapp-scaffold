@@ -1,5 +1,5 @@
+import { useWalletModal } from "@solana/wallet-adapter-ant-design";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletName } from "@solana/wallet-adapter-wallets";
 import { Button, Dropdown, Menu } from "antd";
 import { ButtonProps } from "antd/lib/button";
 import React from "react";
@@ -12,15 +12,17 @@ export interface ConnectButtonProps
 }
 
 export const ConnectButton = (props: ConnectButtonProps) => {
-  const { connected, connect, select, wallet } = useWallet();
+  const modalState = useWalletModal();
+
+  const { connected, connect, select, wallet, wallets } = useWallet();
   const { onClick, children, disabled, allowWalletChange, ...rest } = props;
 
   // only show if wallet selected or user connected
   const menu = (
     <Menu>
-      {Object.entries(WalletName).map(([key, value]) => (
-        <Menu.Item key="3" onClick={() => select(key as WalletName)}>
-          Change Wallet to {value}
+      {wallets.map((wallet) => (
+        <Menu.Item key={wallet.name} onClick={() => select(wallet.name)}>
+          Change Wallet to {wallet.name}
         </Menu.Item>
       ))}
     </Menu>
@@ -30,7 +32,7 @@ export const ConnectButton = (props: ConnectButtonProps) => {
     return (
       <Button
         {...rest}
-        onClick={connected ? onClick : connect}
+        onClick={connected ? onClick : () => modalState.setVisible(true)}
         disabled={connected && disabled}
       >
         {connected ? props.children : LABELS.CONNECT_LABEL}

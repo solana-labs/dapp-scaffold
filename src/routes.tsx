@@ -14,6 +14,7 @@ import {
   getSolflareWallet,
   getSolletWallet,
   getSolongWallet,
+  getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
 
 export function Routes() {
@@ -21,12 +22,13 @@ export function Routes() {
     () => [
       getPhantomWallet(),
       getSolflareWallet(),
-      // TODO: Get tor.us wallet client Id
-      // getTorusWallet({
-      //   options: {
-      //     clientId: "Go to https://developer.tor.us and create a client ID",
-      //   },
-      // }),
+      getTorusWallet({
+        options: {
+          // TODO: Get your own tor.us wallet client Id
+          clientId:
+            "BOM5Cl7PXgE9Ylq1Z1tqzhpydY0RVr8k90QQ85N7AKI5QGSrr9iDC-3rvmy0K_hF0JfpLMiXoDhta68JwcxS1LQ",
+        },
+      }),
       getLedgerWallet(),
       getSolongWallet(),
       getMathWallet(),
@@ -36,23 +38,21 @@ export function Routes() {
   );
 
   return (
-    <>
-      <HashRouter basename={"/"}>
-        <ConnectionProvider>
-          <WalletProvider wallets={wallets} autoConnect>
-            <AccountsProvider>
-              <MarketProvider>
-                <AppLayout>
-                  <Switch>
-                    <Route exact path="/" component={() => <HomeView />} />
-                    <Route exact path="/faucet" children={<FaucetView />} />
-                  </Switch>
-                </AppLayout>
-              </MarketProvider>
-            </AccountsProvider>
-          </WalletProvider>
-        </ConnectionProvider>
-      </HashRouter>
-    </>
+    <HashRouter basename={"/"}>
+      <ConnectionProvider>
+        <WalletProvider wallets={wallets} autoConnect>
+          <AccountsProvider>
+            <MarketProvider>
+              <AppLayout>
+                <Switch>
+                  <Route exact path="/" component={() => <HomeView />} />
+                  <Route exact path="/faucet" children={<FaucetView />} />
+                </Switch>
+              </AppLayout>
+            </MarketProvider>
+          </AccountsProvider>
+        </WalletProvider>
+      </ConnectionProvider>
+    </HashRouter>
   );
 }

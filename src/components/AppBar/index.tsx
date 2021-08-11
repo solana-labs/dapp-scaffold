@@ -15,7 +15,7 @@ export const AppBar = (props: { left?: JSX.Element; right?: JSX.Element }) => {
     <div className="App-Bar-right">
       <WalletMultiButton />
       <div style={{ margin: 5 }} />
-      {connected ? <WalletDisconnectButton color="secondary" /> : null}
+      {connected ? <WalletDisconnectButton /> : null}
       <Popover
         placement="topRight"
         title={LABELS.SETTINGS_TOOLTIP}
