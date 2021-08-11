@@ -45,7 +45,7 @@ export const HomeView = () => {
       </Col>
 
       <Col span={12}>
-        <WalletMultiButton />
+        <WalletMultiButton type="ghost" />
       </Col>
       <Col span={12}>
         <Link to="/faucet">
