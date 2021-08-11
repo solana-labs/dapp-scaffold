@@ -11,22 +11,20 @@ const { Header, Content } = Layout;
 
 export const AppLayout = React.memo(({ children }) => {
   return (
-    <>
-      <WalletModalProvider>
-        <div className="App wormhole-bg">
-          <Layout title={LABELS.APP_TITLE}>
-            <Header className="App-Bar">
-              <Link to="/">
-                <div className="app-title">
-                  <h2>Solana DAPP</h2>
-                </div>
-              </Link>
-              <AppBar />
-            </Header>
-            <Content style={{ padding: "0 50px" }}>{children}</Content>
-          </Layout>
-        </div>
-      </WalletModalProvider>
-    </>
+    <WalletModalProvider>
+      <div className="App wormhole-bg">
+        <Layout title={LABELS.APP_TITLE}>
+          <Header className="App-Bar">
+            <Link to="/">
+              <div className="app-title">
+                <h2>Solana DAPP</h2>
+              </div>
+            </Link>
+            <AppBar />
+          </Header>
+          <Content style={{ padding: "0 50px" }}>{children}</Content>
+        </Layout>
+      </div>
+    </WalletModalProvider>
   );
 });
