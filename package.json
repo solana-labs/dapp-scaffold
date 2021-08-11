@@ -2,15 +2,36 @@
   "name": "dapp-scaffold",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/solana-labs/dapp-scaffold"
+  },
+  "homepage": ".",
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "program:build": "cd program && cargo build-bpf",
+    "program:test": "cd program && cargo test-bpf",
+    "localnet:up": "solana-test-validator --bpf-program BpfProgram1111111111111111111111111111111111 program/target/deploy/bpf_program_template.so --reset",
+    "localnet:logs": "solana logs -u localhost",
+    "predeploy": "git pull --ff-only && yarn && yarn build",
+    "deploy": "gh-pages -d build",
+    "deploy:ar": "arweave deploy-dir build --key-file ",
+    "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+  },
   "dependencies": {
     "@ant-design/icons": "^4.5.0",
     "@craco/craco": "^5.7.0",
-    "@ledgerhq/hw-transport-webusb": "^5.41.0",
     "@project-serum/serum": "^0.13.34",
-    "@project-serum/sol-wallet-adapter": "^0.2.4",
     "@solana/spl-token": "^0.1.6",
     "@solana/spl-token-registry": "^0.2.203",
     "@solana/spl-token-swap": "^0.1.0",
+    "@solana/wallet-adapter-ant-design": "^0.1.0",
+    "@solana/wallet-adapter-base": "^0.4.1",
+    "@solana/wallet-adapter-react": "^0.6.0",
+    "@solana/wallet-adapter-wallets": "^0.6.0",
     "@solana/web3.js": "^1.22.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -28,19 +49,16 @@
     "react-scripts": "3.4.3",
     "typescript": "^4.0.0"
   },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject",
-    "program:build": "cd program && cargo build-bpf",
-    "program:test": "cd program && cargo test-bpf",
-    "localnet:up": "solana-test-validator --bpf-program BpfProgram1111111111111111111111111111111111 program/target/deploy/bpf_program_template.so --reset",
-    "localnet:logs": "solana logs -u localhost",
-    "predeploy": "git pull --ff-only && yarn && yarn build",
-    "deploy": "gh-pages -d build",
-    "deploy:ar": "arweave deploy-dir build --key-file ",
-    "format:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|css|md)\""
+  "devDependencies": {
+    "@types/bn.js": "^4.11.6",
+    "@types/bs58": "^4.0.1",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.62",
+    "@types/react": "^16.9.50",
+    "@types/react-dom": "^16.9.8",
+    "arweave-deploy": "^1.9.1",
+    "gh-pages": "^3.1.0",
+    "prettier": "^2.1.2"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -57,28 +75,7 @@
       "last 1 safari version"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/solana-labs/dapp-scaffold"
-  },
-  "homepage": ".",
-  "devDependencies": {
-    "@types/bn.js": "^4.11.6",
-    "@types/bs58": "^4.0.1",
-    "@types/jest": "^24.9.1",
-    "@types/ledgerhq__hw-transport": "^4.21.3",
-    "@types/ledgerhq__hw-transport-webusb": "^4.70.1",
-    "@types/node": "^12.12.62",
-    "@types/react": "^16.9.50",
-    "@types/react-dom": "^16.9.8",
-    "arweave-deploy": "^1.9.1",
-    "gh-pages": "^3.1.0",
-    "prettier": "^2.1.2"
-  },
   "jest": {
-    "transform": {
-      "(@project-serum/sol-wallet-adapter).+\\.js$": "<rootDir>/node_modules/react-scripts/node_modules/babel-jest"
-    },
     "transformIgnorePatterns": [
       "/node_modules/(?!@project-serum/sol-wallet-adapter)"
     ]
