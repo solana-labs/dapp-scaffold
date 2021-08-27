@@ -17,7 +17,7 @@ yarn
 
 ```bash
 
-yarn start
+yarn dev
 
 ```
 
