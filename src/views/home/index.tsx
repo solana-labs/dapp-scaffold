@@ -43,15 +43,25 @@ export const HomeView = () => {
           {formatUSD.format(SRM?.balanceInUSD)})
         </h2>
       </Col>
-
-      <Col span={12}>
+      <Col span={6}>
         <WalletMultiButton type="ghost" />
       </Col>
-      <Col span={12}>
+      <Col span={6}>
+        <Link to="/send-solana">
+          <Button>Send Solana</Button>
+        </Link>
+      </Col>
+      <Col span={6}>
+        <Link to="/token-minting">
+          <Button>Mint Token</Button>
+        </Link>
+      </Col>
+      <Col span={6}>
         <Link to="/faucet">
           <Button>Faucet</Button>
         </Link>
       </Col>
+
       <Col span={24}>
         <div className="builton" />
       </Col>

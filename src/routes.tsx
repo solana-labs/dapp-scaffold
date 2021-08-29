@@ -17,7 +17,8 @@ import {
   getTorusWallet,
 } from "@solana/wallet-adapter-wallets";
 import { AccountInformation } from "./views/accountInformation";
-import { TokenHandling } from "./views/tokenHandling";
+import { TokenMinting } from "./views/token-minting";
+import { SendSolana } from "./views/send-solana";
 
 export function Routes() {
   const wallets = useMemo(
@@ -56,9 +57,10 @@ export function Routes() {
                   />
                   <Route
                     exact
-                    path="/token-handling"
-                    children={<TokenHandling />}
+                    path="/token-minting"
+                    children={<TokenMinting />}
                   />
+                  <Route exact path="/send-solana" children={<SendSolana />} />
                 </Switch>
               </AppLayout>
             </MarketProvider>

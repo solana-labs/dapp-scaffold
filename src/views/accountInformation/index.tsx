@@ -3,7 +3,6 @@ import { AccountInfo } from "@solana/web3.js";
 import { Button, Col, Row, Spin } from "antd";
 import React, { FC, useState } from "react";
 import { useConnection } from "../../contexts/connection";
-import "./styles.less";
 
 export const AccountInformation: FC = () => {
   const [accountInfo, setAccountInfo] = useState<AccountInfo<Buffer> | null>(
