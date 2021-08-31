@@ -1,7 +1,6 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
 import {
-  Transaction,
   LAMPORTS_PER_SOL,
   SystemProgram,
   PublicKey,
@@ -11,6 +10,7 @@ import React, { FC, useState } from "react";
 import { LABELS } from "../../constants";
 import { useConnection } from "../../contexts/connection";
 import { notify } from "../../utils/notifications";
+import { sendAndConfirmWalletTransaction } from "../../utils/transaction";
 
 export const SendSolana: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,7 @@ export const SendSolana: FC = () => {
       setIsLoading(true);
       const lamports = LAMPORTS_PER_SOL / amount;
 
-      // Note this transaction instruction is handled internally by the SystemProgram class;
+      // Note this transaction instruction is formed internally by the SystemProgram class;
       // however, most program calls look similar to this.
       const transactionInstruction = SystemProgram.transfer({
         fromPubkey: publicKey!,
@@ -36,24 +36,11 @@ export const SendSolana: FC = () => {
         programId: TOKEN_PROGRAM_ID,
       });
 
-      // Let's create a transaction; A recent blockhash is required to sign the transaction.
-      // Also, the feePayer is the account that will pay the fee for the transaction.
-      const recentBlockhash = await connection.getRecentBlockhash();
-
-      const transaction = new Transaction({
-        recentBlockhash: recentBlockhash.blockhash,
+      const transactionId = await sendAndConfirmWalletTransaction(connection, signTransaction, {
         feePayer: publicKey!,
-      }).add(
-        // Transactions are formed by an array of instructions.
-        transactionInstruction
-      );
+        instructions: [transactionInstruction],
+      });
 
-      // The transaction is signed by the wallet.
-      const signedTransaction = await signTransaction(transaction);
-      const transactionId = await connection.sendRawTransaction(
-        signedTransaction.serialize()
-      );
-      await connection.confirmTransaction(transactionId);
       notify({
         message: `${LABELS.TRANSACTION_SUCCESSFUL} transactionId: ${transactionId}`,
         type: "success",

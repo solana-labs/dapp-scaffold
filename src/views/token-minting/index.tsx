@@ -1,28 +1,82 @@
-import SplToken, {
+import {
+  AccountInfo,
   MintLayout,
   Token,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
 import { useWallet } from "@solana/wallet-adapter-react";
 import {
-  AccountInfo,
+  Connection,
   Keypair,
   PublicKey,
-  sendAndConfirmRawTransaction,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import { Button, Col, Input, Row, Spin } from "antd";
-import React, { FC, useState } from "react";
+import { Button, Input, Spin } from "antd";
+import React, { FC, FormEventHandler, useState } from "react";
 import { LABELS } from "../../constants";
 import { useConnection } from "../../contexts/connection";
 import { notify } from "../../utils/notifications";
+import { sendAndConfirmWalletTransaction } from "../../utils/transaction";
+
+const getOrCreateAssociatedAccountInfoWithWallet = async (
+  connection: Connection,
+  signTransaction: (transaction: Transaction) => Promise<Transaction>,
+  {
+    token,
+    payer,
+    address,
+  }: { token: Token; address: PublicKey; payer: PublicKey }
+) => {
+  // This is a great example on how to derive program addresses (PDA),
+  // also a common pattern across solana programs.
+  // In solana, an address for the wallet is handled by the spl program
+  // if it doesn't exists, it will be created.
+  // You can check the implementation of getAssociatedTokenAddress in:
+  // https://github.com/solana-labs/solana-program-library/blob/master/token/js/client/token.js#L2277
+  const associatedAddress = await Token.getAssociatedTokenAddress(
+    token.associatedProgramId,
+    token.programId,
+    token.publicKey,
+    address!
+  );
+  let associatedAccount: AccountInfo;
+  // #region getOrCreateAssociatedAccountInfo
+  // This is the wallet version of {token.getOrCreateAssociatedAccountInfo}
+  try {
+    associatedAccount = await token.getAccountInfo(associatedAddress);
+  } catch (error) {
+    const associatedTokenAccountInstruction = Token.createAssociatedTokenAccountInstruction(
+      token.associatedProgramId,
+      token.programId,
+      token.publicKey,
+      associatedAddress,
+      address,
+      payer
+    );
+    await sendAndConfirmWalletTransaction(connection, signTransaction, {
+      feePayer: payer!,
+      instructions: [associatedTokenAccountInstruction],
+    });
+    associatedAccount = await token.getAccountInfo(associatedAddress);
+  }
+  return associatedAccount;
+};
 
 export const TokenMinting: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState<Token | null>(null);
   const connection = useConnection();
   const { publicKey, signTransaction } = useWallet();
-  const createMint = async () => {
+
+  // Mint and send tokens form:
+  const [amount, setAmount] = useState(0);
+  const [destination, setDestination] = useState("");
+
+  const handleSubmitCreateMint: FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
+    e.preventDefault();
     try {
       setIsLoading(true);
 
@@ -33,16 +87,17 @@ export const TokenMinting: FC = () => {
         TOKEN_PROGRAM_ID,
         {
           publicKey: publicKey!,
-          secretKey: new Uint8Array(
-            0
-          ) /* Let's set secret key as empty array because wallet adapter signs it. */,
+          /* Let's set secret key as empty array because wallet adapter signs it. */
+          secretKey: new Uint8Array(0),
         }
       );
 
+      // Rent excemption is calculated on the size of the accounts involved in the transaction most of the times.
       const balanceNeededForRentExcemption = await Token.getMinBalanceRentForExemptAccount(
         connection
       );
 
+      // We have to create an account.
       const createAccountInstruction = SystemProgram.createAccount({
         fromPubkey: publicKey!,
         newAccountPubkey: mintAccount.publicKey,
@@ -59,63 +114,88 @@ export const TokenMinting: FC = () => {
         null
       );
 
-      let recentBlockhash = await connection.getRecentBlockhash();
+      const recentBlockhash = await connection.getRecentBlockhash();
       const transaction = new Transaction({
         recentBlockhash: recentBlockhash.blockhash,
         feePayer: publicKey!,
       })
         .add(createAccountInstruction)
         .add(createInitMintInstruction);
+
       const signedTransaction = await signTransaction(transaction);
+      signedTransaction.partialSign(mintAccount);
+
       const transactionId = await connection.sendRawTransaction(
         signedTransaction.serialize()
       );
+      await connection.confirmTransaction(transactionId, "confirmed");
 
       notify({
-        message: `${LABELS.TRANSACTION_SUCCESSFUL} transactionId: ${transactionId}`,
+        message: `Token minted ${LABELS.TRANSACTION_SUCCESSFUL} transactionId: ${transactionId}`,
         type: "success",
       });
+      setToken(token);
+    } catch (error) {
+      notify({
+        message: `${LABELS.TRANSACTION_FAILED} ${error.message}`,
+        type: "error",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      const fromTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-        publicKey!
-      );
+  const handleSubmitMintToken: FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
+    e.preventDefault();
+    if (!token) {
+      return;
+    }
+    try {
+      setIsLoading(true);
 
-      const toTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-        new PublicKey("/test")
-      );
-
-      await token.mintTo(fromTokenAccount.address, publicKey!, [], 1000000000);
-
-      await token.setAuthority(
-        token.publicKey,
-        null,
-        "MintTokens",
-        publicKey!,
-        []
-      );
-
-      // Add token transfer instructions to transaction
-      recentBlockhash = await connection.getRecentBlockhash();
-      const sendTransaction = new Transaction({
-        recentBlockhash: recentBlockhash.blockhash,
-        feePayer: publicKey!,
-      }).add(
-        Token.createTransferInstruction(
-          TOKEN_PROGRAM_ID,
-          fromTokenAccount.address,
-          toTokenAccount.address,
-          publicKey!,
-          [],
-          1
-        )
-      );
-
-      // Sign transaction, broadcast, and confirm
-      const signature = await sendAndConfirmRawTransaction(
+      const fromTokenAccount = await getOrCreateAssociatedAccountInfoWithWallet(
         connection,
-        transaction.serialize()
+        signTransaction,
+        { token, payer: publicKey!, address: publicKey! }
       );
-      console.log("SIGNATURE", signature);
+      const toTokenAccount = await getOrCreateAssociatedAccountInfoWithWallet(
+        connection,
+        signTransaction,
+        { token, payer: publicKey!, address: new PublicKey(destination)! }
+      );
+
+      const mintToInstruction = Token.createMintToInstruction(
+        token.programId,
+        token.publicKey,
+        fromTokenAccount.address,
+        publicKey!,
+        [],
+        amount
+      );
+      await sendAndConfirmWalletTransaction(connection, signTransaction, {
+        feePayer: publicKey!,
+        instructions: [mintToInstruction],
+      });
+
+      const transferInstruction = Token.createTransferInstruction(
+        TOKEN_PROGRAM_ID,
+        fromTokenAccount.address,
+        toTokenAccount.address,
+        publicKey!,
+        [],
+        amount - 0.2 // Just a little bit so the account always has a little bit of balance
+      );
+      const transactionId = await sendAndConfirmWalletTransaction(connection, signTransaction, {
+        feePayer: publicKey!,
+        instructions: [transferInstruction],
+      });
+
+      notify({
+        message: `Sent ${amount} minted tokens to ${destination} successfully. Transaction Id: ${transactionId}`,
+        type: "success",
+      });
     } catch (error) {
       notify({
         message: `${LABELS.TRANSACTION_FAILED} ${error.message}`,
@@ -127,7 +207,7 @@ export const TokenMinting: FC = () => {
   };
 
   return (
-    <form
+    <main
       className="flexColumn container"
       style={{
         flex: 1,
@@ -135,13 +215,44 @@ export const TokenMinting: FC = () => {
         marginRight: "auto",
         marginTop: "1em",
       }}
-      onSubmit={() => {}}
     >
-      <h3>Mint a token</h3>
-      <Button disabled={isLoading} type="primary" htmlType="submit">
-        {isLoading ? "Loading..." : "Mint and send SPL token"}
-      </Button>
-      {isLoading ? <Spin spinning /> : null}
-    </form>
+      <form onSubmit={handleSubmitCreateMint}>
+        <h3>Create mint</h3>
+        <Button disabled={isLoading} type="primary" htmlType="submit">
+          {isLoading ? "Loading..." : "Mint SPL token"}
+        </Button>
+        {isLoading ? <Spin spinning /> : null}
+      </form>
+      {token ? (
+        <>
+          <dl>
+            <dt>Token address:</dt>
+            <dd>{token.publicKey.toString()}</dd>
+          </dl>
+          <form onSubmit={handleSubmitMintToken}>
+            <h3>This example mints tokens into your wallet and transfers those into the destination wallet.</h3>
+            <Input
+              type="number"
+              placeholder="Amount"
+              value={amount}
+              onChange={(e) => setAmount(parseInt(e.target.value, 10))}
+              required
+            />
+            <div className="spacer" />
+            <Input
+              type="text"
+              placeholder="Destination"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+              required
+            />
+            <Button disabled={isLoading} type="primary" htmlType="submit">
+              {isLoading ? "Loading..." : "Yes"}
+            </Button>
+            {isLoading ? <Spin spinning /> : null}
+          </form>
+        </>
+      ) : null}
+    </main>
   );
 };

@@ -1571,9 +1571,9 @@
     dotenv "10.0.0"
 
 "@solana/wallet-adapter-ant-design@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-ant-design/-/wallet-adapter-ant-design-0.1.0.tgz#67510ceded9080e541115150cfc2d8e6c63f63c6"
-  integrity sha512-RPR8wDoJcR4B8rT8BmfUegtRMQ7cjGH/z1SFf3IphXxI4l/cly+KASLQoHU0gntKVrpwFBq+gQeKHCNkgw0huQ==
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-ant-design/-/wallet-adapter-ant-design-0.1.1.tgz#575df75c85afa85f14efc9b57c01105c7f22afaf"
+  integrity sha512-ioZys95fV3x/pSkQmXbIaNHGpxuU7huOr8C2GlLVhqxy//vfan4FgqJjnvsmplO9oRH3J1DEfhTUlTBrTpZTgw==
 
 "@solana/wallet-adapter-base@^0.4.1":
   version "0.4.1"
@@ -1601,9 +1601,9 @@
   integrity sha512-2Y3625SyQi0Kz9crqzrYOJD76jfDlcFhUEfJYlWWc+aJTnKwLECd91qGoBmms40PyBuTmdB9eJWTYT0Ev0NAig==
 
 "@solana/wallet-adapter-react@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.6.0.tgz#3aa74c36f8564633572d81bccc09934118b905ae"
-  integrity sha512-erl6ycld0cnfvsBJ3aXtvLmqQL1ua5Frph+b0UHu5o7z6BOzF2TqdpgMz9nzIEPtNaiR+AgZeDWU35lptDlpOQ==
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-react/-/wallet-adapter-react-0.6.1.tgz#bbdeb312697756c473484bd1a546f81972e451ba"
+  integrity sha512-CplOg/IywoDh3GdUTBOYXMTvWAMTvVFgk4tO2cbzl5+4rLO23dEp+9g2fRfhC2+vvYlzZwFqf4pV+darbRhCRQ==
 
 "@solana/wallet-adapter-solflare@^0.1.0":
   version "0.1.0"
@@ -1632,9 +1632,9 @@
     "@types/keccak" "^3.0.1"
 
 "@solana/wallet-adapter-wallets@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-wallets/-/wallet-adapter-wallets-0.6.0.tgz#03117cb2d102de10da5d975da71da45f17cd1076"
-  integrity sha512-MazpY4QiGl/ljdZrTGsQnEZFEIcas+nmceeleSCz9L1BEu8AqovcqmW0Ak//yhGZm6C/3RfxgwpV+4PKOrrexQ==
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@solana/wallet-adapter-wallets/-/wallet-adapter-wallets-0.6.1.tgz#e1afb5b7ebeba460384e9be5a378e165b76d61d5"
+  integrity sha512-BoejyJXuIJt89nRzQJdTEjG26q0tIyw0Cr3woIyCWTEIylmfGO9Oiedj5LsK9IvhP+5PGaXf/IfMhgmLtjyn1w==
   dependencies:
     "@solana/wallet-adapter-ledger" "^0.4.1"
     "@solana/wallet-adapter-mathwallet" "^0.4.1"
