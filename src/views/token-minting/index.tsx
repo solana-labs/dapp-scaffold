@@ -41,7 +41,6 @@ const getOrCreateAssociatedAccountInfoWithWallet = async (
     address!
   );
   let associatedAccount: AccountInfo;
-  // #region getOrCreateAssociatedAccountInfo
   // This is the wallet version of {token.getOrCreateAssociatedAccountInfo}
   try {
     associatedAccount = await token.getAccountInfo(associatedAddress);
