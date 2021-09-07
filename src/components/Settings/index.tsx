@@ -1,19 +1,26 @@
 import React from "react";
 import { Button, Select } from "antd";
-import { ENDPOINTS, useConnectionConfig } from "../../contexts/connection";
 import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  ENDPOINTS,
+  useConnectionSettings,
+  useConnectionSettingsActions,
+} from "../../contexts/connectionSettings";
 
 export const Settings = () => {
   const { connected, disconnect } = useWallet();
-  const { endpoint, setEndpoint } = useConnectionConfig();
+  const connectionEndpoint = useConnectionSettings();
+  const { setConnetionEndpoint } = useConnectionSettingsActions();
 
   return (
     <>
       <div style={{ display: "grid" }}>
         Network:{" "}
         <Select
-          onSelect={setEndpoint}
-          value={endpoint}
+          onSelect={(option) => {
+            setConnetionEndpoint(ENDPOINTS.find((i) => i.endpoint === option)!);
+          }}
+          value={connectionEndpoint}
           style={{ marginBottom: 20 }}
         >
           {ENDPOINTS.map(({ name, endpoint }) => (

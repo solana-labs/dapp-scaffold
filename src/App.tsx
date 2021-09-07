@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.less";
-import { Routes } from "./routes";
+import { RoutesWrapper } from "./routes";
 
 function App() {
-  return <Routes />;
+  return <RoutesWrapper />;
 }
 
 export default App;

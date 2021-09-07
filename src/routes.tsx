@@ -1,7 +1,9 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
 import React, { useMemo } from "react";
-import { WalletProvider } from "@solana/wallet-adapter-react";
-import { ConnectionProvider } from "./contexts/connection";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
 import { AccountsProvider } from "./contexts/accounts";
 import { MarketProvider } from "./contexts/market";
 import { AppLayout } from "./components/Layout";
@@ -19,8 +21,22 @@ import {
 import { AccountInformation } from "./views/accountInformation";
 import { TokenMinting } from "./views/token-minting";
 import { SendSolana } from "./views/send-solana";
+import {
+  ConnectionSettingsProvider,
+  useConnectionSettings,
+} from "./contexts/connectionSettings";
+import { TokensProvider } from "./contexts/tokenMap";
 
-export function Routes() {
+export function RoutesWrapper() {
+  return (
+    <ConnectionSettingsProvider>
+      <Routes />
+    </ConnectionSettingsProvider>
+  );
+}
+
+function Routes() {
+  const connectionEndpoint = useConnectionSettings();
   const wallets = useMemo(
     () => [
       getPhantomWallet(),
@@ -42,29 +58,35 @@ export function Routes() {
 
   return (
     <HashRouter basename={"/"}>
-      <ConnectionProvider>
+      <ConnectionProvider endpoint={connectionEndpoint}>
         <WalletProvider wallets={wallets} autoConnect>
-          <AccountsProvider>
-            <MarketProvider>
-              <AppLayout>
-                <Switch>
-                  <Route exact path="/" component={() => <HomeView />} />
-                  <Route exact path="/faucet" children={<FaucetView />} />
-                  <Route
-                    exact
-                    path="/account-information"
-                    children={<AccountInformation />}
-                  />
-                  <Route
-                    exact
-                    path="/token-minting"
-                    children={<TokenMinting />}
-                  />
-                  <Route exact path="/send-solana" children={<SendSolana />} />
-                </Switch>
-              </AppLayout>
-            </MarketProvider>
-          </AccountsProvider>
+          <TokensProvider>
+            <AccountsProvider>
+              <MarketProvider>
+                <AppLayout>
+                  <Switch>
+                    <Route exact path="/" component={() => <HomeView />} />
+                    <Route exact path="/faucet" children={<FaucetView />} />
+                    <Route
+                      exact
+                      path="/account-information"
+                      children={<AccountInformation />}
+                    />
+                    <Route
+                      exact
+                      path="/token-minting"
+                      children={<TokenMinting />}
+                    />
+                    <Route
+                      exact
+                      path="/send-solana"
+                      children={<SendSolana />}
+                    />
+                  </Switch>
+                </AppLayout>
+              </MarketProvider>
+            </AccountsProvider>
+          </TokensProvider>
         </WalletProvider>
       </ConnectionProvider>
     </HashRouter>

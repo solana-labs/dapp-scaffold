@@ -1,23 +1,22 @@
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   LAMPORTS_PER_SOL,
   SystemProgram,
   PublicKey,
+  Transaction,
 } from "@solana/web3.js";
 import { Button, Input, Spin } from "antd";
 import React, { FC, useState } from "react";
 import { LABELS } from "../../constants";
-import { useConnection } from "../../contexts/connection";
 import { notify } from "../../utils/notifications";
-import { sendAndConfirmWalletTransaction } from "../../utils/transaction";
 
 export const SendSolana: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState(0);
   const [destination, setDestination] = useState("");
-  const { publicKey, signTransaction } = useWallet();
-  const connection = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+  const { connection } = useConnection();
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (
     e
@@ -36,16 +35,16 @@ export const SendSolana: FC = () => {
         programId: TOKEN_PROGRAM_ID,
       });
 
-      const transactionId = await sendAndConfirmWalletTransaction(connection, signTransaction, {
-        feePayer: publicKey!,
-        instructions: [transactionInstruction],
-      });
+      const transactionId = await sendTransaction(
+        new Transaction().add(transactionInstruction),
+        connection
+      );
 
       notify({
         message: `${LABELS.TRANSACTION_SUCCESSFUL} transactionId: ${transactionId}`,
         type: "success",
       });
-    } catch (error) {
+    } catch (error: any) {
       notify({
         message: `${LABELS.TRANSACTION_FAILED} ${error.message}`,
         type: "error",

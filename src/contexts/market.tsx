@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { MINT_TO_MARKET } from "./../models/marketOverrides";
 import { STABLE_COINS } from "./../utils/utils";
-import { useConnectionConfig } from "./connection";
 import { cache, getMultipleAccounts } from "./accounts";
 import { Market, MARKETS, Orderbook, TOKEN_MINTS } from "@project-serum/serum";
 import { AccountInfo, Connection, PublicKey } from "@solana/web3.js";
@@ -10,6 +9,7 @@ import { EventEmitter } from "./../utils/eventEmitter";
 
 import { DexMarketParser } from "./../models/dex";
 import { useUserAccounts } from "../hooks";
+import { useConnectionSettings } from "./connectionSettings";
 
 export const BONFIDA_POOL_INTERVAL = 30 * 60_000; // 30 min
 
@@ -36,7 +36,7 @@ const MarketsContext = React.createContext<MarketsContextState | null>(null);
 const marketEmitter = new EventEmitter();
 
 export function MarketProvider({ children = null as any }) {
-  const { endpoint } = useConnectionConfig();
+  const endpoint = useConnectionSettings();
   const accountsToObserve = useMemo(() => new Map<string, number>(), []);
   const [marketMints, setMarketMints] = useState<string[]>([]);
   const { userAccounts } = useUserAccounts();

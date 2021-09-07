@@ -1,15 +1,14 @@
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { AccountInfo } from "@solana/web3.js";
 import { Button, Col, Row, Spin } from "antd";
 import React, { FC, useState } from "react";
-import { useConnection } from "../../contexts/connection";
 
 export const AccountInformation: FC = () => {
   const [accountInfo, setAccountInfo] = useState<AccountInfo<Buffer> | null>(
     null
   );
   const [isLoading, setIsLoading] = useState(false);
-  const connection = useConnection();
+  const { connection } = useConnection();
   const { publicKey } = useWallet();
   const handleGetAccountInfoClick = async () => {
     try {

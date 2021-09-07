@@ -3,15 +3,15 @@ import { Button, Col, Row } from "antd";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TokenIcon } from "../../components/TokenIcon";
-import { useConnectionConfig } from "../../contexts/connection";
 import { useMarkets } from "../../contexts/market";
+import { useTokens } from "../../contexts/tokenMap";
 import { useUserBalance, useUserTotalBalance } from "../../hooks";
 import { WRAPPED_SOL_MINT } from "../../utils/ids";
 import { formatUSD } from "../../utils/utils";
 
 export const HomeView = () => {
   const { marketEmitter, midPriceInUSD } = useMarkets();
-  const { tokenMap } = useConnectionConfig();
+  const { tokenMap } = useTokens();
   const SRM_ADDRESS = "SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt";
   const SRM = useUserBalance(SRM_ADDRESS);
   const SOL = useUserBalance(WRAPPED_SOL_MINT);

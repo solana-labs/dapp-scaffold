@@ -1,13 +1,12 @@
 import React, { useCallback } from "react";
-import { useConnection } from "../../contexts/connection";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { notify } from "../../utils/notifications";
 import { ConnectButton } from "./../../components/ConnectButton";
 import { LABELS } from "../../constants";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 export const FaucetView = () => {
-  const connection = useConnection();
+  const { connection } = useConnection();
   const { publicKey } = useWallet();
 
   const handleRequestAirdrop = useCallback(async () => {

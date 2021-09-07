@@ -4,7 +4,8 @@ import {
   Token,
   TOKEN_PROGRAM_ID,
 } from "@solana/spl-token";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { SendTransactionOptions } from "@solana/wallet-adapter-base";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import {
   Connection,
   Keypair,
@@ -15,13 +16,15 @@ import {
 import { Button, Input, Spin } from "antd";
 import React, { FC, FormEventHandler, useState } from "react";
 import { LABELS } from "../../constants";
-import { useConnection } from "../../contexts/connection";
 import { notify } from "../../utils/notifications";
-import { sendAndConfirmWalletTransaction } from "../../utils/transaction";
 
 const getOrCreateAssociatedAccountInfoWithWallet = async (
   connection: Connection,
-  signTransaction: (transaction: Transaction) => Promise<Transaction>,
+  sendTransaction: (
+    transaction: Transaction,
+    connection: Connection,
+    options?: SendTransactionOptions | undefined
+  ) => Promise<string>,
   {
     token,
     payer,
@@ -53,10 +56,11 @@ const getOrCreateAssociatedAccountInfoWithWallet = async (
       address,
       payer
     );
-    await sendAndConfirmWalletTransaction(connection, signTransaction, {
-      feePayer: payer!,
-      instructions: [associatedTokenAccountInstruction],
-    });
+    const transactionId = await sendTransaction(
+      new Transaction().add(associatedTokenAccountInstruction),
+      connection
+    );
+    await connection.confirmTransaction(transactionId);
     associatedAccount = await token.getAccountInfo(associatedAddress);
   }
   return associatedAccount;
@@ -65,8 +69,8 @@ const getOrCreateAssociatedAccountInfoWithWallet = async (
 export const TokenMinting: FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState<Token | null>(null);
-  const connection = useConnection();
-  const { publicKey, signTransaction } = useWallet();
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction, signTransaction } = useWallet();
 
   // Mint and send tokens form:
   const [amount, setAmount] = useState(0);
@@ -121,7 +125,7 @@ export const TokenMinting: FC = () => {
         .add(createAccountInstruction)
         .add(createInitMintInstruction);
 
-      const signedTransaction = await signTransaction(transaction);
+      const signedTransaction = await signTransaction!(transaction);
       signedTransaction.partialSign(mintAccount);
 
       const transactionId = await connection.sendRawTransaction(
@@ -134,7 +138,7 @@ export const TokenMinting: FC = () => {
         type: "success",
       });
       setToken(token);
-    } catch (error) {
+    } catch (error: any) {
       notify({
         message: `${LABELS.TRANSACTION_FAILED} ${error.message}`,
         type: "error",
@@ -156,12 +160,12 @@ export const TokenMinting: FC = () => {
 
       const fromTokenAccount = await getOrCreateAssociatedAccountInfoWithWallet(
         connection,
-        signTransaction,
+        sendTransaction,
         { token, payer: publicKey!, address: publicKey! }
       );
       const toTokenAccount = await getOrCreateAssociatedAccountInfoWithWallet(
         connection,
-        signTransaction,
+        sendTransaction,
         { token, payer: publicKey!, address: new PublicKey(destination)! }
       );
 
@@ -173,10 +177,11 @@ export const TokenMinting: FC = () => {
         [],
         amount
       );
-      await sendAndConfirmWalletTransaction(connection, signTransaction, {
-        feePayer: publicKey!,
-        instructions: [mintToInstruction],
-      });
+
+      await sendTransaction(
+        new Transaction().add(mintToInstruction),
+        connection
+      );
 
       const transferInstruction = Token.createTransferInstruction(
         TOKEN_PROGRAM_ID,
@@ -186,16 +191,16 @@ export const TokenMinting: FC = () => {
         [],
         amount - 0.2 // Just a little bit so the account always has a little bit of balance
       );
-      const transactionId = await sendAndConfirmWalletTransaction(connection, signTransaction, {
-        feePayer: publicKey!,
-        instructions: [transferInstruction],
-      });
+      const transactionId = await sendTransaction(
+        new Transaction().add(transferInstruction),
+        connection
+      );
 
       notify({
         message: `Sent ${amount} minted tokens to ${destination} successfully. Transaction Id: ${transactionId}`,
         type: "success",
       });
-    } catch (error) {
+    } catch (error: any) {
       notify({
         message: `${LABELS.TRANSACTION_FAILED} ${error.message}`,
         type: "error",
@@ -229,7 +234,10 @@ export const TokenMinting: FC = () => {
             <dd>{token.publicKey.toString()}</dd>
           </dl>
           <form onSubmit={handleSubmitMintToken}>
-            <h3>This example mints tokens into your wallet and transfers those into the destination wallet.</h3>
+            <h3>
+              This example mints tokens into your wallet and transfers those
+              into the destination wallet.
+            </h3>
             <Input
               type="number"
               placeholder="Amount"
