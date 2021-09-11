@@ -1,12 +1,12 @@
 use {
-    bpf_program_template::process_instruction,
     assert_matches::assert_matches,
+    bpf_program_template::process_instruction,
     solana_program::{
         instruction::{AccountMeta, Instruction},
         pubkey::Pubkey,
     },
+    solana_program_test::{processor, tokio, ProgramTest},
     solana_sdk::{signature::Signer, transaction::Transaction},
-    solana_program_test::{processor, tokio, ProgramTest}
 };
 
 #[tokio::test]
