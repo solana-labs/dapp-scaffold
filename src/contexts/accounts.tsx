@@ -152,7 +152,12 @@ export const cache = {
 
     cache.registerParser(id, deserialize);
     pendingCalls.delete(address);
-    const account = deserialize(new PublicKey(address), obj);
+    let account;
+    try {
+      account = deserialize(new PublicKey(address), obj);
+    } catch (err) {
+      console.error(err);
+    }
     if (!account) {
       return;
     }
