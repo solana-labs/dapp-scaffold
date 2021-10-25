@@ -155,7 +155,6 @@ export const cache = {
     let account;
     try {
       account = deserialize(new PublicKey(address), obj);
-
     } catch(e) {
       console.error(e);
     }
