@@ -12,14 +12,14 @@ import { notify } from "./../utils/notifications";
 import { ExplorerLink } from "../components/ExplorerLink";
 import { setProgramIds } from "../utils/ids";
 import { cache, getMultipleAccounts, MintParser } from "./accounts";
-import { TokenListProvider, ENV as ChainID, TokenInfo } from "@solana/spl-token-registry";
+import {
+  TokenListProvider,
+  ENV as ChainID,
+  TokenInfo,
+} from "@solana/spl-token-registry";
 import { WalletAdapter } from "@solana/wallet-adapter-base";
 
-export type ENV =
-  | "mainnet-beta"
-  | "testnet"
-  | "devnet"
-  | "localnet";
+export type ENV = "mainnet-beta" | "testnet" | "devnet" | "localnet";
 
 export const ENDPOINTS = [
   {
@@ -100,6 +100,7 @@ export function ConnectionProvider({ children = undefined as any }) {
     // fetch token files
     (async () => {
       const res = await new TokenListProvider().resolve();
+      console.log(chain.chainID);
       const list = res
         .filterByChainId(chain.chainID)
         .excludeByTag("nft")
@@ -109,15 +110,19 @@ export function ConnectionProvider({ children = undefined as any }) {
         return map;
       }, new Map<string, TokenInfo>());
 
-      const accounts = await getMultipleAccounts(connection, [...knownMints.keys()], 'single');
+      const accounts = await getMultipleAccounts(
+        connection,
+        [...knownMints.keys()],
+        "single"
+      );
       accounts.keys.forEach((key, index) => {
         const account = accounts.array[index];
-        if(!account) {
+        if (!account) {
           return;
         }
 
         cache.add(new PublicKey(key), account, MintParser);
-      })
+      });
 
       setTokenMap(knownMints);
       setTokens(list);
@@ -254,14 +259,11 @@ export const sendTransaction = async (
   if (signers.length > 0) {
     transaction.partialSign(...signers);
   }
-  transaction = await wallet.signTransaction(transaction);
-  const rawTransaction = transaction.serialize();
-  let options = {
+  const options = {
     skipPreflight: true,
     commitment: "singleGossip",
   };
-
-  const txid = await connection.sendRawTransaction(rawTransaction, options);
+  const txid = await wallet.sendTransaction(transaction, connection, options);
 
   if (awaitConfirmation) {
     const status = (

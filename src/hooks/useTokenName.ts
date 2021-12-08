@@ -3,6 +3,8 @@ import { useConnectionConfig } from "../contexts/connection";
 import { getTokenName } from "../utils/utils";
 
 export function useTokenName(mintAddress?: string | PublicKey) {
+  const config = useConnectionConfig();
+  console.log(config);
   const { tokenMap } = useConnectionConfig();
   const address =
     typeof mintAddress === "string" ? mintAddress : mintAddress?.toBase58();
