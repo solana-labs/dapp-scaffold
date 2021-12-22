@@ -43,19 +43,23 @@ export interface ParsedAccount<T> extends ParsedAccountBase {
 }
 
 export const MintParser = (pubKey: PublicKey, info: AccountInfo<Buffer>) => {
-  const buffer = Buffer.from(info.data);
+  try {
+    const buffer = Buffer.from(info.data);
 
-  const data = deserializeMint(buffer);
+    const data = deserializeMint(buffer);
 
-  const details = {
-    pubkey: pubKey,
-    account: {
-      ...info,
-    },
-    info: data,
-  } as ParsedAccountBase;
+    const details = {
+      pubkey: pubKey,
+      account: {
+        ...info,
+      },
+      info: data,
+    } as ParsedAccountBase;
 
-  return details;
+    return details;
+  } catch(error) {
+    console.error(error);
+  }
 };
 
 export const TokenAccountParser = (
