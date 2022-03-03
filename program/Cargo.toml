@@ -7,7 +7,7 @@ publish = false
 
 [dependencies]
 solana-program = "1.6.12"
-solana-validator = { version = "1.6.12", optional = true }
+solana-validator = { version = "1.10.0", optional = true }
 
 [features]
 test-bpf = ["solana-validator"]
