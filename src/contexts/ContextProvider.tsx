@@ -10,14 +10,35 @@ import {
     // LedgerWalletAdapter,
     // SlopeWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
-import { clusterApiUrl } from '@solana/web3.js';
-import { FC, ReactNode, useCallback, useMemo } from 'react';
+import { clusterApiUrl, Commitment, ConnectionConfig } from '@solana/web3.js';
+import { FC, ReactNode, useCallback, useMemo, useState, useEffect } from 'react';
 import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
 import { notify } from "../utils/notifications";
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const { autoConnect } = useAutoConnect();
-    const network = WalletAdapterNetwork.Devnet;
+    const [ networkSelectVal ] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('network_val');
+        };
+    });
+
+    useEffect (() => {
+        localStorage.setItem('network_val', networkSelectVal);
+    }, [networkSelectVal]);
+
+    // TODO: WALLET ADAPTER IN GENERAL NEEDS WORK, CONNECTING DIFFERENT WALLETS, REFRESH, EVENTS
+
+    let network = WalletAdapterNetwork.Devnet
+    if (networkSelectVal == 'devnet') {
+        network = WalletAdapterNetwork.Devnet;
+    }
+    else if (networkSelectVal == 'testnet') {
+        network = WalletAdapterNetwork.Testnet;
+    }
+    else if (networkSelectVal == 'mainnet') {
+        network = WalletAdapterNetwork.Mainnet;
+    }
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
     const wallets = useMemo(
@@ -40,7 +61,21 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
         },
         []
     );
-
+    if (networkSelectVal == 'localhost') {
+        let localhost = "http://127.0.0.1:8899";
+        let commitment: Commitment = 'processed';
+        let config: ConnectionConfig = {
+            commitment: commitment
+        };
+        return (
+            // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
+            <ConnectionProvider endpoint={localhost} config={config}>
+                <WalletProvider wallets={wallets} onError={onError} autoConnect={autoConnect}>
+                    <ReactUIWalletModalProvider>{children}</ReactUIWalletModalProvider>
+                </WalletProvider>
+            </ConnectionProvider>
+        );
+    }
     return (
         // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
         <ConnectionProvider endpoint={endpoint}>

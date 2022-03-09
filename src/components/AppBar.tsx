@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Link from "next/link";
 
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
@@ -6,6 +6,24 @@ import { useAutoConnect } from '../contexts/AutoConnectProvider';
 
 export const AppBar: FC = props => {
   const { autoConnect, setAutoConnect } = useAutoConnect();
+
+  const [ selectedVal, setSelectedVal ] = useState('');
+  const [ network, setNetwork ] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('network_val');
+    }
+  })
+
+  useEffect (() => {
+    localStorage.setItem('network_val', network);
+    setSelectedVal(network);
+  }, [network])
+
+  const handleChange = (e) => {
+    setNetwork(e.target.value)
+    localStorage.setItem('network_val', e.target.value);
+    window.location.reload();
+  }
 
   return (
     <div>
@@ -19,7 +37,7 @@ export const AppBar: FC = props => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
           </label>
-        
+
           <div className="hidden sm:inline w-22 h-22 md:p-2">
             <svg width="100%" height="22" viewBox="0 0 646 96" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1064_606)">
@@ -80,7 +98,15 @@ export const AppBar: FC = props => {
               </li>
             </ul>
           </div>
-          <WalletMultiButton className="btn btn-ghost mr-4" />
+          <div className="dropdown">
+            <select value={selectedVal} onChange={handleChange} className="btn" name="selectList">
+              <option value="localhost">localhost</option>
+              <option value="devnet">devnet</option>
+              <option value="testnet">testnet</option>
+              <option value="mainnet">mainnet</option>
+            </select>
+          </div>
+          <WalletMultiButton className="btn btn-ghost mr-2" />
         </div>
       </div>
       {props.children}
