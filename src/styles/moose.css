@@ -1,0 +1,16 @@
+.center-img{
+  display:flex;
+  
+}
+
+.hp-img-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box img {
+  width: 100px;
+  height: 100px;
+}
+

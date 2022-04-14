@@ -9,12 +9,13 @@ import Notifications from '../components/Notification'
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 require('../styles/globals.css');
+require('../styles/moose.css');
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
           <Head>
-            <title>Solana Scaffold Lite</title>
+            <title>SolGats - Ask The Oracle</title>
           </Head>
 
           <ContextProvider>
