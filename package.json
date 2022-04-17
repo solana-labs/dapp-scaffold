@@ -23,7 +23,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^9.0.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react-dom": "^17.0.2",
     "zustand": "^3.6.9"
   },
   "devDependencies": {
