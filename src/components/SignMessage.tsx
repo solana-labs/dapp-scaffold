@@ -39,7 +39,6 @@ export const SignMessage: FC = () => {
                 <span className="block group-disabled:hidden" > 
                     Sign Message 
                 </span>
-                <span>  aoeu</span>
             </button>
         </div>
     );

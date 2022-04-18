@@ -17,7 +17,7 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/hello.js"],
   "exclude": ["node_modules", ".next",],
   "ts-node": {
     "require": ["tsconfig-paths/register"],
