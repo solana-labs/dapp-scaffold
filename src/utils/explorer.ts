@@ -7,6 +7,7 @@ export function getExplorerUrl(
     itemType = 'address' // | 'tx' | 'block'
   ) {
     const getClusterUrlParam = () => {
+      return "?cluster=devnet"
       let cluster = ''
       if (endpoint === 'localnet') {
         cluster = `custom&customUrl=${encodeURIComponent(
