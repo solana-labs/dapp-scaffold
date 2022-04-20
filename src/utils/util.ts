@@ -45,26 +45,26 @@ export async function getRpcUrl(): Promise<string> {
 /**
  * Load and parse the Solana CLI config file to determine which payer to use
  */
-// export async function getPayer(): Promise<Keypair> {
-//   try {
-//     const config = await getConfig();
-//     if (!config.keypair_path) throw new Error('Missing keypair path');
-//     return await createKeypairFromFile(config.keypair_path);
-//   } catch (err) {
-//     console.warn(
-//       'Failed to create keypair from CLI config file, falling back to new random keypair',
-//     );
-//     return Keypair.generate();
-//   }
-// }
+export async function getPayer(): Promise<Keypair> {
+  try {
+    const config = await getConfig();
+    if (!config.keypair_path) throw new Error('Missing keypair path');
+    return await createKeypairFromFile(config.keypair_path);
+  } catch (err) {
+    console.warn(
+      'Failed to create keypair from CLI config file, falling back to new random keypair',
+    );
+    return Keypair.generate();
+  }
+}
 
 /**
  * Create a Keypair from a secret key stored in file as bytes' array
  */
-// export async function createKeypairFromFile(
-//   filePath: string,
-// ): Promise<Keypair> {
-//   const secretKeyString = await fs.readFile(filePath, {encoding: 'utf8'});
-//   const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
-//   return Keypair.fromSecretKey(secretKey);
-// }
+export async function createKeypairFromFile(
+  filePath: string,
+): Promise<Keypair> {
+  const secretKeyString = await fs.readFile(filePath, {encoding: 'utf8'});
+  const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
+  return Keypair.fromSecretKey(secretKey);
+}
