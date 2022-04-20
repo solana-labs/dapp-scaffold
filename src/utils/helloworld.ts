@@ -202,27 +202,27 @@ import {
    * Say hello
    */
   export async function sayHello(pub): Promise<void> {
-    programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
-    const GREETING_SEED = 'hello';
-    let payerPublicKey = new PublicKey('3iGdRcLLJ1iuUf7MRAFMA6mCAhiWjarST8qhZWG5D3Bn')
-    greetedPubkey = await PublicKey.createWithSeed(
-      payerPublicKey, //payer.publicKey,
-      GREETING_SEED,
-      programId,
-    );
-    console.log('have greeted')
-    const instruction = new TransactionInstruction({
-      keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
-      programId,
-      data: Buffer.alloc(0), // All instructions are hellos
-    });
-    const payerPerson = new Keypair({publicKey: pub})
-    console.log('have instruction')
-    await sendAndConfirmTransaction(
-      connection,
-      new Transaction().add(instruction),
-      [payerPerson],
-    );
+    // programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
+    // const GREETING_SEED = 'hello';
+    // let payerPublicKey = new PublicKey('3iGdRcLLJ1iuUf7MRAFMA6mCAhiWjarST8qhZWG5D3Bn')
+    // greetedPubkey = await PublicKey.createWithSeed(
+    //   payerPublicKey, //payer.publicKey,
+    //   GREETING_SEED,
+    //   programId,
+    // );
+    // console.log('have greeted')
+    // const instruction = new TransactionInstruction({
+    //   keys: [{pubkey: greetedPubkey, isSigner: false, isWritable: true}],
+    //   programId,
+    //   data: Buffer.alloc(0), // All instructions are hellos
+    // });
+    // const payerPerson = new Keypair({publicKey: pub})
+    // console.log('have instruction')
+    // await sendAndConfirmTransaction(
+    //   connection,
+    //   new Transaction().add(instruction),
+    //   [payerPerson],
+    // );
   }
   
   /**
