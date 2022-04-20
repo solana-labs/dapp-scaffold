@@ -66,6 +66,8 @@ export async function getPayer(): Promise<Keypair> {
 export async function createKeypairFromFile(
   filePath: string,
 ): Promise<Keypair> {
+  return Keypair.generate();
+
   const secretKeyString = await fs.readFile(filePath, {encoding: 'utf8'});
   const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
   return Keypair.fromSecretKey(secretKey);
