@@ -22,10 +22,12 @@ export const SayHello = () => {
         }
 
         notify({ type: 'success', message: 'Saying Hello' });
+        
 
         try {
 
-            const programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
+            const programId = new PublicKey('BPEsYMQU3gp4gDwxhKezUHVqL7XWbsPcWcQwUkbCKr6x')
+            // const programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
             const GREETING_SEED = 'hello';
             let payerPublicKey = new PublicKey('3iGdRcLLJ1iuUf7MRAFMA6mCAhiWjarST8qhZWG5D3Bn')
             const greetedPubkey = await PublicKey.createWithSeed(

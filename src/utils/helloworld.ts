@@ -144,8 +144,9 @@ import {
     //     `Failed to read program keypair at '${PROGRAM_KEYPAIR_PATH}' due to error: ${errMsg}. Program may need to be deployed with \`solana program deploy dist/program/helloworld.so\``,
     //   );
     // }
-
-    programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
+    
+    programId = new PublicKey('BPEsYMQU3gp4gDwxhKezUHVqL7XWbsPcWcQwUkbCKr6x')
+    // programId = new PublicKey('YPWSCenv6uhXHKE74pCA3RzqJgx2QJJBsnPSeb9BHNp')
   
     // Check if the program has been deployed
     const programInfo = await connection.getAccountInfo(programId);
