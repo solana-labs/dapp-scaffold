@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
-import { EndpointTypes } from '../models/types'
 
-export default function useQueryContext() {
+import { EndpointTypes } from 'models/types'
+
+export default function useQueryContext () {
   const router = useRouter()
   const { cluster } = router.query
 

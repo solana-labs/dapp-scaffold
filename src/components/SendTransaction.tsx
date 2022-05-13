@@ -1,7 +1,9 @@
+import { FC, useCallback } from 'react';
+
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@solana/web3.js';
-import { FC, useCallback } from 'react';
-import { notify } from "../utils/notifications";
+
+import { notify } from "utils/notifications";
 
 export const SendTransaction: FC = () => {
     const { connection } = useConnection();
@@ -44,8 +46,8 @@ export const SendTransaction: FC = () => {
                 <div className="hidden group-disabled:block ">
                     Wallet not connected
                 </div>
-                <span className="block group-disabled:hidden" > 
-                    Send Transaction 
+                <span className="block group-disabled:hidden" >
+                    Send Transaction
                 </span>
             </button>
         </div>
