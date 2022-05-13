@@ -6,11 +6,11 @@ import Link from 'next/link';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 
 // Components
-import { RequestAirdrop } from '../../components/RequestAirdrop';
+import { RequestAirdrop } from 'components/RequestAirdrop';
 import pkg from '../../../package.json';
 
 // Store
-import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
+import useUserSOLBalanceStore from 'stores/useUserSOLBalanceStore';
 
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
@@ -41,8 +41,8 @@ export const HomeView: FC = ({ }) => {
           <pre data-prefix=">">
             <code className="truncate">Start building on Solana  </code>
           </pre>
-        </div>        
-          <div className="text-center">
+        </div>
+        <div className="text-center">
           <RequestAirdrop />
           {/* {wallet.publicKey && <p>Public Key: {wallet.publicKey.toBase58()}</p>} */}
           {wallet && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}

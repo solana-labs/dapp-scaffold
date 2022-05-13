@@ -1,6 +1,6 @@
-import useNotificationStore from "../stores/useNotificationStore";
+import useNotificationStore from "stores/useNotificationStore";
 
-export function notify(newNotification: {
+export function notify (newNotification: {
   type?: string
   message: string
   description?: string
