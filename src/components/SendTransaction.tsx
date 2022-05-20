@@ -20,7 +20,7 @@ export const SendTransaction: FC = () => {
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
                     toPubkey: Keypair.generate().publicKey,
-                    lamports: 1,
+                    lamports: 1_000_000,
                 })
             );
 
