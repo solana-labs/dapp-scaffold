@@ -4,26 +4,66 @@ import bs58 from 'bs58';
 import { FC, useCallback } from 'react';
 import { sign } from 'tweetnacl';
 import { notify } from "../utils/notifications";
+import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react'
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
+import { clusterApiUrl } from '@solana/web3.js'
+import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
+import { Connection } from '@solana/web3.js';
+import { TOKEN_PROGRAM_ID, } from "@solana/spl-token";
 
 export const SignMessage: FC = () => {
     const { publicKey, signMessage } = useWallet();
 
     const onClick = useCallback(async () => {
         try {
-            // `publicKey` will be null if the wallet isn't connected
-            if (!publicKey) throw new Error('Wallet not connected!');
-            // `signMessage` will be undefined if the wallet doesn't support it
-            if (!signMessage) throw new Error('Wallet does not support message signing!');
-            // Encode anything as bytes
-            const message = new TextEncoder().encode('Hello, world!');
-            // Sign the bytes using the wallet
-            const signature = await signMessage(message);
-            // Verify that the bytes were signed using the private key that matches the known public key
-            if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
-            notify({ type: 'success', message: 'Sign message successful!', txid: bs58.encode(signature) });
-        } catch (error: any) {
-            notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
-            console.log('error', `Sign Message failed! ${error?.message}`);
+            
+            const network = WalletAdapterNetwork.Devnet;
+
+            // const { publicKey } = useWallet(); 
+
+            const endpoint = clusterApiUrl(network);
+
+            const connection = new Connection(endpoint)
+
+            // const account = await connection.getParsedProgramAccounts()
+
+            const wallets = [
+                new PhantomWalletAdapter(),
+                new SolflareWalletAdapter({ network }),
+              ];
+
+            const accounts = await connection.getParsedProgramAccounts(
+                TOKEN_PROGRAM_ID,
+                {
+                    filters: [
+                        {
+                            dataSize: 165,
+                        },
+                        {
+                            memcmp: {
+                                offset: 32,
+                                bytes: "7tVLqdj7FLjeiQKoiJdHg9d4p3ccn5W4NJBYT88UFRRY",
+                            },
+                        },
+                    ],
+                }
+            );
+            console.log(accounts);
+        //     // `publicKey` will be null if the wallet isn't connected
+        //     if (!publicKey) throw new Error('Wallet not connected!');
+        //     // `signMessage` will be undefined if the wallet doesn't support it
+        //     if (!signMessage) throw new Error('Wallet does not support message signing!');
+        //     // Encode anything as bytes
+        //     const message = new TextEncoder().encode('Hello, world!');
+        //     // Sign the bytes using the wallet
+        //     const signature = await signMessage(message);
+        //     // Verify that the bytes were signed using the private key that matches the known public key
+        //     if (!sign.detached.verify(message, signature, publicKey.toBytes())) throw new Error('Invalid signature!');
+        //     notify({ type: 'success', message: 'Sign message successful!', txid: bs58.encode(signature) });
+        // } catch (error: any) {
+        //     notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
+        //     console.log('error', `Sign Message failed! ${error?.message}`);
         }
     }, [publicKey, notify, signMessage]);
 
