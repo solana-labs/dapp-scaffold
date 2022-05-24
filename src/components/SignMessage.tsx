@@ -64,8 +64,12 @@ export const SignMessage: FC = () => {
         // } catch (error: any) {
         //     notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
         //     console.log('error', `Sign Message failed! ${error?.message}`);
-        }
-    }, [publicKey, notify, signMessage]);
+        
+   
+    }catch(err){
+        console.log(err)
+    }
+}, [publicKey, notify, signMessage]);
 
     return (
         <div>
