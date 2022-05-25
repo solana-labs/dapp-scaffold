@@ -10,42 +10,33 @@ import { clusterApiUrl } from '@solana/web3.js'
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets'
 import { Connection } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, } from "@solana/spl-token";
+import { actions }from "@metaplex/js";
+const { mintNFT,} = actions;
+
 
 export const SignMessage: FC = () => {
-    const { publicKey, signMessage } = useWallet();
+    const network = WalletAdapterNetwork.Devnet; 
+    const wallets = [
+        new PhantomWalletAdapter(),
+        new SolflareWalletAdapter({ network }),
+        ];
+        const endpoint = clusterApiUrl(network);
+    
+        const connection = new Connection(endpoint);
+        const { publicKey, signMessage } = useWallet();
 
+        const hi =5;
+    
+       
+        const wallet = useWallet();
     const onClick = useCallback(async () => {
         try {
             
-            const network = WalletAdapterNetwork.Devnet;
-
-            const endpoint = clusterApiUrl(network);
-
-            const connection = new Connection(endpoint);
-
-            const wallets = [
-                new PhantomWalletAdapter(),
-                new SolflareWalletAdapter({ network }),
-              ];
-
-            const accounts = await connection.getParsedProgramAccounts(
-                TOKEN_PROGRAM_ID,
-                {
-                    filters: [
-                        {
-                            dataSize: 165,
-                        },
-                        {
-                            memcmp: {
-                                offset: 32,
-                                bytes: "7tVLqdj7FLjeiQKoiJdHg9d4p3ccn5W4NJBYT88UFRRY",
-                            },
-                        },
-                    ],
-                }
-            );
-            console.log(accounts);
-    
+            const uri = "https://gateway.pinata.cloud/ipfs/QmPjcp3L7wRDKxTMdgJBXgMwPhRab71cwLMNh5Wd2kwGTW"
+            const nft = await mintNFT({connection,wallet,uri,})
+            // const vault =  await createVault({connection,wallet,hi,wallet,});
+           
+            console.log(nft);
     }catch(err){
         console.log(err)
     }
@@ -61,7 +52,7 @@ export const SignMessage: FC = () => {
                     Wallet not connected
                 </div>
                 <span className="block group-disabled:hidden" > 
-                    Sign Message 
+                    Create NFTS From wallet
                 </span>
             </button>
         </div>

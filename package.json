@@ -12,6 +12,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "@metaplex-foundation/js-next": "^0.9.0",
+    "@metaplex/js": "^4.12.0",
     "@solana/spl-token": "^0.2.0",
     "@solana/wallet-adapter-base": "^0.9.5",
     "@solana/wallet-adapter-react": "^0.15.5",

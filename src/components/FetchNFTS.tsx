@@ -76,7 +76,7 @@ const metaplex = Metaplex.make(connection)
             // let uri = await fetch(x.uri);
             // let res = await uri.json();
             return (
-                <img        width={200} height={200} src={x.image} />
+                <img         width={200} height={200} src={x.image} />
             )
         })}
             </li>

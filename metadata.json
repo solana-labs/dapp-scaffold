@@ -1,0 +1,18 @@
+{
+    "name": "Number #0001",
+    "symbol": "NB",
+    "description": "Collection of 10 numbers on the blockchain. This is the number 1/10.",
+    "seller_fee_basis_points": 500,
+    "image": "https://gateway.pinata.cloud/ipfs/QmZqGs3RrKnUZB33vVYqcueoBRTk65YUWJ8ex3nJ3nB6TR",
+    "attributes": [
+        {"trait_type": "Layer-1", "value": "0"},
+        {"trait_type": "Layer-2", "value": "0"}, 
+        {"trait_type": "Layer-3", "value": "0"},
+        {"trait_type": "Layer-4", "value": "1"}
+    ],
+    "properties": {
+        "creators": [{"address": "DZMj6Bf2qw5RRZjqKzyZmrRKPdzc2mXoc1fUkL4PDkK5", "share": 100}],
+        "files": [{"uri": "0.png", "type": "image/png"}]
+    },
+    "collection": {"name": "numbers", "family": "numbers"}
+}
