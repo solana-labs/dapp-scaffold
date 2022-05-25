@@ -5,6 +5,7 @@ import { notify } from "../utils/notifications";
 import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/js-next";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 
+
 export const SendTransaction: FC = () => {
   
 const connection = new Connection(clusterApiUrl("devnet"));
@@ -24,10 +25,14 @@ const metaplex = Metaplex.make(connection)
         try {
             const { nft } = await metaplex.nfts().create({
               uri: "https://gateway.pinata.cloud/ipfs/QmZ24mVxarhtkt63X4UV9zjno4BZ2JWKodao3L6RnxPHBj",
-      
+        
           });
-          
-          console.log(nft);
+        
+        const myNfts = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
+      
+
+
+          console.log(myNfts);
         } catch(err) {
           console.log(err);
         }
