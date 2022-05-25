@@ -6,7 +6,7 @@ import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/j
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 
 
-export const SendTransaction: FC = () => {
+export const FetchNFTS: FC = () => {
 
     const [NFTList, setNFTList] = useState([]);
   
@@ -25,13 +25,10 @@ const metaplex = Metaplex.make(connection)
 
     const onClick = useCallback(async () => {
         
-        console.log("minting NFT to your address, will take 5-10 seconds")
+        
         try {
-            const { nft } = await metaplex.nfts().create({
-              uri: "https://gateway.pinata.cloud/ipfs/QmZ24mVxarhtkt63X4UV9zjno4BZ2JWKodao3L6RnxPHBj",
-        
-          });
-        
+       
+    
          myNFTs = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
       
           console.log(myNFTs);
@@ -47,18 +44,19 @@ const metaplex = Metaplex.make(connection)
         } catch(err) {
           console.log(err);
         }
+        
     }, [ notify, connection]);
 
-    // const fetchNFTs = async () =>{
-    //     console.log("FETCHING NFTS");
-    //     myNFTs = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
-    //     console.log(myNFTs);
-    //     myNFTs.map((x) => {
-    //         let uri = fetch(x.uri);
-    //         console.log("uri is", uri);
-    //       })
+    const fetchNFTs = async () =>{
+        // console.log("FETCHING NFTS");
+        // myNFTs = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
+        // console.log(myNFTs);
+        // myNFTs.map((x) => {
+        //     let uri = fetch(x.uri);
+        //     console.log("uri is", uri);
+        //   })
 
-    // }
+    }
 
     return (
         <div>
@@ -70,17 +68,17 @@ const metaplex = Metaplex.make(connection)
                     Wallet not connected
                 </div>
                 <span className="block group-disabled:hidden" > 
-                    Send Transaction 
+                    Fetch NFTS
                 </span>
             </button>
             <li>
-                {NFTList.map((x) => {
-                    // let uri = await fetch(x.uri);
-                    // let res = await uri.json();
-                    return (
-                        <img width={200} height={200} src={x.image} />
-                    )
-                })}
+            {NFTList.map((x) => {
+            // let uri = await fetch(x.uri);
+            // let res = await uri.json();
+            return (
+                <img        width={200} height={200} src={x.image} />
+            )
+        })}
             </li>
 
             
