@@ -23,4 +23,55 @@ a {
 .wallet-adapter-button:not([disabled]):hover {
   background-color: #707070;
 }
+.fas.fa-heart:hover {
+  color: #f44336 !important;
+}
 
+.fas.fa-share-alt:hover {
+  color: #11428b !important;
+}
+.abc {
+  background-color: #2c2b2b;
+  
+}
+.max_width{
+  max-width: 18rem;
+}
+.pd{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.image_width{
+  width: 14rem;
+  height: 12rem;
+  
+  border-radius: 25px;
+  border: 3px solid #f3eded;
+}
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.card:hover {
+  box-shadow: 0 10px 15px 0 rgba(235, 230, 230, 0.2);
+}
+.container2 {
+  padding: 2px 16px;
+}
+.column {
+  float: left;
+  width: 30%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}

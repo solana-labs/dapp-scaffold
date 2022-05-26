@@ -1,60 +1,65 @@
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@solana/web3.js';
-import { FC, useCallback, useState } from 'react';
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import {
+    Keypair,
+    SystemProgram,
+    Transaction,
+    TransactionSignature,
+} from "@solana/web3.js";
+import { FC, useCallback, useState } from "react";
 import { notify } from "../utils/notifications";
-import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/js-next";
+import {
+    Metaplex,
+    keypairIdentity,
+    bundlrStorage,
+} from "@metaplex-foundation/js-next";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
-
-
+import {NFTS} from "./NFTS";
 export const FetchNFTS: FC = () => {
-
     const [NFTList, setNFTList] = useState([]);
-  
-const connection = new Connection(clusterApiUrl("devnet"));
-const key = [209,180,0,24,29,165,237,25,23,223,195,104,4,250,94,117,156,224,109,59,57,110,0,175,249,192,56,65,140,117,250,54,63,146,28,49,99,138,186,87,72,58,49,194,199,238,116,4,42,74,153,96,191,217,29,177,228,150,27,87,60,186,34,16]
-              
+    // const [test, settest] = useState(true);
 
-const secret = new Uint8Array(key)
+    const connection = new Connection(clusterApiUrl("devnet"));
+    const key = [1,90,27,228,91,62,245,81,208,23,124,206,118,237,164,26,237,156,197,60,139,77,178,90,5,35,34,5,108,97,244,121,240,51,231,189,237,131,63,125,244,114,198,95,83,103,122,253,64,106,180,25,123,16,45,99,224,225,121,156,142,237,80,152];
 
-let myNFTs;
+    const secret = new Uint8Array(key);
 
-const wallet = Keypair.fromSecretKey(secret,true);
-const metaplex = Metaplex.make(connection)
-    .use(keypairIdentity(wallet))
-    .use(bundlrStorage());
+    let myNFTs;
+    let indexKeys = 0;
+    let arr = [];
+
+
+    const wallet = Keypair.fromSecretKey(secret, true);
+    const metaplex = Metaplex.make(connection)
+        .use(keypairIdentity(wallet))
+        .use(bundlrStorage());
 
     const onClick = useCallback(async () => {
-        
-        
         try {
-       
-    
-         myNFTs = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
-      
-          console.log(myNFTs);
-          let arr = [];
-          myNFTs.map(async (x) => {
-            let uri = await fetch(x.uri);
-            let res = await uri.json();
-            arr.push(res);
-            console.log("uri is", res.name);
-          })
-          setNFTList(arr);
-          console.log("NFTList is", arr);
-        } catch(err) {
-          console.log(err);
-        }
-        
-    }, [ notify, connection]);
+            myNFTs = await metaplex
+                .nfts()
+                .findAllByOwner(metaplex.identity().publicKey);
 
-    const fetchNFTs = async () =>{
-        // console.log("FETCHING NFTS");
-        // myNFTs = await metaplex.nfts().findAllByOwner(metaplex.identity().publicKey);
-        // console.log(myNFTs);
-        // myNFTs.map((x) => {
-        //     let uri = fetch(x.uri);
-        //     console.log("uri is", uri);
-        //   })
+            console.log(myNFTs);
+            myNFTs.map(async (x) => {
+                let uri = await fetch(x.uri);
+                let res = await uri.json();
+                arr.push(res.image);
+                console.log("name is", res.image);
+            });
+            setTimeout(() => {
+                setNFTList(arr); 
+              }, 1000);
+            // settest(true);
+            // await updateNFTs();
+            console.log("NFTList is", arr);
+        } catch (err) {
+            console.log(err);
+        }
+    }, [notify, connection]);
+
+    const updateNFTs = async () => {
+        await setNFTList(arr);
+        await settest(true);
 
     }
 
@@ -62,26 +67,28 @@ const metaplex = Metaplex.make(connection)
         <div>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={onClick} disabled={0}
+                onClick={onClick}
+                disabled={0}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected
                 </div>
-                <span className="block group-disabled:hidden" > 
-                    Fetch NFTS
-                </span>
-            </button>
-            <li>
-            {NFTList.map((x) => {
-            // let uri = await fetch(x.uri);
-            // let res = await uri.json();
-            return (
-                <img         width={200} height={200} src={x.image} />
-            )
-        })}
-            </li>
+                <span className="block group-disabled:hidden">Fetch NFTS</span>
+            </button><br/><br/><br/>
+            <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
+          Your NFTS
+        </h1><br/>
+            <div className="row">
+                    
+                        {NFTList.map((x) => {
+                            // let uri = await fetch(x.uri);
+                            // let res = await uri.json();
+                            // return <img width={200} height={200} src={x} key={indexKeys++}/>;
+                            return  <NFTS data={x}/> 
+                        })}</div>
+                   
+            {/* <button onClick={()=> settest(true)}>update</button> */}
 
-            
         </div>
     );
 };
