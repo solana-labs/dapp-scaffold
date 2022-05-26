@@ -1,4 +1,5 @@
 // import { FC } from 'react';
+import { produceWithPatches } from 'immer';
 import React from 'react';
 
 export const NFTS = (pops) => {
@@ -15,11 +16,11 @@ export const NFTS = (pops) => {
                     <br />
 
                     <div>
-                        <h5 className="card-title font-weight-bold mb-2 text-center">NFTS</h5>
+                        <h5 className="card-title font-weight-bold mb-2 text-center">{pops.data.name}</h5>
                     </div>
 
                     <div className="bg-image hover-overlay pd" data-mdb-rippleripple rounded-0-color="light">
-                        <img className="img-fluid  max_width image_width" src={pops.data}
+                        <img className="img-fluid  max_width image_width" src={pops.data.image}
                             alt="Card image cap" />
 
                     </div>

@@ -11,6 +11,7 @@ import {
     Metaplex,
     keypairIdentity,
     bundlrStorage,
+    walletAdapterIdentity,
 } from "@metaplex-foundation/js-next";
 import { Connection, clusterApiUrl } from "@solana/web3.js";
 import {NFTS} from "./NFTS";
@@ -19,18 +20,17 @@ export const FetchNFTS: FC = () => {
     // const [test, settest] = useState(true);
 
     const connection = new Connection(clusterApiUrl("devnet"));
-    const key = [1,90,27,228,91,62,245,81,208,23,124,206,118,237,164,26,237,156,197,60,139,77,178,90,5,35,34,5,108,97,244,121,240,51,231,189,237,131,63,125,244,114,198,95,83,103,122,253,64,106,180,25,123,16,45,99,224,225,121,156,142,237,80,152];
-
-    const secret = new Uint8Array(key);
+    // const key = [1,90,27,228,91,62,245,81,208,23,124,206,118,237,164,26,237,156,197,60,139,77,178,90,5,35,34,5,108,97,244,121,240,51,231,189,237,131,63,125,244,114,198,95,83,103,122,253,64,106,180,25,123,16,45,99,224,225,121,156,142,
 
     let myNFTs;
     let indexKeys = 0;
     let arr = [];
 
 
-    const wallet = Keypair.fromSecretKey(secret, true);
+    // const wallet = Keypair.fromSecretKey(secret, true);
+    const wallet = useWallet();
     const metaplex = Metaplex.make(connection)
-        .use(keypairIdentity(wallet))
+        .use(walletAdapterIdentity(wallet))
         .use(bundlrStorage());
 
     const onClick = useCallback(async () => {
@@ -43,7 +43,7 @@ export const FetchNFTS: FC = () => {
             myNFTs.map(async (x) => {
                 let uri = await fetch(x.uri);
                 let res = await uri.json();
-                arr.push(res.image);
+                arr.push(res);
                 console.log("name is", res.image);
             });
             setTimeout(() => {
@@ -72,7 +72,7 @@ export const FetchNFTS: FC = () => {
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected
-                </div>
+                </div> 
                 <span className="block group-disabled:hidden">Fetch NFTS</span>
             </button><br/><br/><br/>
             <h1 className="text-center text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
