@@ -646,7 +646,7 @@ export async function loadFairLaunchProgram(
 }
 
 export async function loadAuctionHouseProgram(
-  walletKeyPair: Keypair,
+  walletKeyPair: anchor.Wallet,
   env: string,
   customRpcUrl?: string,
 ) {
@@ -657,7 +657,7 @@ export async function loadAuctionHouseProgram(
     //@ts-ignore
     customRpcUrl || getCluster(env),
   );
-  const walletWrapper = new anchor.Wallet(walletKeyPair);
+  const walletWrapper = walletKeyPair;
   const provider = new anchor.Provider(solConnection, walletWrapper, {
     preflightCommitment: 'recent',
   });

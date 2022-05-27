@@ -23,6 +23,7 @@ import { getPriceWithMantissa } from './helpers/various';
 import { sendTransactionWithRetryWithKeypair } from './helpers/transactions';
 import { decodeMetadata, Metadata } from './helpers/schema';
 import { Keypair } from '@solana/web3.js';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 
 export async function getAuctionHouseFromOpts(
   auctionHouse: any,
@@ -1337,7 +1338,7 @@ export async function show(cmd :any){
 
 export const create_auction_house = async (cmd: any) => {
     const {
-      keypair,
+      wallet,
       env,
       sellerFeeBasisPoints,
       canChangeSalePrice,
@@ -1349,7 +1350,8 @@ export const create_auction_house = async (cmd: any) => {
     console.log("here")
     const sfbp = parseInt(sellerFeeBasisPoints);
 
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = wallet;
+    // console.log(walletKeyPair.publicKey)
     const anchorProgram = await loadAuctionHouseProgram(walletKeyPair, env);
     console.log(walletKeyPair)
     let twdKey: web3.PublicKey,
@@ -1357,7 +1359,7 @@ export const create_auction_house = async (cmd: any) => {
       tMintKey: web3.PublicKey;
     if (!treasuryWithdrawalDestination) {
       console.log('No treasury withdrawal dest detected, using keypair');
-      twdKey = walletKeyPair.publicKey;
+      twdKey = walletKeyPair.publicKey.toString();
     } else {
       twdKey = new web3.PublicKey(treasuryWithdrawalDestination);
     }
@@ -1367,12 +1369,14 @@ export const create_auction_house = async (cmd: any) => {
     } else {
       fwdKey = new web3.PublicKey(feeWithdrawalDestination);
     }
+
     if (!treasuryMint) {
       console.log('No treasury mint detected, using SOL.');
       tMintKey = WRAPPED_SOL_MINT;
     } else {
       tMintKey = new web3.PublicKey(treasuryMint);
     }
+
     const twdAta = tMintKey.equals(WRAPPED_SOL_MINT)
       ? twdKey
       : (await getAtaForMint(tMintKey, twdKey))[0];
@@ -1386,7 +1390,7 @@ export const create_auction_house = async (cmd: any) => {
     const [treasuryAccount, treasuryBump] = await getAuctionHouseTreasuryAcct(
       auctionHouse,
     );
-    
+    // console.log("hi")
     await anchorProgram.rpc.createAuctionHouse(
       bump,
       feeBump,

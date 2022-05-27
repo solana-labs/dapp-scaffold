@@ -26,6 +26,8 @@
     "@solana/web3.js": "^1.43.1",
     "@tailwindcss/typography": "^0.5.0",
     "daisyui": "^1.24.3",
+    "fs": "^0.0.1-security",
+    "fs.promises": "^0.1.2",
     "immer": "^9.0.12",
     "next": "12.0.8",
     "next-compose-plugins": "^2.2.1",
