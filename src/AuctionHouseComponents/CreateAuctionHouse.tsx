@@ -1,9 +1,6 @@
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@solana/web3.js';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { FC, useCallback, useState } from 'react';
-import { notify } from "../utils/notifications";
-import { Metaplex, keypairIdentity, bundlrStorage } from "@metaplex-foundation/js-next";
-import { Connection, clusterApiUrl } from "@solana/web3.js";
+
 import { create_auction_house} from "../api/src/auction-house";
 
 export const CreateAuctionHouse: FC = () => {
@@ -15,19 +12,18 @@ export const CreateAuctionHouse: FC = () => {
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
         walletAddress = wallet.publicKey.toString()
-        console.log("my pub wallet",wallet.publicKey.toString());
+        console.log("my pub wallet ===>",walletAddress);
     }
 
 
-    console.log("abc wallet details", { keypair: Keypair.generate().secretKey })
     function getCreateauctionhouse() {
-        create_auction_house({ env: 'devnet', sfbp: 100, wallet : wallet}).then(x => {
+        create_auction_house({ env: 'devnet', sfbp: 100, ccsp: 100, rso: true, wallet : wallet}).then(x => {
             alert('Auction House Address: ' + x)
             AuctionAddress = x
             console.log("abc")
         })
     }
- 
+    
     return (
         <div>
             
