@@ -4,6 +4,9 @@ import { FC } from "react";
 // import { CreateNFTS } from '../../components/CreateNFTS';
 // import { FetchNFTS} from '../../components/FetchNFTS';
 import {CreateAuctionHouse} from '../../AuctionHouseComponents/CreateAuctionHouse';
+import {Sell} from '../../AuctionHouseComponents/Sell';
+import {GetAuctionHouse} from '../../AuctionHouseComponents/GetAuctionHouse';
+import {ExecuteSell} from '../../AuctionHouseComponents/ExecuteSell';
 export const HomeView : FC = ({ }) => {
 
   return (
@@ -15,6 +18,10 @@ export const HomeView : FC = ({ }) => {
         {/* CONTENT GOES HERE */}
         <div className="text-center">
          <CreateAuctionHouse/>
+         <GetAuctionHouse/>
+         <Sell/>
+         <ExecuteSell/>
+
         </div>
       </div>
     </div>

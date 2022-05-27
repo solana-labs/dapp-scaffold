@@ -1227,9 +1227,9 @@ export const deposit = async (cmd : any) => {
 
 export async function show(cmd :any){
     console.log(cmd)
-    const { keypair, env, auctionHouse, treasuryMint } = cmd;
+    const { wallet, env, auctionHouse, treasuryMint } = cmd;
 
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = wallet;
     const anchorProgram = await loadAuctionHouseProgram(walletKeyPair, env);
     let tMintKey;
     if (!treasuryMint) {
