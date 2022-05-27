@@ -1,5 +1,5 @@
 import { LAMPORTS_PER_SOL, AccountInfo } from '@solana/web3.js';
-import fs from 'fs';
+// import fs from 'fs';
 import weighted from 'weighted';
 import path from 'path';
 import { BN, Program, web3 } from '@project-serum/anchor';
