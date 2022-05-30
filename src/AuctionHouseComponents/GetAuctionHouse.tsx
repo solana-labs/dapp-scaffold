@@ -59,7 +59,7 @@ export const GetAuctionHouse: FC = () => {
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getAuctionHouse}
-                disabled={0}
+                disabled={false}
             >
 
             <span className="block group-disabled:hidden">Get AH Info</span>
