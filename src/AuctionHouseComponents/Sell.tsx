@@ -11,15 +11,12 @@ export const Sell: FC = () => {
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
     
     const wallet = useWallet();
-    if (wallet.connected && wallet.publicKey) {
-        walletAddress = wallet.publicKey.toString()
-        console.log("my pub wallet ===>",walletAddress);
-    }
+   
 
 
     function getSell() {
         
-        sell({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', env: 'devnet', keypair: Keypair.generate().secretKey }).then(x => {
+        sell({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', wallet : wallet }).then(x => {
             alert('Create Sell Action'+'Account'+x.account+'MintAddress'+x.mintAddress+'Price'+x.price);
         })
     }

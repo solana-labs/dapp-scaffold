@@ -14,6 +14,7 @@ import {
 import { getUnixTs, sleep } from './various';
 import { DEFAULT_TIMEOUT } from './constants';
 import log from 'loglevel';
+import { Wallet } from '@project-serum/anchor';
 
 interface BlockhashAndFeeCalculator {
   blockhash: Blockhash;
@@ -22,7 +23,7 @@ interface BlockhashAndFeeCalculator {
 
 export const sendTransactionWithRetryWithKeypair = async (
   connection: Connection,
-  wallet: Keypair,
+  wallet: Wallet,
   instructions: TransactionInstruction[],
   signers: Keypair[],
   commitment: Commitment = 'singleGossip',
@@ -46,11 +47,12 @@ export const sendTransactionWithRetryWithKeypair = async (
     );
   }
 
-  if (signers.length > 0) {
-    transaction.sign(...[wallet, ...signers]);
-  } else {
-    transaction.sign(wallet);
-  }
+  // if (signers.length > 0) {
+  //   transaction.sign(...[wallet, ...signers]);
+  // } else {
+  //   transaction.sign(wallet);
+  // }
+  await wallet.signTransaction(transaction);
 
   if (beforeSend) {
     beforeSend();
