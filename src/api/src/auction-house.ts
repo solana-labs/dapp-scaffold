@@ -286,9 +286,9 @@ export const sell = async (cmd : any) => {
       tokenSizeAdjusted,
       new BN(0),
     );
-
+      
     const signers : Keypair[] = [];
-
+    console.log("here done")
     const instruction = await anchorProgram.instruction.sell(
       tradeBump,
       freeTradeBump,
@@ -315,7 +315,7 @@ export const sell = async (cmd : any) => {
         signers,
       },
     );
-
+      console.log("here2")
     if (auctionHouseKeypairLoaded) {
       signers.push(auctionHouseKeypairLoaded);
 
@@ -323,13 +323,13 @@ export const sell = async (cmd : any) => {
         .filter(k => k.pubkey.equals(auctionHouseKeypairLoaded.publicKey))
         .map(k => (k.isSigner = true));
     }
-
+    console.log("here3")
     if (!auctionHouseSigns) {
       instruction.keys
         .filter(k => k.pubkey.equals(walletKeyPair.publicKey))
         .map(k => (k.isSigner = true));
     }
-
+    console.log("here4")
     await sendTransactionWithRetryWithKeypair(
       anchorProgram.provider.connection,
       auctionHouseSigns ? auctionHouseKeypairLoaded : walletKeyPair,
@@ -337,7 +337,7 @@ export const sell = async (cmd : any) => {
       signers,
       'max',
     );
-
+    console.log("here5")
     console.log(
       'Set',
       tokenSize,
@@ -1471,7 +1471,7 @@ export const update_auction_house = async (cmd : any) => {
       force,
     } = cmd;
 
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = keypair;
     const anchorProgram = await loadAuctionHouseProgram(walletKeyPair, env);
 
     let tMintKey: web3.PublicKey;

@@ -34,6 +34,14 @@ a {
   background-color: #2c2b2b;
   
 }
+input[type="text"]
+{
+    color: black !important;
+}
+input[type="number"]
+{
+    color: black !important;
+}
 .max_width{
   max-width: 18rem;
 }

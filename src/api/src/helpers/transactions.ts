@@ -14,7 +14,8 @@ import {
 import { getUnixTs, sleep } from './various';
 import { DEFAULT_TIMEOUT } from './constants';
 import log from 'loglevel';
-import { Wallet } from '@project-serum/anchor';
+
+import * as anchor from '@project-serum/anchor';
 
 interface BlockhashAndFeeCalculator {
   blockhash: Blockhash;
@@ -23,7 +24,9 @@ interface BlockhashAndFeeCalculator {
 
 export const sendTransactionWithRetryWithKeypair = async (
   connection: Connection,
-  wallet: Wallet,
+
+  wallet: anchor.Wallet,
+
   instructions: TransactionInstruction[],
   signers: Keypair[],
   commitment: Commitment = 'singleGossip',
@@ -52,15 +55,21 @@ export const sendTransactionWithRetryWithKeypair = async (
   // } else {
   //   transaction.sign(wallet);
   // }
-  await wallet.signTransaction(transaction);
+
+  
+  
+  const signedTransaction = await wallet.signTransaction(transaction);
+  console.log("sign transaction",signedTransaction);
+  // const {signature , slot}= await connection.sendRawTransaction(signedTransaction.serialize());
 
   if (beforeSend) {
     beforeSend();
   }
+  console.log("abc")
 
   const { txid, slot } = await sendSignedTransaction({
     connection,
-    signedTransaction: transaction,
+    signedTransaction: signedTransaction,
   });
 
   return { txid, slot };
@@ -87,6 +96,7 @@ export async function sendSignedTransaction({
       skipPreflight: true,
     },
   );
+  console.log("Transaction signature",txid)
 
   log.debug('Started awaiting confirmation for', txid);
 
@@ -99,6 +109,7 @@ export async function sendSignedTransaction({
       await sleep(500);
     }
   })();
+  console.log("pass2")
   try {
     const confirmation = await awaitTransactionSignatureConfirmation(
       txid,
@@ -107,7 +118,7 @@ export async function sendSignedTransaction({
       'confirmed',
       true,
     );
-
+      console.log("confirmed")
     if (!confirmation)
       throw new Error('Timed out awaiting confirmation on transaction');
 
@@ -216,6 +227,7 @@ async function awaitTransactionSignatureConfirmation(
           };
           if (result.err) {
             log.warn('Rejected via websocket', result.err);
+            
             reject(status);
           } else {
             log.debug('Resolved via websocket', result);
@@ -228,6 +240,7 @@ async function awaitTransactionSignatureConfirmation(
       done = true;
       log.error('WS error in setup', txid, e);
     }
+    console.log("pass4")
     while (!done && queryStatus) {
       // eslint-disable-next-line no-loop-func
       (async () => {
@@ -236,6 +249,7 @@ async function awaitTransactionSignatureConfirmation(
             txid,
           ]);
           status = signatureStatuses && signatureStatuses.value[0];
+          console.log("pass5")
           if (!done) {
             if (!status) {
               log.debug('REST null result for', txid, status);
@@ -253,10 +267,12 @@ async function awaitTransactionSignatureConfirmation(
           }
         } catch (e) {
           if (!done) {
+            console.log("error",e)
             log.error('REST connection error: txid', txid, e);
           }
         }
       })();
+      console.log("pass6")
       await sleep(2000);
     }
   });
