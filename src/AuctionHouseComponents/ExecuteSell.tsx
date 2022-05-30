@@ -1,5 +1,7 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import { FC, useCallback, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 import { execute_sale } from "../api/src/auction-house";
 
@@ -26,7 +28,7 @@ export const ExecuteSell: FC = () => {
     
     return (
         <div>
-            <div><br/>
+            {/* <div><br/>
                 <label>Auction House Address:
                     <input type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
                 </label>
@@ -43,7 +45,59 @@ export const ExecuteSell: FC = () => {
                     <input type="text" value={sellerAccount} onInput={e => setSellerAccount((e.target as HTMLTextAreaElement).value)}/>
                 </label>
                 
-            </div>
+            </div> */}
+            <Box
+                component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '15ch' },
+        input:{
+            background: "white"
+        }
+      }}
+      noValidate
+      autoComplete="off"
+    >
+            <TextField 
+                label="Auction House Address"
+                variant='filled'
+                color='success'
+                text-color="red"
+                size='small'
+                onChange={(e) => { setAuctionHouseAddress(e.target.value)}}
+            />
+                        <TextField 
+                label="Mint Address"
+                variant='filled'
+                color='success'
+                text-color="red"
+                size='small'
+                onChange={(e) => { setMintAddress(e.target.value)}}
+            />
+            <TextField 
+                label="Price"
+                variant='filled'
+                color='success'
+                text-color="red"
+                onChange={(e) => { setPrice(e.target.value)}}
+                size='small'
+            />
+            <TextField 
+                label="Buyer Account"
+                variant='filled'
+                color='success'
+                text-color="red"
+                size='small'
+                onChange={(e) => { setBuyerAccount(e.target.value)}}
+            />
+            <TextField 
+                label="Seller Account"
+                variant='filled'
+                color='success'
+                text-color="red"
+                onChange={(e) => { setSellerAccount(e.target.value)}}
+                size='small'
+            />
+    </Box>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getExecuteSale} disabled={false}
@@ -52,7 +106,7 @@ export const ExecuteSell: FC = () => {
                     Wallet not connected
                 </div>
                 <span className="block group-disabled:hidden" >
-                   ExecuteSell
+                   Execute Sell
                 </span>
             </button>
         </div>
