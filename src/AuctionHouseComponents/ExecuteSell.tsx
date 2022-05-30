@@ -19,7 +19,7 @@ export const ExecuteSell: FC = () => {
 
     function getExecuteSale() {
         alert('Execute Sale');
-        execute_sale({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', buyerWallet: '3DikCrEsfAVHv9rXENg2Hdmc16L71EjveQEF4NbSfRak', sellerWallet: 'CCJC2s8FDGAs8GqmngE9gviusEuNnkdUwchcYMZ8ZmHB', env: 'devnet', keypair: Keypair.generate().secretKey })
+        execute_sale({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', buyerWallet: '9gVFkGqBtPnxsgeJsM2y4oZYVvmTvPm84s3bENqPLQem', sellerWallet: 'EiKwSZAiNW8QoJSf8Rd48xeHURv3kTNCXcNVUMn2fjx3', env: 'devnet', wallet: wallet })
     }
     
     return (
