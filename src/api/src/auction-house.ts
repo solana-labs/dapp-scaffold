@@ -687,6 +687,7 @@ export const execute_sale = async (cmd : any) => {
     } = cmd;
 
     const auctionHouseKey = new web3.PublicKey(auctionHouse);
+    
     const walletKeyPair = wallet;
 
     const mintKey = new web3.PublicKey(mint);
