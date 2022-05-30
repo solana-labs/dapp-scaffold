@@ -18,8 +18,9 @@ export const Sell: FC = () => {
 
 
     function getSell() {
+        console.log("ah,auction",auctionHouseAddress);
         
-        sell({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', env: 'devnet', keypair: Keypair.generate().secretKey }).then(x => {
+        sell({ auctionHouse: "4kAkuX3eqqb6dFnpbBtbAi9g3tswyAEyns8kDE4nYuvo", buyPrice: price, mint: mintAddress, tokenSize: '1', env: 'devnet', wallet: wallet }).then(x => {
             alert('Create Sell Action'+'Account'+x.account+'MintAddress'+x.mintAddress+'Price'+x.price);
         })
     }
@@ -28,7 +29,7 @@ export const Sell: FC = () => {
         <div>
             <div><br/>
                 <label>Auction House Address:
-                    <input type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
+                    <input className="black-font" type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
                 </label>
                 <label>Mint address:
                     <input type="text" value={mintAddress} onInput={e => setMintAddress((e.target as HTMLTextAreaElement).value)} />
