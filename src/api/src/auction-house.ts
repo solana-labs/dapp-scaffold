@@ -674,7 +674,7 @@ export const cancel = async (cmd : any) => {
 //  .action
 export const execute_sale = async (cmd : any) => {
     const {
-      keypair,
+      wallet,
       env,
       auctionHouse,
       auctionHouseKeypair,
@@ -687,7 +687,7 @@ export const execute_sale = async (cmd : any) => {
     } = cmd;
 
     const auctionHouseKey = new web3.PublicKey(auctionHouse);
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = wallet;
 
     const mintKey = new web3.PublicKey(mint);
 
