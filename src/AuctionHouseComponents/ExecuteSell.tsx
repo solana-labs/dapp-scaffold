@@ -9,6 +9,8 @@ export const ExecuteSell: FC = () => {
     const [price, setPrice] = useState(''); // '' is the initial state value
     const [mintAddress, setMintAddress] = useState(''); // '' is the initial state value
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
+    const [buyerAccount, setBuyerAccount] = useState(''); // '' is the initial state value
+    const [sellerAccount, setSellerAccount] = useState(''); // '' is the initial
     
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
@@ -19,7 +21,7 @@ export const ExecuteSell: FC = () => {
 
     function getExecuteSale() {
         alert('Execute Sale');
-        execute_sale({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', buyerWallet: '9gVFkGqBtPnxsgeJsM2y4oZYVvmTvPm84s3bENqPLQem', sellerWallet: 'EiKwSZAiNW8QoJSf8Rd48xeHURv3kTNCXcNVUMn2fjx3', env: 'devnet', wallet: wallet })
+        execute_sale({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', buyerWallet: buyerAccount, sellerWallet: sellerAccount, env: 'devnet', wallet: wallet })
     }
     
     return (
@@ -33,6 +35,12 @@ export const ExecuteSell: FC = () => {
                 </label>
                 <label>CurrentPrice:
                     <input type="number" value={price} onInput={e => setPrice((e.target as HTMLTextAreaElement).value)}/>
+                </label>
+                <label>Buyer Account:
+                    <input type="text" value={buyerAccount} onInput={e => setBuyerAccount((e.target as HTMLTextAreaElement).value)}/>
+                </label>
+                <label>Seller Account:
+                    <input type="text" value={sellerAccount} onInput={e => setSellerAccount((e.target as HTMLTextAreaElement).value)}/>
                 </label>
                 
             </div>
