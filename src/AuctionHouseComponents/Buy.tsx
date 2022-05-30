@@ -18,7 +18,7 @@ export const Buy: FC = () => {
 
 
     function getBuy() {
-        buy({ auctionHouse: auctionHouseAddress, buyPrice: price, tokenSize: '1', mint: mintAddress, env: 'devnet', keypair: Keypair.generate().secretKey }).then(x => {
+        buy({ auctionHouse: auctionHouseAddress, buyPrice: price, tokenSize: '1', mint: mintAddress, env: 'devnet', wallet: wallet }).then(x => {
             alert('Buy / offer Action'+'Offer: '+x);
         })
     }
