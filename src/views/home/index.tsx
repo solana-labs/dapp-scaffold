@@ -8,6 +8,7 @@ import { Sell } from '../../AuctionHouseComponents/Sell';
 import { GetAuctionHouse } from '../../AuctionHouseComponents/GetAuctionHouse';
 import { ExecuteSell } from '../../AuctionHouseComponents/ExecuteSell';
 import { Buy } from '../../AuctionHouseComponents/Buy';
+import { Cancel} from '../../AuctionHouseComponents/Cancel';
 export const HomeView: FC = ({ }) => {
 
   return (
@@ -23,6 +24,7 @@ export const HomeView: FC = ({ }) => {
           <Sell />
           <Buy />
           <ExecuteSell />
+          <Cancel/>
 
         </div>
       </div>
