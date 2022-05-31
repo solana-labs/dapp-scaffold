@@ -11,6 +11,7 @@ import { sell } from "../api/src/auction-house";
 export const Sell: FC = () => {
     let walletAddress = "";
     
+    const { publicKey } = useWallet();
     const [price, setPrice] = useState(''); // '' is the initial state value
     const [mintAddress, setMintAddress] = useState(''); // '' is the initial state value
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
@@ -32,20 +33,6 @@ export const Sell: FC = () => {
     
     return (
         <div>
-            {/* <div><br/>
-                <label>Auction House Address:
-                    <input className="black-font" type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                <label>Mint address:
-                    <input type="text" value={mintAddress} onInput={e => setMintAddress((e.target as HTMLTextAreaElement).value)} />
-                </label>
-                <label>Price:
-                    <input type="number" value={price} onInput={e => setPrice((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                
-            </div> */}
-
-            {/* <BasicTextFields /> */}
             <Box
                 component="form"
       sx={{
@@ -85,7 +72,7 @@ export const Sell: FC = () => {
     <h1>{test}</h1>
     <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={getSell} disabled={false}
+                onClick={getSell} disabled={!publicKey}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected

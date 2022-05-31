@@ -9,6 +9,7 @@ export const GetAuctionHouse: FC = () => {
     let walletAddress = " ";
     let AuctionAddress = " ";
 
+    const { publicKey } = useWallet();
     const [AHInfo, setAHInfo] = useState([]);
     const [AHFetched, setAHFetched] = useState(false);
     let arr = [];
@@ -20,23 +21,8 @@ export const GetAuctionHouse: FC = () => {
     }
 
     const getAuctionHouse = () => {
-        // let res = show(null, wallet, "So11111111111111111111111111111111111111112");
-        // console.log("Result is", res);
+      
         show({ env: 'devnet', wallet: wallet }).then(x => {
-            // setAHInfo('Auction House: ' + x.auctionHouseKey +
-            //     'Mint: ' + x.treasuryMint.toBase58() +
-            //     'Authority: ' + x.authority.toBase58() +
-            //     'Creator: ' + x.creator.toBase58() +
-            //     'Fee Payer Acct:' + x.auctionHouseFeeAccount.toBase58() +
-            //     'Treasury Acct: ' + x.auctionHouseTreasury.toBase58() +
-            //     'Fee Payer Withdrawal Acct: ' + x.feeWithdrawalDestination.toBase58() +
-            //     'Treasury Withdrawal Acct: ' + x.treasuryWithdrawalDestination.toBase58() +
-            //     'Seller Fee Basis Points: ' + x.sellerFeeBasisPoints +
-            //     'Requires Sign Off: ' + x.requiresSignOff +
-            //     'Can Change Sale Price: ' + x.canChangeSalePrice +
-            //     'AH Bump: ' + x.bump +
-            //     'AH Fee Bump: ' + x.feePayerBump +
-            //     'AH Treasury Bump: ' + x.treasuryBump);
             arr.push(x.auctionHouseKey, x.treasuryMint.toBase58(), x.authority.toBase58(),
             x.creator.toBase58(),x.auctionHouseFeeAccount.toBase58(),
             x.auctionHouseTreasury.toBase58(), x.feeWithdrawalDestination.toBase58(), x.feeWithdrawalDestination.toBase58(),
@@ -59,7 +45,7 @@ export const GetAuctionHouse: FC = () => {
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getAuctionHouse}
-                disabled={false}
+                disabled={!publicKey}
             >
 
             <span className="block group-disabled:hidden">Get AH Info</span>
