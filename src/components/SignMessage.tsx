@@ -29,28 +29,16 @@ export const SignMessage: FC = () => {
         const { publicKey, signMessage } = useWallet();
         const [URI, setURI] = useState("");
 
-
-        const hi =5;
-    
-       
         const wallet = useWallet();
     const onClick = useCallback(async () => {
         try {
-       
-
-            // let uri = URI
-         
-
-            // console.log("URI is", uri);
-            // let uri = "https://gateway.pinata.cloud/ipfs/QmYTURSSxNv1sMZUkh5uo7vjowo4vNRMkJTThSosNLi1Cw"
-            // console.log("URI IS", uri)
             
-            // const nft = await mintNFT({connection,wallet: wallet,uri: URI,})
-
-            const nft = await mintNFT({connection,wallet :wallet,uri:URI,});
-            console.log("NFT ys", nft);
+            console.log("URI is", URI);
+            // const uri = "https://gateway.pinata.cloud/ipfs/QmPbSW7PcSMHBSPEyqs8SETDJvqC69rKBbGmawhmJmHxSE"
+            const nft = await mintNFT({connection,wallet :wallet, uri:URI,})
             // const vault =  await createVault({connection,wallet,hi,wallet,});
            
+            console.log(nft);
     }catch(err){
         console.log(err)
     }
@@ -88,7 +76,6 @@ export const SignMessage: FC = () => {
                     Create NFTS From wallet
                 </span>
             </button>
-            <p>{URI}</p>
         </div>
     );
 };
