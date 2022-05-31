@@ -91,10 +91,10 @@ export const show_escrow = async (cmd : any ) => { //{ env: 'devnet', keypair: '
 //  .option('-a, --amount <string>', 'Amount to withdraw').action
 
 export const withdraw = async (cmd : any) => {
-    const { keypair, env, amount, auctionHouse, auctionHouseKeypair } =
+    const { wallet, env, amount, auctionHouse, auctionHouseKeypair } =
       cmd;
     const auctionHouseKey = new web3.PublicKey(auctionHouse);
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = wallet;
     const auctionHouseKeypairLoaded = auctionHouseKeypair
       ? loadWalletKey(auctionHouseKeypair)
       : null;
@@ -1086,10 +1086,10 @@ export const buy = async (cmd : any ) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 //  .action
 export const deposit = async (cmd : any) => {
-    const { keypair, env, amount, auctionHouse, auctionHouseKeypair } =
+    const { wallet, env, amount, auctionHouse, auctionHouseKeypair } =
       cmd;
     const auctionHouseKey = new web3.PublicKey(auctionHouse);
-    const walletKeyPair = loadWalletKey(keypair);
+    const walletKeyPair = wallet;
 
     const auctionHouseKeypairLoaded = auctionHouseKeypair
       ? loadWalletKey(auctionHouseKeypair)
