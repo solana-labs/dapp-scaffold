@@ -36,7 +36,7 @@ export const Footer: FC = () => {
                             target="_blank"
                             className="text-white text-base font-bold hover:text-primary-dark transition-all duration-200"
                         >
-                            SoluLab hehe
+                            SoluLab Inc
                         </a>
                     </div>
                 </div>

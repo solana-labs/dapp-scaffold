@@ -32,7 +32,7 @@ export const SignMessage: FC = () => {
     const onClick = useCallback(async () => {
         try {
             
-            const uri = "https://gateway.pinata.cloud/ipfs/QmPjcp3L7wRDKxTMdgJBXgMwPhRab71cwLMNh5Wd2kwGTW"
+            const uri = "https://gateway.pinata.cloud/ipfs/QmPbSW7PcSMHBSPEyqs8SETDJvqC69rKBbGmawhmJmHxSE"
             const nft = await mintNFT({connection,wallet,uri,})
             // const vault =  await createVault({connection,wallet,hi,wallet,});
            

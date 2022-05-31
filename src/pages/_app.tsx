@@ -14,7 +14,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
           <Head>
-            <title>SoluLab - Solana</title>
+            <title>SoluLab-Solana</title>
           </Head>
 
           <ContextProvider>

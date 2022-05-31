@@ -1588,7 +1588,7 @@ export const update_auction_house = async (cmd : any) => {
       },
     });
     console.log('Updated auction house', auctionHouseKey.toBase58());
-    return auctionHouseKey.toBase58()
+    return C
   };
 
 

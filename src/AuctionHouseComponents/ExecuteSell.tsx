@@ -22,8 +22,8 @@ export const ExecuteSell: FC = () => {
 
 
     function getExecuteSale() {
-        alert('Execute Sale');
         execute_sale({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', buyerWallet: buyerAccount, sellerWallet: sellerAccount, env: 'devnet', wallet: wallet })
+        alert('Execute Sale');
     }
     
     return (
