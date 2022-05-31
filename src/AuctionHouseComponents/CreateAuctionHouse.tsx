@@ -8,7 +8,7 @@ export const CreateAuctionHouse: FC = () => {
     var AuctionAddress = "3EERzZ6dHvYKksjDuUECDTRNKENCw8NcN4LFFKj4C6th";
 
 
-    
+    const { publicKey } = useWallet();
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
         walletAddress = wallet.publicKey.toString()
@@ -29,7 +29,7 @@ export const CreateAuctionHouse: FC = () => {
             
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={getCreateauctionhouse} disabled={false}
+                onClick={getCreateauctionhouse} disabled={!publicKey}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected

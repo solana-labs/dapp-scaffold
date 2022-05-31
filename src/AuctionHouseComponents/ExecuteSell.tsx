@@ -8,6 +8,7 @@ import { execute_sale } from "../api/src/auction-house";
 export const ExecuteSell: FC = () => {
     let walletAddress = "";
     
+    const { publicKey } = useWallet();
     const [price, setPrice] = useState(''); // '' is the initial state value
     const [mintAddress, setMintAddress] = useState(''); // '' is the initial state value
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
@@ -100,7 +101,7 @@ export const ExecuteSell: FC = () => {
     </Box>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={getExecuteSale} disabled={false}
+                onClick={getExecuteSale} disabled={!publicKey}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected

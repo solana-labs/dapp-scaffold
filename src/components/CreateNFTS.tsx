@@ -8,7 +8,7 @@ import { Connection, clusterApiUrl } from "@solana/web3.js";
 
 export const CreateNFTS: FC = () => {
 
-  
+    const { publicKey } = useWallet();
     const connection = new Connection(clusterApiUrl("devnet"));
     const key =[1,90,27,228,91,62,245,81,208,23,124,206,118,237,164,26,237,156,197,60,139,77,178,90,5,35,34,5,108,97,244,121,240,51,231,189,237,131,63,125,244,114,198,95,83,103,122,253,64,106,180,25,123,16,45,99,224,225,121,156,142,237,80,152]
     const secret = new Uint8Array(key)
@@ -37,7 +37,7 @@ export const CreateNFTS: FC = () => {
         <div>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={onClick} disabled={0}
+                onClick={onClick} disabled={!publicKey}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected

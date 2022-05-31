@@ -4,10 +4,12 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 
 import { buy } from "../api/src/auction-house";
+import { PublicKey } from '@solana/web3.js';
 
 export const Buy: FC = () => {
     let walletAddress = "";
     
+    const { publicKey } = useWallet();
     const [price, setPrice] = useState(''); // '' is the initial state value
     const [mintAddress, setMintAddress] = useState(''); // '' is the initial state value
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
@@ -15,7 +17,6 @@ export const Buy: FC = () => {
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
         walletAddress = wallet.publicKey.toString()
-        console.log("my pub wallet ===>",walletAddress);
     }
 
 
@@ -77,7 +78,7 @@ export const Buy: FC = () => {
     </Box>
     <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={getBuy} disabled={false}
+                onClick={getBuy} disabled={!publicKey}
             >
                 <div className="hidden group-disabled:block ">
                     Wallet not connected
