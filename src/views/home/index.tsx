@@ -23,10 +23,6 @@ export const HomeView: FC = ({ }) => {
           <GetAuctionHouse />
           {/* <Sell />
           <Buy />
-<<<<<<< HEAD
-          <ExecuteSell />
-          <Cancel/>
-=======
           <ExecuteSell /> */}
 
         </div>

@@ -20,11 +20,6 @@ export const Footer: FC = () => {
                         </svg>
                 </div>
                 
-                <hr /> <hr /> <hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /> <hr />
-                <hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr />
-                <hr /><hr /><hr /><hr />                 <hr /> <hr /> <hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /> <hr />
-                <hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr /><hr />
-                <hr /><hr /><hr /><hr /> <hr /><hr /><hr /><hr />
                 <div className="grid-flow-col gap-4 text-center pr-4">
                     <div>
                         <p className="text-white text-base font-light cursor-default ">

@@ -64,15 +64,6 @@ export const AppBar: FC = props => {
               <a className="btn btn-ghost btn-sm rounded-btn">Sell</a>
             </Link>
             <Link href="/execute">
-            <a className="btn btn-ghost btn-sm rounded-btn">NFTs</a>
-            </Link>
-            <Link href="/buy">
-              <a className="btn btn-ghost btn-sm rounded-btn">Buy</a>
-            </Link>
-            <Link href="/sell">
-              <a className="btn btn-ghost btn-sm rounded-btn">Sell</a>
-            </Link>
-            <Link href="/execute">
               <a className="btn btn-ghost btn-sm rounded-btn">Execute Sale</a>
             </Link>
           </div>
