@@ -1,6 +1,6 @@
 // TODO: SignMessage
 import bs58 from 'bs58';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { sign } from 'tweetnacl';
 import { notify } from "../utils/notifications";
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react'
@@ -12,6 +12,9 @@ import { Connection } from '@solana/web3.js';
 import { TOKEN_PROGRAM_ID, } from "@solana/spl-token";
 import { actions }from "@metaplex/js";
 const { mintNFT,} = actions;
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+
 
 
 export const SignMessage: FC = () => {
@@ -24,6 +27,8 @@ export const SignMessage: FC = () => {
     
         const connection = new Connection(endpoint);
         const { publicKey, signMessage } = useWallet();
+        const [URI, setURI] = useState("");
+
 
         const hi =5;
     
@@ -44,6 +49,25 @@ export const SignMessage: FC = () => {
 
     return (
         <div>
+            <Box
+                component="form"
+                 sx={{
+                    '& > :not(style)': { m: 2, width: '25ch' },
+                    input:{
+                        background: "white"
+                    }
+                }}
+                noValidate
+                autoComplete="off"
+            >
+            <TextField 
+                label="URI"
+                variant='filled'
+                color='success'
+                onChange={(e) => { setURI(e.target.value)}}
+                size='small'
+            />
+            </Box>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={onClick} disabled={!publicKey}
