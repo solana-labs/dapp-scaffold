@@ -51,7 +51,7 @@ export const Sell: FC = () => {
                 onChange={(e) => { setAuctionHouseAddress(e.target.value)}}
                 size='small'
             />
-                        <TextField 
+            <TextField 
                 label="Mint Address"
                 variant='filled'
                 color='success'
