@@ -19,8 +19,8 @@ export const Cancel: FC = () => {
 
 
     function getCancel() {
-        alert('Execute Sale');
         cancel({ auctionHouse: auctionHouseAddress, buyPrice: price, mint: mintAddress, tokenSize: '1', env: 'devnet', wallet: wallet })
+        alert('Cancel Sale or Buy');
     } 
     
     return (

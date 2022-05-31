@@ -46,9 +46,11 @@ export const GetAuctionHouse: FC = () => {
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getAuctionHouse}
                 disabled={!publicKey}
-            >
+            ><div className="hidden group-disabled:block ">
+            Wallet not connected
+            </div>
 
-            <span className="block group-disabled:hidden">Get AH Info</span>
+            <span className="block group-disabled:hidden">Get Auction House Info</span>
             </button>
             { AHFetched ?   <>
                             <h3>Auction House Key: {AHInfo[0]}</h3>
