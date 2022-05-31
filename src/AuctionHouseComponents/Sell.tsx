@@ -15,7 +15,6 @@ export const Sell: FC = () => {
     const [price, setPrice] = useState(''); // '' is the initial state value
     const [mintAddress, setMintAddress] = useState(''); // '' is the initial state value
     const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
-    const [test, settest] = useState("");
     
     const wallet = useWallet();
    
@@ -69,7 +68,6 @@ export const Sell: FC = () => {
                 size='small'
             />
     </Box>
-    <h1>{test}</h1>
     <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getSell} disabled={!publicKey}
