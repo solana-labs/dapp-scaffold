@@ -5,6 +5,8 @@ import { deposit } from "../api/src/auction-house";
 
 export const Deposit: FC = () => {
     let walletAddress = "";
+    const [price, setPrice] = useState(''); // '' is the initial state value
+    const [auctionHouseAddress,setAuctionHouseAddress]= useState(''); // '' is the initial state value
     
 
 
@@ -16,7 +18,7 @@ export const Deposit: FC = () => {
 
 
     function getDeposit() {
-       
+        deposit({ auctionHouse: auctionHouseAddress, amount: price, env: 'devnet', wallet: wallet })
     }
     
     return (
@@ -33,6 +35,12 @@ export const Deposit: FC = () => {
                     Deposit 
                 </span>
             </button>
+            <label>Auction House Address:
+                    <input type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
+                </label>
+                <label>Amount:
+                    <input type="number" value={price} onInput={e => setPrice((e.target as HTMLTextAreaElement).value)}/>
+                </label>
         </div>
     );
 };
