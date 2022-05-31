@@ -59,10 +59,8 @@ export const FetchNFTS: FC = () => {
 
     const updateNFTs = async () => {
         await setNFTList(arr);
-        await settest(true);
 
     }
-
     return (
         <div>
             <button
@@ -84,7 +82,7 @@ export const FetchNFTS: FC = () => {
                             // let uri = await fetch(x.uri);
                             // let res = await uri.json();
                             // return <img width={200} height={200} src={x} key={indexKeys++}/>;
-                            return  <NFTS data={x}/> 
+                            return  <NFTS data={x} key={indexKeys++}/> 
                         })}</div>
                    
             {/* <button onClick={()=> settest(true)}>update</button> */}
