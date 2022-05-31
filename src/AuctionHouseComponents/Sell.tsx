@@ -82,7 +82,7 @@ export const Sell: FC = () => {
                 size='small'
             />
     </Box>
-    <h1>{test}</h1>
+    {/* <h1>{test}</h1> */}
     <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
                 onClick={getSell} disabled={false}

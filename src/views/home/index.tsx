@@ -20,9 +20,9 @@ export const HomeView: FC = ({ }) => {
         <div className="text-center">
           <CreateAuctionHouse />
           <GetAuctionHouse />
-          <Sell />
+          {/* <Sell />
           <Buy />
-          <ExecuteSell />
+          <ExecuteSell /> */}
 
         </div>
       </div>
