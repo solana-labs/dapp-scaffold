@@ -1,7 +1,7 @@
 
 import { FC } from "react";
 import { SignMessage } from '../../components/SignMessage';
-import { CreateNFTS } from '../../components/CreateNFTS';
+
 import { FetchNFTS} from '../../components/FetchNFTS';
 export const BasicsView: FC = ({ }) => {
 
@@ -14,7 +14,7 @@ export const BasicsView: FC = ({ }) => {
         {/* CONTENT GOES HERE */}
         <div className="text-center">
           <SignMessage/>
-          <CreateNFTS />
+          
           <FetchNFTS />
         </div>
       </div>

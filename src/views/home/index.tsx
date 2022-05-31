@@ -9,6 +9,8 @@ import { GetAuctionHouse } from '../../AuctionHouseComponents/GetAuctionHouse';
 import { ExecuteSell } from '../../AuctionHouseComponents/ExecuteSell';
 import { Buy } from '../../AuctionHouseComponents/Buy';
 import { Cancel} from '../../AuctionHouseComponents/Cancel';
+import {Deposit} from '../../AuctionHouseComponents/Deposit';
+import {Withdraw} from '../../AuctionHouseComponents/Withdraw';
 export const HomeView: FC = ({ }) => {
 
   return (
@@ -20,6 +22,8 @@ export const HomeView: FC = ({ }) => {
         {/* CONTENT GOES HERE */}
         <div className="text-center">
           <CreateAuctionHouse />
+          <Deposit/>
+          <Withdraw/>
           <GetAuctionHouse />
           {/* <Sell />
           <Buy />
