@@ -18,7 +18,6 @@ export const ExecuteSell: FC = () => {
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
         walletAddress = wallet.publicKey.toString()
-        console.log("my pub wallet ===>",walletAddress);
     }
 
 
@@ -29,24 +28,6 @@ export const ExecuteSell: FC = () => {
     
     return (
         <div>
-            {/* <div><br/>
-                <label>Auction House Address:
-                    <input type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                <label>Mint address:
-                    <input type="text" value={mintAddress} onInput={e => setMintAddress((e.target as HTMLTextAreaElement).value)} />
-                </label>
-                <label>CurrentPrice:
-                    <input type="number" value={price} onInput={e => setPrice((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                <label>Buyer Account:
-                    <input type="text" value={buyerAccount} onInput={e => setBuyerAccount((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                <label>Seller Account:
-                    <input type="text" value={sellerAccount} onInput={e => setSellerAccount((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                
-            </div> */}
             <Box
                 component="form"
       sx={{

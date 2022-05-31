@@ -5,14 +5,13 @@ import { create_auction_house} from "../api/src/auction-house";
 
 export const CreateAuctionHouse: FC = () => {
     let walletAddress = "";
-    var AuctionAddress = "3EERzZ6dHvYKksjDuUECDTRNKENCw8NcN4LFFKj4C6th";
+    var AuctionAddress 
 
 
     const { publicKey } = useWallet();
     const wallet = useWallet();
     if (wallet.connected && wallet.publicKey) {
         walletAddress = wallet.publicKey.toString()
-        console.log("my pub wallet ===>",walletAddress);
     }
 
 
@@ -20,7 +19,6 @@ export const CreateAuctionHouse: FC = () => {
         create_auction_house({ env: 'devnet', sfbp: 100, ccsp: 100, rso: true, wallet : wallet}).then(x => {
             alert('Auction House Address: ' + x)
             AuctionAddress = x
-            console.log("abc")
         })
     }
     

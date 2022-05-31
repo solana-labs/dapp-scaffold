@@ -28,18 +28,6 @@ export const Buy: FC = () => {
     
     return (
         <div>
-            {/* <div><br/>
-                <label>Auction House Address:
-                    <input type="text" value={auctionHouseAddress} onInput={e => setAuctionHouseAddress((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                <label>Mint address:
-                    <input type="text" value={mintAddress} onInput={e => setMintAddress((e.target as HTMLTextAreaElement).value)} />
-                </label>
-                <label>Price:
-                    <input type="number" value={price} onInput={e => setPrice((e.target as HTMLTextAreaElement).value)}/>
-                </label>
-                
-            </div> */}
             <Box
                 component="form"
       sx={{
