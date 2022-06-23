@@ -8,6 +8,7 @@ import { XIcon } from '@heroicons/react/solid'
 import useNotificationStore from '../stores/useNotificationStore'
 import { useConnection } from '@solana/wallet-adapter-react';
 import { getExplorerUrl } from '../utils/explorer'
+import { useNetworkConfiguration } from 'contexts/NetworkConfigurationProvider';
 
 const NotificationList = () => {
   const { notifications, set: setNotificationStore } = useNotificationStore(
@@ -46,6 +47,7 @@ const NotificationList = () => {
 
 const Notification = ({ type, message, description, txid, onHide }) => {
   const { connection } = useConnection();
+  const { networkConfiguration } = useNetworkConfiguration();
 
   // TODO: we dont have access to the network or endpoint here.. 
   // getExplorerUrl(connection., txid, 'tx')
@@ -86,7 +88,7 @@ const Notification = ({ type, message, description, txid, onHide }) => {
               <div className="flex flex-row">
          
                 <a
-                  href={'https://explorer.solana.com/tx/' + txid + `?cluster=devnet`}
+                  href={'https://explorer.solana.com/tx/' + txid + `?cluster=${networkConfiguration}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex flex-row link link-accent"
