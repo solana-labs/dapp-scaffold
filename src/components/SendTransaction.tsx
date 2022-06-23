@@ -27,6 +27,7 @@ export const SendTransaction: FC = () => {
             signature = await sendTransaction(transaction, connection);
 
             await connection.confirmTransaction(signature, 'confirmed');
+            console.log(signature);
             notify({ type: 'success', message: 'Transaction successful!', txid: signature });
         } catch (error: any) {
             notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
