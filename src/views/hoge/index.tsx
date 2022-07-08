@@ -1,6 +1,8 @@
 
 import { FC } from "react";
 import { Connect } from '../../components/Connect';
+import { Getter } from '../../components/Getter';
+import { Setter } from '../../components/Setter';
 
 export const HogeView: FC = ({ }) => {
 
@@ -12,6 +14,8 @@ export const HogeView: FC = ({ }) => {
         </h1>
         <div className="text-center">
           <Connect/>
+          <Getter/>
+          <Setter/>
         </div>
       </div>
     </div>
