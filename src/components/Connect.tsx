@@ -1,15 +1,16 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { notify } from "../utils/notifications";
 
 export const Connect: FC = () => {
     const { publicKey } = useWallet();
     const { connection } = useConnection();
+    const [version, setVersion] = useState<string>('');
 
     const onClick = useCallback(async () => {
         try {
           const version = await connection.getVersion();
-          notify({ type: 'success', message: version['solana-core'] });
+          setVersion(version['solana-core']);
         } catch (error: any) {
             notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
             console.log('error', `Sign Message failed! ${error?.message}`);
@@ -29,6 +30,7 @@ export const Connect: FC = () => {
                     Connect To Solana
                 </span>
             </button>
+            <p>Version : {version}</p>
         </div>
     );
 };
