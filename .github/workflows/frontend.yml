@@ -19,5 +19,8 @@ jobs:
         with:
           node-version: "16"
       - run: yarn install
+      - name: Run Linter
+        run: yarn lint
       - name: Build
         run: yarn build
+q
