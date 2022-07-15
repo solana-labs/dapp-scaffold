@@ -1,9 +1,8 @@
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { useConnection } from '@solana/wallet-adapter-react';
 import { FC, useCallback, useState } from 'react';
 import { notify } from "../utils/notifications";
 
 export const Connect: FC = () => {
-    const { publicKey } = useWallet();
     const { connection } = useConnection();
     const [version, setVersion] = useState<string>('');
 
@@ -15,19 +14,16 @@ export const Connect: FC = () => {
             notify({ type: 'error', message: `Sign Message failed!`, description: error?.message });
             console.log('error', `Sign Message failed! ${error?.message}`);
         }
-    }, [publicKey, connection, notify]);
+    }, [version, connection, notify]);
 
     return (
         <div>
             <button
                 className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
-                onClick={onClick} disabled={!publicKey}
+                onClick={onClick}
             >
-                <div className="hidden group-disabled:block">
-                    Wallet not connected
-                </div>
                 <span className="block group-disabled:hidden" > 
-                    Connect To Solana
+                    Get Solana Version
                 </span>
             </button>
             <p>Version : {version}</p>

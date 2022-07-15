@@ -3,21 +3,6 @@ import { Keypair, PublicKey, sendAndConfirmTransaction, Transaction, Transaction
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 
-// The state of a greeting account managed by the hello world program
-class GreetingAccount {
-  counter = 0;
-  constructor(fields: {counter: number} | undefined = undefined) {
-    if (fields) {
-      this.counter = fields.counter;
-    }
-  }
-}
-
-// Borsh schema definition for greeting accounts
-const GreetingSchema = new Map([
-  [GreetingAccount, {kind: 'struct', fields: [['counter', 'u32']]}],
-]);
-
 export const Setter: FC = () => {
     const { publicKey } = useWallet();
     const { connection } = useConnection();
