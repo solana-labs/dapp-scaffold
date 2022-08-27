@@ -2,7 +2,6 @@
   "name": "solana-dapp-next",
   "version": "0.1.0",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

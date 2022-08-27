@@ -11,6 +11,8 @@ import pkg from '../../../package.json';
 
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
+import { WalletNotConnectedError } from '@solana/wallet-adapter-base';
+import { Keypair, SystemProgram, Transaction } from '@solana/web3.js';
 
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
@@ -25,6 +27,27 @@ export const HomeView: FC = ({ }) => {
       getUserSOLBalance(wallet.publicKey, connection)
     }
   }, [wallet.publicKey, connection, getUserSOLBalance])
+
+  const onTransfer = async () => {
+    if (!wallet.publicKey) throw new WalletNotConnectedError();
+
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: wallet.publicKey,
+        toPubkey: Keypair.generate().publicKey,
+        lamports: 1,
+      })
+    );
+
+    const {
+      context: { slot: minContextSlot },
+      value: { blockhash, lastValidBlockHeight }
+    } = await connection.getLatestBlockhashAndContext();
+
+    const signature = await wallet.sendTransaction(transaction, connection, { minContextSlot });
+
+    await connection.confirmTransaction({ blockhash, lastValidBlockHeight, signature });
+  }
 
   return (
 
@@ -41,11 +64,20 @@ export const HomeView: FC = ({ }) => {
           <pre data-prefix=">">
             <code className="truncate">Start building on Solana  </code>
           </pre>
-        </div>        
-          <div className="text-center">
+        </div>
+        <div className="text-center">
           <RequestAirdrop />
           {/* {wallet.publicKey && <p>Public Key: {wallet.publicKey.toBase58()}</p>} */}
           {wallet && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}
+
+          <div>
+            <button
+              className="px-8 m-2 btn animate-pulse bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ..."
+              onClick={onTransfer}
+            >
+              <span>Transfer</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
