@@ -13,6 +13,9 @@ import pkg from '../../../package.json';
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
 import { Keypair, LAMPORTS_PER_SOL, SystemProgram, Transaction } from '@solana/web3.js';
 
+// MS
+import Squads from "@sqds/sdk";
+
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
@@ -20,12 +23,23 @@ export const HomeView: FC = ({ }) => {
   const balance = useUserSOLBalanceStore((s) => s.balance)
   const { getUserSOLBalance } = useUserSOLBalanceStore()
 
+  const [squads, setSquads] = useState<Squads | null>()
+  const [multisigAccount, setMultisigAccount] = useState()
+
   useEffect(() => {
     if (wallet.publicKey) {
       console.log(wallet.publicKey.toBase58())
       getUserSOLBalance(wallet.publicKey, connection)
     }
   }, [wallet.publicKey, connection, getUserSOLBalance])
+
+  useEffect(() => {
+    if (wallet) {
+      // By default, the canonical Program IDs for SquadsMPL and ProgramManager will be used
+      // The 'wallet' passed in will be the signer/feePayer on all transactions through the Squads object.
+      setSquads(Squads.devnet(wallet)); // or Squads.devnet(...); Squads.mainnet(...)
+    }
+  }, [wallet])
 
   const onTransfer = async () => {
     const destAddress = Keypair.generate().publicKey;
@@ -43,6 +57,20 @@ export const HomeView: FC = ({ }) => {
 
     await connection.confirmTransaction(signature, 'confirmed');
     console.log('balance after transfer: ', balance)
+  }
+
+  const createMS = async () => {
+    if (!squads) {
+      console.log("squads not found:", wallet)
+      return
+    }
+    const threshold = 1
+    const createKey = Keypair.generate().publicKey;
+    const members = [wallet.publicKey];
+    const newMultisigAccount = await squads.createMultisig(threshold, createKey, members);
+    // setMultisigAccount(newMultisigAccount)
+    console.log('account created: ', newMultisigAccount)
+
   }
 
   return (
@@ -72,6 +100,13 @@ export const HomeView: FC = ({ }) => {
           onClick={onTransfer}
         >
           <span>Transfer</span>
+        </button>
+
+        <button
+          className="px-8 m-2 btn animate-pulse bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ..."
+          onClick={createMS}
+        >
+          <span>Create a MultiSig</span>
         </button>
       </div>
     </div>

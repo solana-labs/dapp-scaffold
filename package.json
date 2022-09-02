@@ -15,6 +15,7 @@
     "@solana/wallet-adapter-react-ui": "^0.9.5",
     "@solana/wallet-adapter-wallets": "^0.15.3",
     "@solana/web3.js": "^1.31.0",
+    "@sqds/sdk": "^1.0.4",
     "@tailwindcss/typography": "^0.5.0",
     "daisyui": "^1.24.3",
     "immer": "^9.0.12",
