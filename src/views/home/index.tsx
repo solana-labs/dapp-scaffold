@@ -16,6 +16,9 @@ import { Keypair, LAMPORTS_PER_SOL, SystemProgram, Transaction } from '@solana/w
 // MS
 import Squads from "@sqds/sdk";
 
+// Local Storage
+import { useLocalStorage } from 'usehooks-ts'
+
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
@@ -24,7 +27,7 @@ export const HomeView: FC = ({ }) => {
   const { getUserSOLBalance } = useUserSOLBalanceStore()
 
   const [squads, setSquads] = useState<Squads | null>()
-  const [multisigAccount, setMultisigAccount] = useState()
+  const [multisigAccount, setMultisigAccount] = useLocalStorage('multisigAccount', null)
 
   useEffect(() => {
     if (wallet.publicKey) {
@@ -68,8 +71,9 @@ export const HomeView: FC = ({ }) => {
     const createKey = Keypair.generate().publicKey;
     const members = [wallet.publicKey];
     const newMultisigAccount = await squads.createMultisig(threshold, createKey, members);
-    // setMultisigAccount(newMultisigAccount)
+    setMultisigAccount(newMultisigAccount)
     console.log('account created: ', newMultisigAccount)
+    console.log('balance after MS create: ', balance)
 
   }
 
@@ -86,7 +90,8 @@ export const HomeView: FC = ({ }) => {
         </h4>
         <div className="max-w-md mx-auto mockup-code bg-primary p-6 my-2">
           <pre data-prefix=">">
-            <code className="truncate">Start building on Solana  </code>
+            <code className="truncate">LocalStorage Multisig  </code>
+            {multisigAccount && <p>{multisigAccount.publicKey}</p>}
           </pre>
         </div>
         <div className="text-center">
