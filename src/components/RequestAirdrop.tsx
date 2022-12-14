@@ -20,10 +20,10 @@ export const RequestAirdrop: FC = () => {
 
         try {
             const signature = await connection.requestAirdrop(publicKey, LAMPORTS_PER_SOL);
-            const latestBlockHash = await connection.getLatestBlockhash();
+            const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
             await connection.confirmTransaction({
-                blockhash: latestBlockHash.blockhash,
-                lastValidBlockHeight: latestBlockHash.lastValidBlockHeight,
+                blockhash,
+                lastValidBlockHeight,
                 signature
               });
             notify({ type: 'success', message: 'Airdrop successful!', txid: signature });
