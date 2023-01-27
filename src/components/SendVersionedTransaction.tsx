@@ -1,9 +1,9 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@solana/web3.js';
+import { Keypair, SystemProgram, TransactionMessage, TransactionSignature, VersionedTransaction } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 
-export const SendTransaction: FC = () => {
+export const SendVersionedTransaction: FC = () => {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
 
@@ -16,17 +16,29 @@ export const SendTransaction: FC = () => {
 
         let signature: TransactionSignature = '';
         try {
-            const transaction = new Transaction().add(
+
+            const instructions = [
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
                     toPubkey: Keypair.generate().publicKey,
                     lamports: 1_000_000,
-                })
-            );
+                }),
+            ];
 
-            signature = await sendTransaction(transaction, connection);
+            let latestBlockhash = await connection
+                .getLatestBlockhash()
 
-            await connection.confirmTransaction(signature, 'confirmed');
+            const messageV0 = new TransactionMessage({
+                payerKey: publicKey,
+                recentBlockhash: latestBlockhash.blockhash,
+                instructions,
+            }).compileToV0Message();
+
+            const transation = new VersionedTransaction(messageV0)
+
+            signature = await sendTransaction(transation, connection);
+            await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
+
             console.log(signature);
             notify({ type: 'success', message: 'Transaction successful!', txid: signature });
         } catch (error: any) {
@@ -46,7 +58,7 @@ export const SendTransaction: FC = () => {
                     Wallet not connected
                 </div>
                 <span className="block group-disabled:hidden" >
-                    Send Transaction
+                    Send Versioned Transaction
                 </span>
             </button>
         </div>
