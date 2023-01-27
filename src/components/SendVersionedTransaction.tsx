@@ -17,7 +17,7 @@ export const SendVersionedTransaction: FC = () => {
         let signature: TransactionSignature = '';
         try {
 
-            // Create instructions to send, in this case one transfer
+            // Create instructions to send, in this case a simple transfer
             const instructions = [
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
@@ -39,7 +39,10 @@ export const SendVersionedTransaction: FC = () => {
             // Create a new VersionedTransacction to support the v0 message
             const transation = new VersionedTransaction(messageV0)
 
+            // Send transaction and await for signature
             signature = await sendTransaction(transation, connection);
+
+            // Await for confirmation
             await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
 
             console.log(signature);

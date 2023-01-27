@@ -1,5 +1,5 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, SystemProgram, Transaction, TransactionSignature } from '@solana/web3.js';
+import { Keypair, SystemProgram, Transaction, TransactionMessage, TransactionSignature, VersionedTransaction } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 
@@ -16,18 +16,33 @@ export const SendTransaction: FC = () => {
 
         let signature: TransactionSignature = '';
         try {
-            const transaction = new Transaction().add(
+
+            // Create instructions to send, in this case a simple transfer
+            const instructions = [
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
                     toPubkey: Keypair.generate().publicKey,
                     lamports: 1_000_000,
-                })
-            );
-
-            signature = await sendTransaction(transaction, connection);
+                }),
+            ];
 
             // Get the lates block hash to use on our transaction and confirmation
             let latestBlockhash = await connection.getLatestBlockhash()
+
+            // Create a new TransactionMessage with version and compile it to legacy
+            const messageLegacy = new TransactionMessage({
+                payerKey: publicKey,
+                recentBlockhash: latestBlockhash.blockhash,
+                instructions,
+            }).compileToLegacyMessage();
+
+            // Create a new VersionedTransacction which supports legacy and v0
+            const transation = new VersionedTransaction(messageLegacy)
+
+            // Send transaction and await for signature
+            signature = await sendTransaction(transation, connection);
+
+            // Send transaction and await for signature
             await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
 
             console.log(signature);

@@ -1,11 +1,20 @@
 import { FC } from 'react';
 import Link from "next/link";
+import dynamic from 'next/dynamic';
 
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useAutoConnect } from '../contexts/AutoConnectProvider';
 import NetworkSwitcher from './NetworkSwitcher';
 
-export const AppBar: FC = props => {
+const WalletMultiButtonDynamic = dynamic(
+  async () => (await import('@solana/wallet-adapter-react-ui')).WalletMultiButton,
+  { ssr: false }
+);
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export const AppBar: React.FC<Props> = ({ children }) => {
   const { autoConnect, setAutoConnect } = useAutoConnect();
 
   return (
@@ -63,7 +72,7 @@ export const AppBar: FC = props => {
 
         {/* Wallet & Settings */}
         <div className="navbar-end">
-          <WalletMultiButton className="btn btn-ghost mr-4" />
+          <WalletMultiButtonDynamic className="btn btn-ghost mr-4" />
 
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="btn btn-square btn-ghost text-right">
@@ -87,7 +96,7 @@ export const AppBar: FC = props => {
           </div>
         </div>
       </div>
-      {props.children}
+      {children}
     </div>
   );
 };
