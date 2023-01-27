@@ -20,11 +20,11 @@
     "@tailwindcss/typography": "^0.5.0",
     "daisyui": "^1.24.3",
     "immer": "^9.0.12",
-    "next": "12.0.8",
+    "next": "^13.1.5",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^9.0.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "zustand": "^3.6.9"
   },
   "devDependencies": {
