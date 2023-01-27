@@ -1,9 +1,9 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Keypair, SystemProgram, Transaction, TransactionMessage, TransactionSignature, VersionedTransaction } from '@solana/web3.js';
+import { Keypair, SystemProgram, TransactionMessage, TransactionSignature, VersionedTransaction } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 
-export const SendTransaction: FC = () => {
+export const SendVersionedTransaction: FC = () => {
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
 
@@ -29,20 +29,20 @@ export const SendTransaction: FC = () => {
             // Get the lates block hash to use on our transaction and confirmation
             let latestBlockhash = await connection.getLatestBlockhash()
 
-            // Create a new TransactionMessage with version and compile it to legacy
-            const messageLegacy = new TransactionMessage({
+            // Create a new TransactionMessage with version and compile it to version 0
+            const messageV0 = new TransactionMessage({
                 payerKey: publicKey,
                 recentBlockhash: latestBlockhash.blockhash,
                 instructions,
-            }).compileToLegacyMessage();
+            }).compileToV0Message();
 
-            // Create a new VersionedTransacction which supports legacy and v0
-            const transation = new VersionedTransaction(messageLegacy)
+            // Create a new VersionedTransacction to support the v0 message
+            const transation = new VersionedTransaction(messageV0)
 
             // Send transaction and await for signature
             signature = await sendTransaction(transation, connection);
 
-            // Send transaction and await for signature
+            // Await for confirmation
             await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
 
             console.log(signature);
@@ -64,7 +64,7 @@ export const SendTransaction: FC = () => {
                     Wallet not connected
                 </div>
                 <span className="block group-disabled:hidden" >
-                    Send Transaction
+                    Send Versioned Transaction
                 </span>
             </button>
         </div>
