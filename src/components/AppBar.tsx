@@ -10,11 +10,8 @@ const WalletMultiButtonDynamic = dynamic(
   { ssr: false }
 );
 
-interface Props {
-  children: React.ReactNode;
-}
 
-export const AppBar: React.FC<Props> = ({ children }) => {
+export const AppBar: React.FC = () => {
   const { autoConnect, setAutoConnect } = useAutoConnect();
 
   return (
@@ -96,7 +93,6 @@ export const AppBar: React.FC<Props> = ({ children }) => {
           </div>
         </div>
       </div>
-      {children}
     </div>
   );
 };
