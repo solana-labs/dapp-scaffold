@@ -17,6 +17,7 @@ export const SendVersionedTransaction: FC = () => {
         let signature: TransactionSignature = '';
         try {
 
+            // Create instructions to send, in this case one transfer
             const instructions = [
                 SystemProgram.transfer({
                     fromPubkey: publicKey,
@@ -25,15 +26,17 @@ export const SendVersionedTransaction: FC = () => {
                 }),
             ];
 
-            let latestBlockhash = await connection
-                .getLatestBlockhash()
+            // Get the lates block hash to use on our transaction and confirmation
+            let latestBlockhash = await connection.getLatestBlockhash()
 
+            // Create a new TransactionMessage with version and compile it to version 0
             const messageV0 = new TransactionMessage({
                 payerKey: publicKey,
                 recentBlockhash: latestBlockhash.blockhash,
                 instructions,
             }).compileToV0Message();
 
+            // Create a new VersionedTransacction to support the v0 message
             const transation = new VersionedTransaction(messageV0)
 
             signature = await sendTransaction(transation, connection);

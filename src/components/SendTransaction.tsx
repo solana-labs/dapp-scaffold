@@ -26,7 +26,10 @@ export const SendTransaction: FC = () => {
 
             signature = await sendTransaction(transaction, connection);
 
-            await connection.confirmTransaction(signature, 'confirmed');
+            // Get the lates block hash to use on our transaction and confirmation
+            let latestBlockhash = await connection.getLatestBlockhash()
+            await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
+
             console.log(signature);
             notify({ type: 'success', message: 'Transaction successful!', txid: signature });
         } catch (error: any) {
