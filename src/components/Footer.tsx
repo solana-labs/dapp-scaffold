@@ -85,6 +85,12 @@ export const Footer: FC = () => {
                                             <Link href="https://github.com/solana-labs/solana" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
                                                 Github
                                             </Link>
+                                            <Link href="https://discordapp.com/invite/pquxPsq" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                                Discord
+                                            </Link>
+                                            <Link href="https://solana.com/careers" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                                Careers
+                                            </Link>
                                             
                                         </div>
                                     </div>
@@ -102,8 +108,12 @@ export const Footer: FC = () => {
                                             <Link href="https://solanacookbook.com/" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
                                                 Cookbook
                                             </Link>
-                                            
-
+                                            <Link href="https://buildspace.so/solana-core" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                                Developer Course
+                                            </Link>
+                                            <Link href="https://www.youtube.com/@solplay8055/videos" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                                Unity Game Dev
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -116,6 +126,12 @@ export const Footer: FC = () => {
                                         </Link>
                                         <Link href="https://solanau.org/#events" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
                                             Events
+                                        </Link>
+                                        <Link href="https://solana.org/grants" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                            Grants
+                                        </Link>
+                                        <Link href="https://solana.org/validators" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+                                            Validators
                                         </Link>
                                         <Link href="https://www.youtube.com/@SolanaFndn" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
                                             Youtube
