@@ -11,7 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.5",
+    "@heroicons/react": "^2.0.14",
     "@noble/ed25519": "^1.7.1",
     "@solana/wallet-adapter-base": "^0.9.20",
     "@solana/wallet-adapter-react": "^0.15.28",
