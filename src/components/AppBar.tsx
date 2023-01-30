@@ -18,7 +18,7 @@ export const AppBar: React.FC = () => {
     <div>
 
       {/* NavBar / Header */}
-      <div className="navbar flex flex-row md:mb-2 shadow-lg bg-black text-neutral-content border-b border-zinc-600">
+      <div className="navbar flex h-20 flex-row md:mb-2 shadow-lg bg-black text-neutral-content border-b border-zinc-600">
         <div className="navbar-start">
           <label htmlFor="my-drawer" className="btn btn-square btn-ghost">
 
@@ -56,8 +56,11 @@ export const AppBar: React.FC = () => {
         </div>
 
         {/* Nav Links */}
-        <div className="hidden md:inline md:navbar-center">
-          <div className="flex items-stretch">
+     
+
+        {/* Wallet & Settings */}
+        <div className="navbar-end">
+        <div className="hidden md:inline flex items-stretch">
             <Link href="/">
               <span className="btn btn-ghost btn-sm rounded-btn">Home</span>
             </Link>
@@ -65,10 +68,6 @@ export const AppBar: React.FC = () => {
               <span className="btn btn-ghost btn-sm rounded-btn">Basics</span>
             </Link>
           </div>
-        </div>
-
-        {/* Wallet & Settings */}
-        <div className="navbar-end">
           <WalletMultiButtonDynamic className="btn btn-ghost mr-4" />
 
           <div className="dropdown dropdown-end">
