@@ -46,7 +46,7 @@ export const AppBar: React.FC = () => {
               </defs>
             </svg>
           </div>
-          <WalletMultiButtonDynamic className="btn relative flex btn-ghost md:hidden" />
+          <WalletMultiButtonDynamic className="btn relative flex btn-ghost md:hidden text-lg" />
         </div>
 
         {/* Nav Links */}
@@ -54,16 +54,15 @@ export const AppBar: React.FC = () => {
 
         {/* Wallet & Settings */}
         <div className="navbar-end">
-        <div className="hidden md:inline flex items-stretch">
-            <Link href="/">
-              <span className="btn btn-ghost btn-sm rounded-btn">Home</span>
-            </Link>
-            <Link href="/basics">
-              <span className="btn btn-ghost btn-sm rounded-btn">Basics</span>
-            </Link>
-          </div>
-          
-          <WalletMultiButtonDynamic className="hidden sm:inline btn flex btn-ghost ml-4" />
+        <div className="hidden md:inline-flex align-items-center">
+  <Link href="/">
+    <span className="btn btn-ghost btn-sm rounded-btn text-lg">Home</span>
+  </Link>
+  <Link href="/basics">
+    <span className="btn btn-ghost btn-sm rounded-btn text-lg">Basics</span>
+  </Link>
+  <WalletMultiButtonDynamic className="btn btn-ghost btn-sm rounded-btn text-lg mr-6" />
+      </div>
           <label htmlFor="my-drawer" className="btn btn-ghost items-center justify-between md:hidden">
             <div className="HAMBURGER-ICON space-y-2.5 ml-5">
               <span className="block h-0.5 w-8 animate-pulse bg-purple-600"></span>
@@ -72,10 +71,10 @@ export const AppBar: React.FC = () => {
             </div>
           </label>
             <div>
-              <span className="absolute block h-0.5 w-8 bg-zinc-800 rotate-90 right-8"></span>
+              <span className="absolute block h-0.5 w-12 bg-zinc-600 rotate-90 right-12"></span>
             </div>
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} className="btn btn-square btn-ghost text-right">
+            <div tabIndex={0} className="btn btn-square btn-ghost text-right mr-4">
               <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
