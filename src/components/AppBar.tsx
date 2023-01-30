@@ -19,7 +19,7 @@ export const AppBar: React.FC = () => {
 
       {/* NavBar / Header */}
       <div className="navbar flex h-20 flex-row md:mb-2 shadow-lg bg-black text-neutral-content border-b border-zinc-600">
-        <div className="navbar-start">
+        <div className="navbar-start align-items-center">
           <div className="hidden sm:inline w-22 h-22 md:p-2 ml-10">
             <svg width="100%" height="22" viewBox="0 0 646 96" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1064_606)">
@@ -46,7 +46,7 @@ export const AppBar: React.FC = () => {
               </defs>
             </svg>
           </div>
-          <WalletMultiButtonDynamic className="btn relative flex btn-ghost md:hidden text-lg" />
+          <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex md:hidden text-lg " />
         </div>
 
         {/* Nav Links */}
@@ -56,12 +56,12 @@ export const AppBar: React.FC = () => {
         <div className="navbar-end">
         <div className="hidden md:inline-flex align-items-center">
   <Link href="/">
-    <span className="btn btn-ghost btn-sm rounded-btn text-lg">Home</span>
+    <span className="btn-ghost btn-sm rounded-btn rounded-btn text-lg font-medium sm:text-xl">Home</span>
   </Link>
   <Link href="/basics">
-    <span className="btn btn-ghost btn-sm rounded-btn text-lg">Basics</span>
+    <span className="btn-ghost btn-sm rounded-btn text-lg font-medium sm:text-xl">Basics</span>
   </Link>
-  <WalletMultiButtonDynamic className="btn btn-ghost btn-sm rounded-btn text-lg mr-6" />
+  <WalletMultiButtonDynamic className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
       </div>
           <label htmlFor="my-drawer" className="btn btn-ghost items-center justify-between md:hidden">
             <div className="HAMBURGER-ICON space-y-2.5 ml-5">
