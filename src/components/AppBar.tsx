@@ -20,13 +20,6 @@ export const AppBar: React.FC = () => {
       {/* NavBar / Header */}
       <div className="navbar flex h-20 flex-row md:mb-2 shadow-lg bg-black text-neutral-content border-b border-zinc-600">
         <div className="navbar-start">
-          <label htmlFor="my-drawer" className="btn btn-square btn-ghost items-center justify-between md:hidden">
-
-            <svg className="inline-block w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </label>
-
           <div className="hidden sm:inline w-22 h-22 md:p-2">
             <svg width="100%" height="22" viewBox="0 0 646 96" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clipPath="url(#clip0_1064_606)">
@@ -68,7 +61,15 @@ export const AppBar: React.FC = () => {
               <span className="btn btn-ghost btn-sm rounded-btn">Basics</span>
             </Link>
           </div>
-          <WalletMultiButtonDynamic className="btn btn-ghost mr-4" />
+          
+          <WalletMultiButtonDynamic className="btn flex btn-ghost mr-14" />
+          <label htmlFor="my-drawer" className="btn btn-ghost items-center justify-between md:hidden">
+            <div className="HAMBURGER-ICON space-y-2.5 ml-5">
+              <span className="block h-0.5 w-8 animate-pulse bg-purple-600"></span>
+              <span className="block h-0.5 w-8 animate-pulse bg-purple-600"></span>
+              <span className="block h-0.5 w-8 animate-pulse bg-purple-600"></span>
+            </div>
+          </label>
 
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="btn btn-square btn-ghost text-right">
