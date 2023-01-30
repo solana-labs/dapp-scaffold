@@ -23,7 +23,7 @@ module.exports = {
           'primary-focus': '#9945FF',     /* Primary color - focused */
           'primary-content': '#ffffff',   /* Foreground content color to use on primary color */
 
-          'secondary': '#f6d860',         /* Secondary color */
+          'secondary': '#808080',         /* Secondary color */
           'secondary-focus': '#f3cc30',   /* Secondary color - focused */
           'secondary-content': '#ffffff', /* Foreground content color to use on secondary color */
 
