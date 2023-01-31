@@ -35,11 +35,11 @@ export const HomeView: FC = ({ }) => {
         </h1>
         <h4 className="md:w-full text-center text-slate-300 my-2">
           <p>Simply the fastest way to get started.</p>
-          Next.js, tailwind, wallet, web3.js, and more.
+          Wallet Adapter, Web3.js, Next.js, Tailwind, and more.
         </h4>
-        <div className="max-w-md mx-auto mockup-code bg-primary p-6 my-2">
+        <div className="max-w-md mx-auto mockup-code bg-primary p-6 px-10 my-2">
           <pre data-prefix=">">
-            <code className="truncate">Start building on Solana  </code>
+            <code className="truncate">npx create-solana-dapp  </code>
           </pre>
         </div>        
           <div className="text-center">
