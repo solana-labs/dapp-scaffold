@@ -903,10 +903,10 @@
     "@wallet-standard/app" "^1.0.0"
     "@wallet-standard/base" "^1.0.0"
 
-"@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.73.0":
-  version "1.73.0"
-  resolved "https://registry.npmjs.org/@solana/web3.js/-/web3.js-1.73.0.tgz"
-  integrity sha512-YrgX3Py7ylh8NYkbanoINUPCj//bWUjYZ5/WPy9nQ9SK3Cl7QWCR+NmbDjmC/fTspZGR+VO9LTQslM++jr5PRw==
+"@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.73.1":
+  version "1.73.1"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.73.1.tgz#876f7bf91f1bd384add1ce96762611f7b31cd0ed"
+  integrity sha512-SUJTpy/gSuN+XrHrm5+mix3cdpSTrNfPKNgsitq4jVf1JIYConFg4pc3mWwIFPMGSnh56IWYm3eDHc+w7iSiMA==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@noble/ed25519" "^1.7.0"
