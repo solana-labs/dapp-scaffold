@@ -14,16 +14,16 @@ module.exports = {
     // TODO: Theme needs works
     themes: [
       {
-        'solana': {                          /* your theme name */
+        'solana': { 
           fontFamily: {
             display: ['PT Mono, monospace'],
             body: ['Inter, sans-serif'],
           },
-          'primary': '#2a2a2a',           /* Primary color */
+          'primary': '#000000',           /* Primary color */
           'primary-focus': '#9945FF',     /* Primary color - focused */
           'primary-content': '#ffffff',   /* Foreground content color to use on primary color */
 
-          'secondary': '#f6d860',         /* Secondary color */
+          'secondary': '#808080',         /* Secondary color */
           'secondary-focus': '#f3cc30',   /* Secondary color - focused */
           'secondary-content': '#ffffff', /* Foreground content color to use on secondary color */
 
@@ -35,7 +35,7 @@ module.exports = {
           'neutral-focus': '#2a2e37',     /* Neutral color - focused */
           'neutral-content': '#ffffff',   /* Foreground content color to use on neutral color */
 
-          'base-100': '#181818',          /* Base color of page, used for blank backgrounds */
+          'base-100': '#000000',          /* Base color of page, used for blank backgrounds */
           'base-200': '#35363a',          /* Base color, a little darker */
           'base-300': '#222222',          /* Base color, even more darker */
           'base-content': '#f9fafb',      /* Foreground content color to use on base color */
