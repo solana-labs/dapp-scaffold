@@ -903,10 +903,10 @@
     "@wallet-standard/app" "^1.0.0"
     "@wallet-standard/base" "^1.0.0"
 
-"@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.73.0":
-  version "1.73.0"
-  resolved "https://registry.npmjs.org/@solana/web3.js/-/web3.js-1.73.0.tgz"
-  integrity sha512-YrgX3Py7ylh8NYkbanoINUPCj//bWUjYZ5/WPy9nQ9SK3Cl7QWCR+NmbDjmC/fTspZGR+VO9LTQslM++jr5PRw==
+"@solana/web3.js@^1.36.0", "@solana/web3.js@^1.44.3", "@solana/web3.js@^1.73.3":
+  version "1.73.3"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.73.3.tgz#60e6bd68f6f364d4be360b1e0a03a0a68468a029"
+  integrity sha512-vHRMo589XEIpoujpE2sZZ1aMZvfA1ImKfNxobzEFyMb+H5j6mRRUXfdgWD0qJ0sm11e5BcBC7HPeRXJB+7f3Lg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@noble/ed25519" "^1.7.0"
@@ -921,8 +921,8 @@
     buffer "6.0.1"
     fast-stable-stringify "^1.0.0"
     jayson "^3.4.4"
-    node-fetch "2"
-    rpc-websockets "^7.5.0"
+    node-fetch "^2.6.7"
+    rpc-websockets "^7.5.1"
     superstruct "^0.14.2"
 
 "@solflare-wallet/sdk@^1.2.0":
@@ -3906,10 +3906,10 @@ node-addon-api@^2.0.0:
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-2.0.2.tgz"
   integrity sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==
 
-node-fetch@2:
-  version "2.6.8"
-  resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.8.tgz"
-  integrity sha512-RZ6dBYuj8dRSfxpUSu+NsdF1dpPpluJxwOp+6IoDp/sH2QNDSvurYsAa+F1WxY2RjA1iP93xhcsUoYbF2XBqVg==
+node-fetch@^2.6.7:
+  version "2.6.9"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
+  integrity sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==
   dependencies:
     whatwg-url "^5.0.0"
 
@@ -4540,10 +4540,10 @@ rlp@^2.2.4:
   dependencies:
     bn.js "^5.2.0"
 
-rpc-websockets@^7.5.0:
-  version "7.5.0"
-  resolved "https://registry.npmjs.org/rpc-websockets/-/rpc-websockets-7.5.0.tgz"
-  integrity sha512-9tIRi1uZGy7YmDjErf1Ax3wtqdSSLIlnmL5OtOzgd5eqPKbsPpwDP5whUDO2LQay3Xp0CcHlcNSGzacNRluBaQ==
+rpc-websockets@^7.5.1:
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/rpc-websockets/-/rpc-websockets-7.5.1.tgz#e0a05d525a97e7efc31a0617f093a13a2e10c401"
+  integrity sha512-kGFkeTsmd37pHPMaHIgN1LVKXMi0JD782v4Ds9ZKtLlwdTKjn+CxM9A9/gLT2LaOuEcEFGL98h1QWQtlOIdW0w==
   dependencies:
     "@babel/runtime" "^7.17.2"
     eventemitter3 "^4.0.7"
