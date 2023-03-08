@@ -11,7 +11,7 @@ const formatDate = (date: string) => format(new Date(date), 'MM/dd/yyyy h:mm:ss'
  * @param number Number to format.
  */
 const numberToCurrencyString = (number: number) =>
-    number.toLocaleString('en-US');
+  number.toLocaleString('en-US');
 
 /**
  * Returns a number whose value is limited to the given range.
@@ -27,8 +27,8 @@ const numberToCurrencyString = (number: number) =>
 const clamp = (current, min, max) => Math.min(Math.max(current, min), max);
 
 export {
-    cn,
-    formatDate,
-    numberToCurrencyString,
-    clamp,
+  cn,
+  formatDate,
+  numberToCurrencyString,
+  clamp,
 };

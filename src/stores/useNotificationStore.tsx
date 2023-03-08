@@ -1,5 +1,5 @@
-import create, { State } from "zustand";
-import produce from "immer";
+import create, { State } from 'zustand';
+import produce from 'immer';
 
 interface NotificationStore extends State {
   notifications: Array<{

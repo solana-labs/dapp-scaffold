@@ -15,13 +15,13 @@ const useUserSOLBalanceStore = create<UserSOLBalanceStore>((set, _get) => ({
         publicKey,
         'confirmed'
       );
-      balance = balance / LAMPORTS_PER_SOL;
+      balance /= LAMPORTS_PER_SOL;
     } catch (e) {
-      console.log(`error getting balance: `, e);
+      console.log('error getting balance: ', e);
     }
     set((s) => {
       s.balance = balance;
-      console.log(`balance updated, `, balance);
+      console.log('balance updated, ', balance);
     })
   },
 }));
