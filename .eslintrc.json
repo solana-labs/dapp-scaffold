@@ -4,8 +4,8 @@
     "es2021": true
   },
   "parser": "@typescript-eslint/parser",
-  "extends": ["next", "plugin:react/recommended", "airbnb", "prettier"],
-  "plugins": ["react", "@typescript-eslint"],
+  "extends": ["next", "plugin:react/recommended", "eslint:recommended"],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -14,12 +14,26 @@
     "sourceType": "module"
   },
   "rules": {
+    "prettier/prettier": "error",
     "indent": ["error", 2],
     "quotes": ["error", "single"],
+    "no-trailing-spaces": "error",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
     "import/prefer-default-export": "off",
+    "no-unused-vars": "warn",
+    "jsx-a11y/label-has-associated-control": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ],
     "max-len": 0,
     "import/extensions": [
       "error",

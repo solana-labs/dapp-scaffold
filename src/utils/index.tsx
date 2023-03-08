@@ -3,7 +3,8 @@ import { format } from 'date-fns';
 // Concatenates classes into a single className string
 const cn = (...args: string[]) => args.join(' ');
 
-const formatDate = (date: string) => format(new Date(date), 'MM/dd/yyyy h:mm:ss');
+const formatDate = (date: string) =>
+  format(new Date(date), 'MM/dd/yyyy h:mm:ss');
 
 /**
  * Formats number as currency string.
@@ -26,9 +27,4 @@ const numberToCurrencyString = (number: number) =>
  */
 const clamp = (current, min, max) => Math.min(Math.max(current, min), max);
 
-export {
-  cn,
-  formatDate,
-  numberToCurrencyString,
-  clamp,
-};
+export { cn, formatDate, numberToCurrencyString, clamp };

@@ -1,37 +1,33 @@
-import { FC } from 'react';
-import Link from 'next/link';
+import { ReactNode } from 'react';
 import Text from './Text';
 import NavElement from './nav-element';
 
-interface Props {
-  children: React.ReactNode;
+interface ContentContainerProps {
+  children: ReactNode;
 }
 
-export const ContentContainer: React.FC<Props> = ({ children }) => (
-  <div className="flex-1 drawer h-52">
-    <input id="my-drawer" type="checkbox" className="grow drawer-toggle" />
-    <div className="items-center  drawer-content">
-      {children}
-    </div>
+export const ContentContainer = ({ children }: ContentContainerProps) => (
+  <div className='drawer h-52 flex-1'>
+    <input id='my-drawer' type='checkbox' className='drawer-toggle grow' />
+    <div className='drawer-content  items-center'>{children}</div>
     {/* SideBar / Drawer */}
-    <div className="drawer-side">
-      <label htmlFor="my-drawer" className="drawer-overlay gap-6" />
+    <div className='drawer-side'>
+      <label htmlFor='my-drawer' className='drawer-overlay gap-6' />
 
-      <ul className="p-4 overflow-y-auto menu w-80 bg-base-100 gap-10 sm:flex items-center">
+      <ul className='menu w-80 items-center gap-10 overflow-y-auto bg-base-100 p-4 sm:flex'>
         <li>
-          <Text variant="heading" className='font-extrabold tracking-tighter text-center text-transparent bg-clip-text bg-gradient-to-br from-indigo-500 to-fuchsia-500 mt-10'>Menu</Text>
+          <Text
+            variant='heading'
+            className='mt-10 bg-gradient-to-br from-indigo-500 to-fuchsia-500 bg-clip-text text-center font-extrabold tracking-tighter text-transparent'
+          >
+            Menu
+          </Text>
         </li>
         <li>
-          <NavElement
-            label="Home"
-            href="/"
-          />
+          <NavElement label='Home' href='/' />
         </li>
         <li>
-          <NavElement
-            label="Basics"
-            href="/basics"
-          />
+          <NavElement label='Basics' href='/basics' />
         </li>
       </ul>
     </div>

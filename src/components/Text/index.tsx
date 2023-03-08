@@ -6,18 +6,18 @@ import { cn } from 'utils';
  * Properties for a card component.
  */
 type TextProps = {
-    variant:
-        | 'big-heading'
-        | 'heading'
-        | 'sub-heading'
-        | 'nav-heading'
-        | 'nav'
-        | 'input'
-        | 'label';
-    className?: string;
-    href?: string;
-    children?: React.ReactNode;
-    id?: string;
+  variant:
+    | 'big-heading'
+    | 'heading'
+    | 'sub-heading'
+    | 'nav-heading'
+    | 'nav'
+    | 'input'
+    | 'label';
+  className?: string;
+  href?: string;
+  children?: React.ReactNode;
+  id?: string;
 };
 
 /**
@@ -43,16 +43,19 @@ const variants = {
  * @param className Custom classes to be applied to the element.
  * @param children Child elements to be rendered within the component.
  */
-function Text({ variant, className, href, children }: TextProps) {
-  return <p className={cn(className, variants[variant])}>
+const Text = ({ variant, className, href, children }: TextProps) => (
+  <p className={cn(className, variants[variant])}>
     {href ? (
-      <Link href={href} className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
+      <Link
+        href={href}
+        className='min-w-0 overflow-hidden text-ellipsis whitespace-nowrap'
+      >
         {children}
       </Link>
     ) : (
       children
     )}
   </p>
-}
+);
 
 export default Text;
