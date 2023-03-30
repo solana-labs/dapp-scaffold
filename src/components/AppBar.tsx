@@ -68,7 +68,7 @@ export const AppBar: React.FC = () => {
         </div>
           <label
               htmlFor="my-drawer"
-              className="btn-gh items-center justify-between md:hidden mr-5"
+              className="btn-gh items-center justify-between md:hidden mr-6"
               onClick={() => setIsNavOpen(!isNavOpen)}>
               <div className="HAMBURGER-ICON space-y-2.5 ml-5">
               <div className={`h-0.5 w-8 bg-purple-600 ${isNavOpen ? 'hidden' : ''}`} />
