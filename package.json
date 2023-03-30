@@ -13,7 +13,7 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "@noble/ed25519": "^1.7.1",
-    "@solana/wallet-adapter-base": "^0.9.20",
+    "@solana/wallet-adapter-base": "^0.9.22",
     "@solana/wallet-adapter-react": "^0.15.28",
     "@solana/wallet-adapter-react-ui": "^0.9.27",
     "@solana/wallet-adapter-wallets": "^0.19.11",
