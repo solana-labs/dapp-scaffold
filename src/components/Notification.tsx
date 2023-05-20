@@ -68,7 +68,7 @@ const Notification = ({ type, message, description, txid, onHide }) => {
     <div
       className={`max-w-sm w-full bg-bkg-1 shadow-lg rounded-md mt-2 pointer-events-auto ring-1 ring-black ring-opacity-5 p-2 mx-4 mb-12 overflow-hidden`}
     >
-      <div className={`p-4`}>
+      <div className={`p-4 rounded-md bg-gradient-to-r from-purple-900 from-10% via-purple-600 via-30% to-emerald-500 to-90%`}>
         <div className={`flex items-center`}>
           <div className={`flex-shrink-0`}>
             {type === 'success' ? (
@@ -91,7 +91,7 @@ const Notification = ({ type, message, description, txid, onHide }) => {
                   href={'https://explorer.solana.com/tx/' + txid + `?cluster=${networkConfiguration}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex flex-row link link-accent"
+                  className="flex flex-row link link-accent text-emerald-200"
                 >
                   <svg className="flex-shrink-0 h-4 ml-2 mt-0.5 text-primary-light w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" ><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                   <div className="flex mx-4">{txid.slice(0, 8)}...
