@@ -45,7 +45,13 @@ export const SendTransaction: FC = () => {
             // Send transaction and await for signature
             await connection.confirmTransaction({ signature, ...latestBlockhash }, 'confirmed');
 
-            console.log(signature);
+            const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+            await connection.confirmTransaction({
+                blockhash,
+                lastValidBlockHeight,
+                signature
+            });
+            console.log('Transaction Signature:', signature);
             notify({ type: 'success', message: 'Transaction successful!', txid: signature });
         } catch (error: any) {
             notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
@@ -66,11 +72,11 @@ export const SendTransaction: FC = () => {
                         <div className="hidden group-disabled:block ">
                         Wallet not connected
                         </div>
-                         <span className="block group-disabled:hidden" >
+                        <span className="block group-disabled:hidden" >
                             Send Transaction
                         </span>
                     </button>
-             </div>
+            </div>
         </div>
     );
 };
