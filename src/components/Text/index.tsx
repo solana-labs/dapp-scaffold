@@ -35,12 +35,13 @@ const variants = {
 };
 
 /**
- * Definition of a card component,the main purpose of
+ * Definition of a card component, the main purpose of
  * which is to neatly display information. Can be both
  * interactive and static.
  *
  * @param variant Variations relating to pre-defined styling of the element.
  * @param className Custom classes to be applied to the element.
+ * @param href A URL for the Link component to point to, making the text interactive.
  * @param children Child elements to be rendered within the component.
  */
 const Text = ({ variant, className, href, children }: TextProps) => (
