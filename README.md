@@ -1,7 +1,13 @@
+Purple Squirrel Network: Solana dApp Scaffold Next
+Welcome to the Solana dApp Scaffold Next, a starting point for developers in the Purple Squirrel Network ecosystem. This repository offers a robust scaffold for building decentralized applications (dApps) on the Solana blockchain, featuring a responsive UI and several common features crucial to dApps.
 
-# Solana dApp Scaffold Next
+Getting Started
+This project is bootstrapped with create-next-app and is a Next.js-based implementation.
 
-The Solana dApp Scaffold repos are meant to house good starting scaffolds for ecosystem developers to get up and running quickly with a front end client UI that integrates several common features found in dApps with some basic usage examples. Wallet Integration. State management. Components examples. Notifications. Setup recommendations.
+Note on Responsiveness: The responsive version for wallets and wallet adapters may have limited functionality on mobile due to plugin and wallet compatibility. For more detailed examples and implementations, visit the Solana Cookbook.
+
+Installation
+To install the dependencies:
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
