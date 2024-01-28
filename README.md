@@ -15,23 +15,6 @@ The Solana dApp Scaffold Next is designed to accelerate the development process 
 - **Notifications:** Implementation of a notification system for better user engagement.
 - **Setup Recommendations:** Guidelines to set up your development environment for Solana dApps.
 
-### Getting Started
-
-This repository is built using Next.js and is bootstrapped with create-next-app. Follow these steps to get started:
-
-1. **Clone the Repository:** Clone this repository to your local machine to start working on your Solana dApp.
-2. **Install Dependencies:** Run `npm install` or `yarn install` to install the necessary dependencies.
-3. **Run the Development Server:** Use `npm run dev` or `yarn dev` to start the development server.
-4. **Open in Browser:** Navigate to `http://localhost:3000` in your browser to view the dApp.
-
-### Contributing
-
-We welcome contributions from the community! If you have ideas, bug reports, or code contributions, feel free to open an issue or submit a pull request.
-
-## Stay Connected
-
-Join the Purple Squirrel Network community and contribute to the future of decentralized applications on Solana. Together, we can build innovative solutions on the blockchain!
-
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
