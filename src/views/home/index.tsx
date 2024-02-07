@@ -6,8 +6,7 @@ import Link from 'next/link';
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 
 // Components
-import { RequestAirdrop } from '../../components/RequestAirdrop';
-import pkg from '../../../package.json';
+import FounderBox from 'components/FounderBox';
 
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
@@ -28,7 +27,7 @@ export const HomeView: FC = ({ }) => {
   return (
 
     <div className="">
-      <RequestAirdrop />    
+      <FounderBox />    
       {wallet &&
         <div className="flex flex-row justify-center">
           <div>
