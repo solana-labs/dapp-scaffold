@@ -3,9 +3,8 @@ import Head from 'next/head';
 import { FC } from 'react';
 import { ContextProvider } from '../contexts/ContextProvider';
 import { AppBar } from '../components/AppBar';
-import { ContentContainer } from '../components/ContentContainer';
-import { Footer } from '../components/Footer';
-import Notifications from '../components/Notification'
+import Notifications from '../components/Notification';
+import Rainbow from '../components/Rainbow';
 require('@solana/wallet-adapter-react-ui/styles.css');
 require('../styles/globals.css');
 
@@ -15,15 +14,15 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <Head>
             <title>Solana Scaffold Lite</title>
           </Head>
-
           <ContextProvider>
             <div className="flex flex-col h-screen">
+              <Rainbow />
               <Notifications />
               <AppBar/>
-              <ContentContainer>
+              <div className='flex-1'>
                 <Component {...pageProps} />
-                <Footer/>
-              </ContentContainer>
+              </div>
+              <Rainbow />
             </div>
           </ContextProvider>
         </>
