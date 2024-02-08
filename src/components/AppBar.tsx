@@ -13,7 +13,7 @@ export const AppBar: React.FC = () => {
   return (
     <div>
       {/* NavBar / Header */}
-      <div className="navbar flex flex-col md:flex-row items-center">
+      <div className="navbar flex flex-col md:flex-row items-center mb-4">
         <Link href="https://talk.xyz" passHref className="text-base-content-accent">
           <svg
               width="220"
@@ -49,9 +49,11 @@ export const AppBar: React.FC = () => {
               />
           </svg>
         </Link>
-        <h1 className="text-base-content">Secure yourself a limited edition Talk founders pass.</h1>
+        <h1 className="text-base-content text-center text-balance text-2xl font-semibold md:text-left">Secure yourself a limited edition Talk founders pass.</h1>
       </div>
-      <WalletMultiButtonDynamic className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
+      <div className="fixed top-8 right-2">
+        <WalletMultiButtonDynamic className="btn-ghost btn-sm rounded-btn text-lg" />
+      </div>
     </div>
   );
 };
