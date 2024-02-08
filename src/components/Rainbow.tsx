@@ -1,5 +1,5 @@
 const Rainbow = () => (
-    <div className="flex h-4">
+    <div className="flex h-4 shrink-0">
         <div className="bg-blue grow" />
         <div className="bg-green grow" />
         <div className="bg-yellow grow" />
