@@ -6,7 +6,7 @@ const FounderBox = () => {
     return (
         <>
             <div className="bg-yellow text-primary-content relative rounded-2xl border-2 border-founder">
-                <div className="container p-4 md:p-8 max-w-xl mx-auto">
+                <div className="container p-4 md:p-8 md:pb-12 max-w-xl mx-auto">
                     <h2 className="mb-4 font-semibold">Become a Talk Founder</h2>
                     <p>
                         Unlock lifetime access to pro features and support our mission to be the
@@ -61,7 +61,7 @@ const FounderBox = () => {
                 </div>
             </div>
             <div className="py-4">
-                <Button className="">
+                <Button className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
                     Mint my Founders Pass
                 </Button>
             </div>
