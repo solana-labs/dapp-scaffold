@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import { mplCandyMachine, create, fetchCandyMachine, fetchCandyGuard, addConfigLines, mintV2, route, deleteCandyGuard, deleteCandyMachine, updateCandyGuard } from '@metaplex-foundation/mpl-candy-machine'
-import { generateSigner, some, none, sol, dateTime, createSignerFromKeypair, keypairIdentity, transactionBuilder, percentAmount, publicKey } from '@metaplex-foundation/umi'
-import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox'
-import { Connection, Keypair } from "@solana/web3.js"
-import { useWallet } from '@solana/wallet-adapter-react';
+import { Connection } from "@solana/web3.js"
 
 const Tx = () => {
-    const { publicKey: myPublicKey } = useWallet();
-
     // Config
-    const rpcConnection = new Connection('https://api.mainnet-beta.solana.com')
+    // main net
+    const rpcConnection = new Connection(process.env.NEXT_PUBLIC_MAINNET_ENDPOINT)
+
+    // test net
+    // const rpcConnection = new Connection(process.env.NEXT_PUBLIC_TESTNET_ENDPOINT)
     const umi = createUmi(rpcConnection)
 
     // Umi config
@@ -50,11 +49,8 @@ const Tx = () => {
     }
 
     useEffect(() => {
-        // fetchCandyMachineAndGuard('8E2ub2YePN8MmhvnQRfK6Tp2mhHehSFHB9b3hr1mokyA', true);
-        if (myPublicKey) {
-            // umi.rpc.getBalance(myPublicKey);
-        }
-    }, [myPublicKey])
+        fetchCandyMachineAndGuard(process.env.NEXT_PUBLIC_CANDY_MACHINE_KEY, true);
+    }, [])
 
     return null;
 }

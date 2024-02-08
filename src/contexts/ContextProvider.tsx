@@ -25,7 +25,10 @@ const ReactUIWalletModalProviderDynamic = dynamic(
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const { autoConnect } = useAutoConnect();
     const network = WalletAdapterNetwork.Mainnet;
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+    // main net
+    const endpoint = process.env.NEXT_PUBLIC_MAINNET_ENDPOINT;
+    // test net
+    // const endpoint = process.env.NEXT_PUBLIC_TESTNET_ENDPOINT;
 
     console.log(network);
 
