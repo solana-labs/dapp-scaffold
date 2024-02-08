@@ -12,7 +12,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
           <Head>
-            <title>Mint Talk.xyz</title>
+            <title>Talk.xyz</title>
           </Head>
           <ContextProvider>
             <div className="flex flex-col h-screen">
