@@ -1,10 +1,19 @@
 // Next, React
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import Image from 'next/image';
+import confetti from 'canvas-confetti';
 
 import Button from 'components/Button';
 
 export const SuccessView: FC = ({ }) => {
+
+  useEffect(() => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.75 }
+    });
+  }, [])
 
   return (
 
