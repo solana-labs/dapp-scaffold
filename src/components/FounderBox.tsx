@@ -61,7 +61,7 @@ const FounderBox = () => {
                 </div>
             </div>
             <div className="py-4">
-                <Button className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
+                <Button href="/success" className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
                     Mint my Founders Pass
                 </Button>
             </div>
