@@ -1494,15 +1494,10 @@
   resolved "https://registry.npmjs.org/@next/font/-/font-13.1.5.tgz"
   integrity sha512-6M5R6yC3JkdJiqo/YJxDp6+0vDn0smXOAzl8uHt4qmDS2u53ji/19K0HM51d+5kg8xntDi+N2hw7YjaU9inkNA==
 
-"@next/swc-linux-x64-gnu@13.1.5":
+"@next/swc-darwin-arm64@13.1.5":
   version "13.1.5"
-  resolved "https://registry.npmjs.org/@next/swc-linux-x64-gnu/-/swc-linux-x64-gnu-13.1.5.tgz"
-  integrity sha512-GftSBFAay2nocGl+KNqFsj6EVSvomaM/bp86hzezbKsTwQmu76PjOCVcejI1gE+4k7f5zPDgCuorF6F04BV0HQ==
-
-"@next/swc-linux-x64-musl@13.1.5":
-  version "13.1.5"
-  resolved "https://registry.npmjs.org/@next/swc-linux-x64-musl/-/swc-linux-x64-musl-13.1.5.tgz"
-  integrity sha512-UD+3lxU4yuAjd+uBkCDfBpAcbGAVfEcE8mX/efIxUGIImmzN0QzgTHYEpKFnY3Lxu02dIBcwQRT3Q5mfO4obng==
+  resolved "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.1.5.tgz"
+  integrity sha512-aeFXK+M/zmG/CNdMJ0tGNs0MWcLueUe7vZ2V6fa+2yz/ZgYJLI7fEfFvVh1p1yBMzupSbZDowvMuCSFTaeg3MA==
 
 "@ngraveio/bc-ur@^1.0.0", "@ngraveio/bc-ur@^1.1.5":
   version "1.1.6"
@@ -4784,11 +4779,6 @@ duplexify@^4.1.2:
     readable-stream "^3.1.1"
     stream-shift "^1.0.0"
 
-e@^0.2.33:
-  version "0.2.33"
-  resolved "https://registry.npmjs.org/e/-/e-0.2.33.tgz"
-  integrity sha512-anpW+L+S+xxSOg0/IdVDwcjxS6b63Cbg0EPhiUbvfr2xSQ9IB0BK+QOjj1ndn5RfnhOyM20AwTOt26xyw/BCLA==
-
 eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/eastasianwidth/-/eastasianwidth-0.2.0.tgz"
@@ -5579,6 +5569,11 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
+
+fsevents@^2.3.2, fsevents@~2.3.2:
+  version "2.3.2"
+  resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
+  integrity sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==
 
 function-bind@^1.1.1, function-bind@^1.1.2:
   version "1.1.2"
