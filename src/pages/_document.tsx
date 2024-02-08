@@ -11,7 +11,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-        <link rel="shortcut icon" href="/favicon.ico"/>
+        <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg"/>
         </Head>
         <body>
           <Main />
