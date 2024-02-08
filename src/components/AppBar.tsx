@@ -13,10 +13,10 @@ export const AppBar: React.FC = () => {
   return (
     <div>
       {/* NavBar / Header */}
-      <div className="navbar flex h-20 flex-row md:mb-2 shadow-lg">
+      <div className="navbar flex flex-row items-center justify-center">
         <div className="navbar-start align-items-center">
-          <div className="w-22 h-22 md:p-2 ml-10">
-            <Link href="https://solana.com" target="_blank" rel="noopener noreferrer" passHref className="text-secondary hover:text-white">
+          <div className="text-base-content-accent">
+            <Link href="https://talk.xyz" passHref>
               <svg
                   width="220"
                   height="220"
@@ -51,14 +51,11 @@ export const AppBar: React.FC = () => {
                   />
               </svg>
             </Link>
+            <h1 className="text-base-content">Secure yourself a limited edition Talk founders pass.</h1>
           </div>
         </div>
-
-        {/* Wallet & Settings */}
-        <div className="navbar-end">
-          <WalletMultiButtonDynamic className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
-        </div>
       </div>
+      <WalletMultiButtonDynamic className="btn-ghost btn-sm rounded-btn text-lg mr-6 " />
     </div>
   );
 };
