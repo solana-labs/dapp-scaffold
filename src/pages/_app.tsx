@@ -1,4 +1,5 @@
 import { AppProps } from 'next/app';
+import { Inter } from '@next/font/google';
 import Head from 'next/head';
 import { FC } from 'react';
 import { ContextProvider } from '../contexts/ContextProvider';
@@ -8,6 +9,12 @@ import Rainbow from '../components/Rainbow';
 require('@solana/wallet-adapter-react-ui/styles.css');
 require('../styles/globals.css');
 
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter'
+});
+
 const App: FC<AppProps> = ({ Component, pageProps }) => {
     return (
         <>
@@ -15,7 +22,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
             <title>Mint Talk.xyz</title>
           </Head>
           <ContextProvider>
-            <div className="flex flex-col h-screen">
+            <div className={`${inter.variable} flex flex-col h-screen font-sans`}>
               <Rainbow />
               <div className="flex-1 flex flex-col max-w-xl m-auto p-4">
                 <Notifications />
