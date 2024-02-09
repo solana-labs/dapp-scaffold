@@ -6,8 +6,11 @@ const FounderBox = () => {
     return (
         <>
             <div className="bg-yellow text-primary-content relative rounded-2xl border-2 border-founder">
-                <div className="container p-4 md:p-8 md:pb-12 max-w-xl mx-auto">
-                    <h2 className="mb-4 font-semibold">Become a Talk Founder</h2>
+                <div className="container p-4 pt-6 md:p-8 md:pb-12 max-w-xl mx-auto">
+                    <div className="flex justify-between">
+                        <h2 className="mb-4 font-semibold tracking-tight">Become a Talk Founder</h2>
+                        <p className="font-semibold tracking-tight">5 SOL</p>
+                    </div>
                     <p>
                         Unlock lifetime access to pro features and support our mission to be the
                         conversational home of the crypto community.
@@ -20,7 +23,7 @@ const FounderBox = () => {
                             <source src="/talk-founders-pass.webm" type="video/webm" />
                         </video>
                     </div>
-                    <div className="grid grid-cols-2 gap-4 text-primary-content">
+                    <div className="grid grid-cols-2 gap-2 md:gap-4 text-primary-content">
                         <MembershipFeature
                             icon="chat"
                             title="Instant Access"
@@ -46,15 +49,15 @@ const FounderBox = () => {
                             iconColor="text-founder"
                         />
                         <MembershipFeature
-                            icon="founder"
-                            title="Treated like Royalty"
-                            description="A little bling with your own founders crown."
+                            icon="invite"
+                            title="Invite Friends"
+                            description="Invite friends and family to talk with you."
                             iconColor="text-founder"
                         />
                         <MembershipFeature
-                            icon="award"
-                            title="Always First"
-                            description="You'll get access to new features as we ship them."
+                            icon="points"
+                            title="Level Up"
+                            description="There’s gold at the end of this rainbow."
                             iconColor="text-founder"
                         />
                     </div>

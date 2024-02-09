@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+::selection {
+  color: oklch(var(--pc));
+  background: oklch(var(--wa));
+}
+
+body {
+  font-size: 0.875rem;
+}
+
 html,
 body {
   padding: 0;
