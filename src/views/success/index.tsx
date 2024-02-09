@@ -4,6 +4,7 @@ import Image from 'next/image';
 import confetti from 'canvas-confetti';
 
 import Button from 'components/Button';
+import IlustrationCredit from "components/IllustrationCredit"
 
 export const SuccessView: FC = ({ }) => {
 
@@ -18,8 +19,9 @@ export const SuccessView: FC = ({ }) => {
 
   return (
 
-    <div className="min-h-[calc(100vh-4rem)] flex justify-center flex-col">
-      <Image src="/illustration-pass.svg" alt="" width="600" height="400" className="-mt-12" />
+    <div className="min-h-[calc(100vh-6rem)] flex justify-center flex-col">
+      <Image src="/illustration-pass.svg" alt="" width="600" height="400" className="-mt-10" />
+      <IlustrationCredit/>
       <div className='text-center'>
         <h1 className='my-4 text-2xl font-semibold'>Welcome to the club!</h1>
         <p className='text-primary my-4 text-balance'>Your founders pass has been stored safely in your wallet. Look after it, it is the key to an exciting future.</p>
