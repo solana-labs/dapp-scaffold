@@ -26,8 +26,8 @@ export const HomeView: FC = ({ }) => {
 
   return (
 
-    <div className="">
-      <div className="navbar flex flex-col md:flex-row items-center mb-4">
+    <div className="md:my-2">
+      <div className="navbar flex flex-col md:flex-row items-center mb-8">
         <Link href="https://talk.xyz" passHref className="text-base-content-accent">
           <svg
               width="220"
@@ -63,7 +63,7 @@ export const HomeView: FC = ({ }) => {
               />
           </svg>
         </Link>
-        <h1 className="text-base-content text-center text-balance text-2xl font-semibold md:text-left">Secure yourself a limited edition Talk founders pass.</h1>
+        <h1 className="text-base-content text-center text-balance text-2xl font-semibold md:text-left leading-tight">Secure yourself a limited edition Talk founders pass.</h1>
       </div>
       <FounderBox />    
       {wallet &&

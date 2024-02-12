@@ -24,7 +24,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <ContextProvider>
             <div className={`${inter.variable} flex flex-col h-screen font-sans`}>
               <Rainbow />
-              <div className="flex-1 flex flex-col max-w-xl m-auto p-4">
+              <div className="flex-1 flex flex-col max-w-xl m-auto p-4 mb-8">
                 <Notifications />
                 <AppBar/>
                 <Component {...pageProps} />
