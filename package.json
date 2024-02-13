@@ -13,7 +13,10 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "@iconscout/react-unicons": "^2.0.2",
-    "@metaplex-foundation/js": "^0.20.1",
+    "@metaplex-foundation/mpl-candy-machine": "^6.0.1",
+    "@metaplex-foundation/umi": "^0.9.1",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
+    "@metaplex-foundation/umi-signer-wallet-adapters": "^0.9.1",
     "@next/font": "13.1.5",
     "@noble/ed25519": "^1.7.1",
     "@solana/wallet-adapter-base": "^0.9.22",

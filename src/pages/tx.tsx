@@ -1,49 +1,72 @@
 import React, { useEffect, useState } from 'react';
 
-import { CandyMachineV2, Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
+import {
+  generateSigner,
+  publicKey,
+  some,
+  transactionBuilder
+} from '@metaplex-foundation/umi';
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import { walletAdapterIdentity } from '@metaplex-foundation/umi-signer-wallet-adapters';
+import {
+  mplCandyMachine,
+  fetchCandyMachine,
+  fetchCandyGuard,
+  mintV2
+} from '@metaplex-foundation/mpl-candy-machine';
+import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const Tx = () => {
-    const { connection } = useConnection();
     const wallet = useWallet();
-    const [candyMachine, setCandyMachine] = useState<CandyMachineV2 | undefined>(undefined)
-    const [isMinting, setIsMinting] = useState(false)
+    const [isMinting, setIsMinting] = useState(false);
+    const [candyMachine, setCandyMachine] = useState(null);
+    const [candyGuard, setCandyGuard] = useState(null);
+    
 
-    const metaplex = Metaplex
-        .make(connection)
+    const umi = createUmi(process.env.NEXT_PUBLIC_MAINNET_ENDPOINT)
         .use(walletAdapterIdentity(wallet))
+        .use(mplCandyMachine())
 
-    const candyMachines = metaplex.candyMachinesV2()
-
-    async function fetchCandyMachine() {
-        const fetched = await candyMachines
-        .findByAddress({ address: new PublicKey(process.env.NEXT_PUBLIC_CANDY_MACHINE_KEY) })
-
-        console.log("Fetched candy machine!", fetched)
-        setCandyMachine(fetched)
+    const fetchCandyMachineAndGuard = async () => {
+      const candyMachinePublicKey = publicKey(process.env.NEXT_PUBLIC_CANDY_MACHINE_KEY)
+      const candyMachine = await fetchCandyMachine(umi, candyMachinePublicKey);
+      const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority);
+      console.log(candyMachine, candyGuard);
+      setCandyMachine(candyMachine);
+      setCandyGuard(candyGuard);
     }
 
     useEffect(() => {
-        fetchCandyMachine()
+      fetchCandyMachineAndGuard()
     }, [])
 
-    async function mintOne() {
+    const mintOne = async () => {
         setIsMinting(true);
-    
-        const mintOutput = await candyMachines
-          .mint({ candyMachine });
-    
+        const nftMint = generateSigner(umi)
+        await transactionBuilder()
+          .add(setComputeUnitLimit(umi, { units: 800_000 }))
+          .add(
+            mintV2(umi, {
+              candyMachine: candyMachine.publicKey,
+              nftMint,
+              collectionMint: candyMachine.collectionMint,
+              collectionUpdateAuthority: candyMachine.authority,
+              tokenStandard: candyMachine.tokenStandard,
+              mintArgs: {
+                allocation: some({ id: 1 })
+              }
+            })
+          )
+          .sendAndConfirm(umi)
         setIsMinting(false);
-        console.log("Minted one!", mintOutput)
     
         // Fetch the candy machine to update the counts
-        await fetchCandyMachine()
+        await fetchCandyMachineAndGuard()
       }
     
       const canMint =
         candyMachine &&
-        candyMachine.itemsRemaining.toNumber() > 0 &&
         wallet.publicKey &&
         !isMinting
 
