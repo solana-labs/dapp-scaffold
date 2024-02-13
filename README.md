@@ -1,6 +1,5 @@
-# Purple Squirrel Network: Solana dApp Scaffold Next
-
-Welcome to the Solana dApp Scaffold Next, a starting point for developers in the Purple Squirrel Network ecosystem. This repository offers a robust scaffold for building decentralized applications (dApps) on the Solana blockchain, featuring a responsive UI and several common features crucial to dApps.
+# Purple Squirrel Network: Solana Dev Faucet
+Welcome to the Solana dev faucet, a starting point for developers in the Purple Squirrel Network ecosystem. This repository offers a robust scaffold for building decentralized applications (dApps) on the Solana blockchain, featuring a responsive UI and several common features crucial to dApps.
 
 ## Overview
 
