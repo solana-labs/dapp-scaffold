@@ -1,19 +1,16 @@
-# Purple Squirrel Network: Solana Dev Faucet
-Welcome to the Solana dev faucet, a starting point for developers in the Purple Squirrel Network ecosystem. This repository offers a robust scaffold for building decentralized applications (dApps) on the Solana blockchain, featuring a responsive UI and several common features crucial to dApps.
+Purple Squirrel Network: Solana Dev Faucet
+Welcome to the Solana Dev Faucet, a starting point for developers within the Purple Squirrel Network ecosystem. This repository provides a robust scaffold for building decentralized applications (dApps) on the Solana blockchain, complete with a responsive UI and essential features crucial for dApps.
 
-## Overview
+Overview
+The Solana dApp Scaffold Next is specifically designed to accelerate the development process for Solana-based dApps. Here’s what it offers:
 
-The Solana dApp Scaffold Next is designed to accelerate the development process for Solana-based dApps. It includes key functionalities and examples to help you get started with Solana blockchain development.
-
-### Features
-
-- **Responsive UI:** A user interface that adapts to different screen sizes, ensuring a seamless experience across devices.
-- **Wallet Integration:** Simplified integration with Solana wallets for user authentication and transactions.
-- **State Management:** Efficient handling of application state to ensure smooth performance.
-- **Components Examples:** Reusable components that demonstrate best practices in dApp UI/UX design.
-- **Notifications:** Implementation of a notification system for better user engagement.
-- **Setup Recommendations:** Guidelines to set up your development environment for Solana dApps.
-
+Features
+Responsive UI: A user interface that seamlessly adapts to various screen sizes, ensuring a consistent experience across devices.
+Wallet Integration: Simplified integration with Solana wallets for user authentication and transactions.
+State Management: Efficient handling of application state to ensure smooth performance.
+Component Examples: Reusable components that demonstrate best practices in dApp UI/UX design.
+Notifications: Implementation of a notification system for improved user engagement.
+Setup Recommendations: Guidelines to set up your development environment for Solana dApps.
 
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
