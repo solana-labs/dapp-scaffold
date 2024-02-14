@@ -3,7 +3,6 @@ import { Inter } from '@next/font/google';
 import Head from 'next/head';
 import { FC } from 'react';
 import { ContextProvider } from '../contexts/ContextProvider';
-import { AppBar } from '../components/AppBar';
 import Notifications from '../components/Notification';
 import Rainbow from '../components/Rainbow';
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -26,7 +25,6 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
               <Rainbow />
               <div className="flex-1 flex flex-col max-w-xl m-auto p-4 mb-8">
                 <Notifications />
-                <AppBar/>
                 <Component {...pageProps} />
               </div>
               <Rainbow />

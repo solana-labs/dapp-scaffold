@@ -2,7 +2,7 @@ import MembershipFeature from 'components/MembershipFeature';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
 
-const FounderBox = () => {
+const FounderBox = ({ setShowMint }) => {
     return (
         <>
             <div className="bg-yellow text-primary-content relative rounded-2xl border-2 border-founder">
@@ -64,7 +64,7 @@ const FounderBox = () => {
                 </div>
             </div>
             <div className="py-4">
-                <Button href="/success" className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
+                <Button onClick={() => setShowMint(true)} className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
                     Mint my Founders Pass
                 </Button>
             </div>
