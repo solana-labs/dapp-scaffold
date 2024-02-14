@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import {
   generateSigner,
   publicKey,
@@ -16,6 +15,7 @@ import {
 } from '@metaplex-foundation/mpl-candy-machine';
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
 import { useWallet } from "@solana/wallet-adapter-react";
+import bs58 from 'bs58';
 
 const Tx = () => {
     const wallet = useWallet();
@@ -29,7 +29,7 @@ const Tx = () => {
         .use(mplCandyMachine())
 
     const fetchCandyMachineAndGuard = async () => {
-      const candyMachinePublicKey = publicKey(process.env.NEXT_PUBLIC_CANDY_MACHINE_KEY)
+      const candyMachinePublicKey = publicKey(process.env.NEXT_PUBLIC_CANDY_MACHINE_KEY);
       const candyMachine = await fetchCandyMachine(umi, candyMachinePublicKey);
       const candyGuard = await fetchCandyGuard(umi, candyMachine.mintAuthority);
       console.log(candyMachine, candyGuard);
@@ -37,33 +37,45 @@ const Tx = () => {
       setCandyGuard(candyGuard);
     }
 
+    console.log(wallet, umi)
+
     useEffect(() => {
       fetchCandyMachineAndGuard()
     }, [])
 
     const mintOne = async () => {
         setIsMinting(true);
+        const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
         const nftMint = generateSigner(umi)
-        await transactionBuilder()
+        const tx = await transactionBuilder()
           .add(setComputeUnitLimit(umi, { units: 800_000 }))
           .add(
             mintV2(umi, {
               candyMachine: candyMachine.publicKey,
+              candyGuard: candyGuard.publicKey,
               nftMint,
               collectionMint: candyMachine.collectionMint,
               collectionUpdateAuthority: candyMachine.authority,
               tokenStandard: candyMachine.tokenStandard,
+              group: some('public'),
               mintArgs: {
-                allocation: some({ id: 1 })
+                solPayment: some({ destination: mainWalletSigner }),
               }
             })
           )
-          .sendAndConfirm(umi)
+          .sendAndConfirm(umi, {
+            confirm: { commitment: "confirmed" },
+          });
         setIsMinting(false);
+
+        const signatureBase58 = bs58.encode(Buffer.from(tx.signature))
+        console.log(`Public mint transaction signature: ${signatureBase58}`)
     
         // Fetch the candy machine to update the counts
-        await fetchCandyMachineAndGuard()
+        await fetchCandyMachineAndGuard();
       }
+
+      console.log(parseInt(candyMachine.itemsRedeemed))
     
       const canMint =
         candyMachine &&
