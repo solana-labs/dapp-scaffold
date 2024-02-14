@@ -9,7 +9,6 @@ import {
     SolletWalletAdapter,
     SolletExtensionWalletAdapter
 } from '@solana/wallet-adapter-wallets';
-import { Cluster, clusterApiUrl } from '@solana/web3.js';
 import { FC, ReactNode, useCallback, useMemo } from 'react';
 import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
 import { notify } from "../utils/notifications";
@@ -27,10 +26,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const network = WalletAdapterNetwork.Mainnet;
     // main net
     const endpoint = process.env.NEXT_PUBLIC_MAINNET_ENDPOINT;
-    // test net
-    // const endpoint = process.env.NEXT_PUBLIC_TESTNET_ENDPOINT;
-
-    console.log(network);
 
     const wallets = useMemo(
         () => [
@@ -54,7 +49,6 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
 
     return (
-        // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
         <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} onError={onError} autoConnect={autoConnect}>
                 <ReactUIWalletModalProviderDynamic>
