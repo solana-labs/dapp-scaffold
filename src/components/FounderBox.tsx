@@ -1,8 +1,29 @@
+import React, { useEffect } from 'react';
+
+import { useWalletModal } from '@solana/wallet-adapter-react-ui';
+
 import MembershipFeature from 'components/MembershipFeature';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const FounderBox = ({ setShowMint }) => {
+    const wallet = useWallet();
+    const { setVisible } = useWalletModal();
+
+    const handleClick = () => {
+        if (wallet.connected) {
+            setShowMint(true);
+        } else {
+            setVisible(true);
+        }
+    }
+
+    useEffect(() => {
+        if (wallet.connected) {
+            setShowMint(true);
+        }
+    }, [wallet?.connected])
     return (
         <>
             <div className="bg-yellow text-primary-content relative rounded-2xl border-2 border-founder">
@@ -64,7 +85,7 @@ const FounderBox = ({ setShowMint }) => {
                 </div>
             </div>
             <div className="py-4">
-                <Button onClick={() => setShowMint(true)} className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
+                <Button onClick={handleClick} className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
                     Mint my Founders Pass
                 </Button>
             </div>

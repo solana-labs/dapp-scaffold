@@ -24,6 +24,7 @@ const Tx = () => {
     const [isMinting, setIsMinting] = useState(false);
     const [candyMachine, setCandyMachine] = useState(null);
     const [candyGuard, setCandyGuard] = useState(null);
+    const [canMint, setCanMint] = useState(false);
     const router = useRouter();
     
 
@@ -42,6 +43,20 @@ const Tx = () => {
     useEffect(() => {
       fetchCandyMachineAndGuard()
     }, [])
+
+    useEffect(() => {
+      setCanMint(
+        candyMachine &&
+        wallet.publicKey &&
+        parseInt(candyMachine?.itemsRedeemed || 0) < candyMachine?.items?.length
+      );
+    }, [candyMachine, wallet?.publicKey])
+
+    useEffect(() => {
+      if (canMint) {
+        mintOne();
+      }
+    }, [canMint])
 
     const mintOne = async () => {
         setIsMinting(true);
@@ -73,16 +88,10 @@ const Tx = () => {
         }
         setIsMinting(false);
       }
-    
-    const canMint =
-        candyMachine &&
-        wallet.publicKey &&
-        parseInt(candyMachine?.itemsRedeemed || 0) < candyMachine?.items?.length
-        !isMinting
 
     return isMinting ? (
       <>
-        <h2 className='text-center text-2xl'>Complete the transaction in your chosen wallet app</h2>
+        <h2 className='text-center text-2xl'>Minting in progress</h2>
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
