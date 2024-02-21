@@ -102,7 +102,7 @@ const Tx = () => {
           disabled={!canMint}
           onClick={mintOne}
         >
-          Mint
+          Mint my Founders Pass
         </Button>
       </div>
     )
