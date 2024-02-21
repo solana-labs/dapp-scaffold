@@ -28,6 +28,26 @@ a {
 
 /* example: override wallet button style */
 .wallet-adapter-button:not([disabled]):hover {
-  background-color: #707070;
+  background-color: #143349;
 }
 
+.wallet-adapter-modal-overlay {
+  background-color: rgba(0,0,0,0.0);
+  backdrop-filter: blur(7px);
+}
+
+.wallet-adapter-modal-wrapper {
+  background-color: #183F5B;
+}
+
+.wallet-adapter-modal-button-close {
+  background-color: #143349;
+}
+
+.wallet-adapter-modal-button-close svg {
+  fill: #fff;
+}
+
+.wallet-adapter-button span {
+  color: #CBE9FF;
+}

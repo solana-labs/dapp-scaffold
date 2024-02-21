@@ -19,7 +19,7 @@ const NotificationList = () => {
 
   return (
     <div
-      className={`z-20 fixed inset-20 flex items-end px-4 py-6 pointer-events-none sm:p-6`}
+      className={`z-20 fixed max-w-xl m-auto inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6`}
     >
       <div className={`flex flex-col w-full`}>
         {reversedNotifications.map((n, idx) => (
@@ -66,21 +66,21 @@ const Notification = ({ type, message, description, txid, onHide }) => {
 
   return (
     <div
-      className={`max-w-sm w-full bg-bkg-1 shadow-lg rounded-md mt-2 pointer-events-auto ring-1 ring-black ring-opacity-5 p-2 mx-4 mb-12 overflow-hidden`}
+      className={`w-full shadow rounded-full bg-${type} pointer-events-auto p-2 m-auto overflow-hidden`}
     >
-      <div className={`p-4 rounded-md bg-primary text-primary-content`}>
+      <div className={`text-primary-content`}>
         <div className={`flex items-center`}>
           <div className={`flex-shrink-0`}>
             {type === 'success' ? (
-              <CheckCircleIcon className={`h-8 w-8 mr-1 text-green`} />
+              <CheckCircleIcon className={`h-8 w-8`} />
             ) : null}
-            {type === 'info' && <InformationCircleIcon className={`h-8 w-8 mr-1 text-red`} />}
+            {type === 'info' && <InformationCircleIcon className={`h-8 w-8`} />}
             {type === 'error' && (
-              <XCircleIcon className={`h-8 w-8 mr-1`} />
+              <XCircleIcon className={`h-8 w-8`} />
             )}
           </div>
           <div className={`ml-2 w-0 flex-1`}>
-            <div className={`font-bold text-fgd-1`}>{message}</div>
+            <div className={`font-semibold`}>{message}</div>
             {description ? (
               <p className={`mt-0.5 text-sm text-fgd-2`}>{description}</p>
             ) : null}
@@ -101,7 +101,7 @@ const Notification = ({ type, message, description, txid, onHide }) => {
               </div>
             ) : null}
           </div>
-          <div className={`ml-4 flex-shrink-0 self-start flex`}>
+          <div className={`ml-4 mr-2 flex-shrink-0 flex`}>
             <button
               onClick={() => onHide()}
               className={`bg-bkg-2 default-transition rounded-md inline-flex text-fgd-3 hover:text-fgd-4 focus:outline-none`}

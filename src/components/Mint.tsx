@@ -91,7 +91,7 @@ const Tx = () => {
 
     return isMinting ? (
       <>
-        <h2 className='text-center text-2xl'>Minting in progress</h2>
+        <h2 className='text-center text-2xl font-semibold tracking-tight'>Minting in progress</h2>
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>

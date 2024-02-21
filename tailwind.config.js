@@ -3,7 +3,7 @@ module.exports = {
   content: ['./src/pages/**/*.{js,ts,jsx,tsx,mdx}', './src/components/**/*.{js,ts,jsx,tsx,mdx}', './src/views/**/*.{js,ts,jsx,tsx,mdx}'],
   safelist: [
       {
-          pattern: /(bg|text|border)-(blue|green|yellow|orange|red|pink|purple)/,
+          pattern: /(bg|text|border)-(blue|green|yellow|orange|red|pink|purple|error|success|info)/,
           variants: ['before', 'after']
       },
       {
