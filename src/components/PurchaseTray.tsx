@@ -15,7 +15,7 @@ const PurchaseTray = ({ showMint, setShowMint }) => {
     <div ref={trayRef} className='fixed inset-x-0 bottom-0 right-0 bg-neutral py-4'>
       <div className='container max-w-xl mx-auto flex flex-col min-h-[30vh]'>
         <div className='flex flex-col items-center justify-center flex-grow'>
-          <Mint />
+          <Mint setShowMint={setShowMint} />
         </div>
       </div>
     </div>

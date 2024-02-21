@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 
-const Tx = () => {
+const Tx = ({ setShowMint }) => {
     const wallet = useWallet();
     const [isMinting, setIsMinting] = useState(false);
     const [candyMachine, setCandyMachine] = useState(null);
@@ -85,6 +85,7 @@ const Tx = () => {
             router.push('/success')
         } catch (e) {
           console.log(e)
+          setShowMint(false);
         }
         setIsMinting(false);
       }
