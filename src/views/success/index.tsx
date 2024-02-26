@@ -2,11 +2,13 @@
 import { FC, useEffect } from 'react';
 import Image from 'next/image';
 import confetti from 'canvas-confetti';
+import { useRouter } from 'next/router';
 
 import Button from 'components/Button';
 import IlustrationCredit from "components/IllustrationCredit"
 
 export const SuccessView: FC = ({ }) => {
+  const router = useRouter();
 
   useEffect(() => {
     confetti({
@@ -26,7 +28,7 @@ export const SuccessView: FC = ({ }) => {
         <h1 className='my-4 text-2xl font-semibold'>Welcome to the club!</h1>
         <p className='text-primary my-4 text-balance'>Your founders pass has been stored safely in your wallet. Look after it, it&rsquo;s the key to an exciting future.</p>
       </div>
-      <Button href="https://talk.xyz" className='mt-4 mb-0'>Continue</Button>
+      <Button href={router?.query?.redirect || 'https://talk.xyz/verify-pass'} className='mt-4 mb-0'>Continue</Button>
     </div>
   );
 };
