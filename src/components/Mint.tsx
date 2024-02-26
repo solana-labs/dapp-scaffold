@@ -82,7 +82,7 @@ const Tx = () => {
             .sendAndConfirm(umi, {
               confirm: { commitment: "confirmed" },
             });
-            router.push('/success')
+            router.push(`/success${router?.query?.redirect ? `?redirect=${router.query.redirect}` : ''}`)
         } catch (e) {
           console.log(e)
         }
