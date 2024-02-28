@@ -45,40 +45,40 @@ const FounderBox = ({ setShowMint }) => {
                         </video>
                     </div>
                     <div className="grid grid-cols-2 gap-2 md:gap-4 text-primary-content">
-                        <MembershipFeature
+                    <MembershipFeature
                             icon="chat"
                             title="Instant Access"
-                            description="Choose a username and use talk.xyz today."
+                            description="Choose your username and use talk.xyz today."
                             iconColor="text-founder"
                         />
                         <MembershipFeature
                             icon="chat-image"
                             title="Talk Founders NFT"
-                            description="A tradeable SOL NFT for your founders pass."
+                            description="A tradeable SOL NFT for your Founders Pass."
                             iconColor="text-founder"
                         />
                         <MembershipFeature
                             icon="founder"
                             title="Treated like Royalty"
-                            description="A little bling with your own founders crown."
-                            iconColor="text-founder"
-                        />
-                        <MembershipFeature
-                            icon="award"
-                            title="Always First"
                             description="You'll get access to new features as we ship them."
                             iconColor="text-founder"
                         />
                         <MembershipFeature
+                            icon="lock"
+                            title="Private Channels"
+                            description="Create your own private channels for friends."
+                            iconColor="text-founder"
+                        />
+                        <MembershipFeature
                             icon="invite"
-                            title="Invite Friends"
-                            description="Invite friends and family to talk with you."
+                            title="All the Invites"
+                            description="Invite friends and degens to Talk with you."
                             iconColor="text-founder"
                         />
                         <MembershipFeature
                             icon="points"
                             title="Level Up"
-                            description="There’s gold at the end of this rainbow."
+                            description="Bonus points when the points system launches."
                             iconColor="text-founder"
                         />
                     </div>
