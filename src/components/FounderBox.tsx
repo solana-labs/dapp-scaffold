@@ -30,7 +30,7 @@ const FounderBox = ({ setShowMint }) => {
                 <div className="container p-4 pt-6 md:p-8 md:pb-12 max-w-xl mx-auto">
                     <div className="flex justify-between">
                         <h2 className="mb-4 font-semibold tracking-tight">Become a Talk Founder</h2>
-                        <p className="font-semibold tracking-tight">5 SOL</p>
+                        <p className="font-semibold tracking-tight">4 SOL</p>
                     </div>
                     <p>
                         Unlock lifetime access to pro features and support our mission to be the
