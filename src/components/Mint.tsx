@@ -61,21 +61,21 @@ const Tx = ({ setShowMint }) => {
 
     const mint = async () => {
       try {
-        // TODO: check if they are saga
+        // TODO: check if they are saga and get the NFT address for sagaNFT
         const result = await axios.post('https://lancelot.talk.xyz/user/has_saga_pass', {});
         console.log(result?.data);
-        const hasSaga = false;
-        if (hasSaga) {
-          mintSaga();
+        const sagaNFT = false;
+        if (sagaNFT) {
+          mintSaga(sagaNFT);
         } else {
-          mintOne();
+          mintPublic();
         }
       } catch (e) {
         console.log(e)
       }
     }
 
-    const mintOne = async () => {
+    const mintPublic = async () => {
         setIsMinting(true);
         try {
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
@@ -93,7 +93,7 @@ const Tx = ({ setShowMint }) => {
                 group: some('public'),
                 mintArgs: {
                   solPayment: some({ destination: mainWalletSigner }),
-                  mintLimit: some({ id: 3 })
+                  mintLimit: some({ id: 2 })
                 }
               })
             )
@@ -108,7 +108,7 @@ const Tx = ({ setShowMint }) => {
         setIsMinting(false);
       }
 
-      const mintSaga = async () => {
+      const mintSaga = async (sagaNFT) => {
         setIsMinting(true);
         try {
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
@@ -126,7 +126,7 @@ const Tx = ({ setShowMint }) => {
                 group: some('public'),
                 mintArgs: {
                   solPayment: some({ destination: mainWalletSigner }),
-                  nftGate: some({ mint: mainWalletSigner }), // TODO: must update
+                  nftGate: some({ mint: publicKey(sagaNFT) }),
                   mintLimit: some({ id: 3 })
                 }
               })
@@ -153,7 +153,7 @@ const Tx = ({ setShowMint }) => {
       <div className='max-w-md w-full'>
         <Button
           disabled={!canMint}
-          onClick={mintOne}
+          onClick={mint}
         >
           Mint my Founders Pass
         </Button>
