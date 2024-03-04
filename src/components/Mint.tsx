@@ -16,6 +16,7 @@ import {
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import Button from 'components/Button';
 
@@ -54,9 +55,25 @@ const Tx = ({ setShowMint }) => {
 
     useEffect(() => {
       if (canMint) {
-        mintOne();
+        mint();
       }
     }, [canMint])
+
+    const mint = async () => {
+      try {
+        // TODO: check if they are saga
+        const result = await axios.post('https://lancelot.talk.xyz/user/has_saga_pass', {});
+        console.log(result?.data);
+        const hasSaga = false;
+        if (hasSaga) {
+          mintSaga();
+        } else {
+          mintOne();
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
 
     const mintOne = async () => {
         setIsMinting(true);
@@ -76,6 +93,41 @@ const Tx = ({ setShowMint }) => {
                 group: some('public'),
                 mintArgs: {
                   solPayment: some({ destination: mainWalletSigner }),
+                  mintLimit: some({ id: 3 })
+                }
+              })
+            )
+            .sendAndConfirm(umi, {
+              confirm: { commitment: "confirmed" },
+            });
+            router.push(`/success${router?.query?.redirect ? `?redirect=${router.query.redirect}` : ''}`)
+        } catch (e) {
+          console.log(e)
+          setShowMint(false);
+        }
+        setIsMinting(false);
+      }
+
+      const mintSaga = async () => {
+        setIsMinting(true);
+        try {
+          const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
+          const nftMint = generateSigner(umi)
+          await transactionBuilder()
+            .add(setComputeUnitLimit(umi, { units: 800_000 }))
+            .add(
+              mintV2(umi, {
+                candyMachine: candyMachine.publicKey,
+                candyGuard: candyGuard.publicKey,
+                nftMint,
+                collectionMint: candyMachine.collectionMint,
+                collectionUpdateAuthority: candyMachine.authority,
+                tokenStandard: candyMachine.tokenStandard,
+                group: some('public'),
+                mintArgs: {
+                  solPayment: some({ destination: mainWalletSigner }),
+                  nftGate: some({ mint: mainWalletSigner }), // TODO: must update
+                  mintLimit: some({ id: 3 })
                 }
               })
             )
