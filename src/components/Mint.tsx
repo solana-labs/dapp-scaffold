@@ -26,6 +26,7 @@ const Tx = ({ setShowMint }) => {
     const [candyMachine, setCandyMachine] = useState(null);
     const [candyGuard, setCandyGuard] = useState(null);
     const [canMint, setCanMint] = useState(false);
+    const [hasSagaPass, setHasSagaPass] = useState(false);
     const router = useRouter();
     
 
@@ -66,6 +67,7 @@ const Tx = ({ setShowMint }) => {
         console.log(result?.data);
         const sagaNFT = false;
         if (sagaNFT) {
+          setHasSagaPass(true);
           mintSaga(sagaNFT);
         } else {
           mintPublic();
@@ -148,6 +150,11 @@ const Tx = ({ setShowMint }) => {
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
+        {hasSagaPass && (
+          <h4 className='text-center text-xl tracking-tight text-primary'>
+            Hello Saga phone holder, we gave you a discount
+          </h4>
+        )}
       </>
     ) : (
       <div className='max-w-md w-full'>
