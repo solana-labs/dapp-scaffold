@@ -9,7 +9,7 @@ const Home: NextPage = (props) => {
         <title>Mint a Talk Founders Pass · Talk.xyz</title>
         <meta
           name="description"
-          content="Secure yourself a limited edition Talk founders pass and access to pro features on Talk.xyz. The tradeable NFT costs 5 SOL."
+          content="Secure yourself a limited edition Talk founders pass and access to pro features on Talk.xyz. The tradeable NFT costs 3 SOL."
         />
       </Head>
       <HomeView />
