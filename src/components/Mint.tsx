@@ -63,9 +63,10 @@ const Tx = ({ setShowMint }) => {
     const mint = async () => {
       try {
         // TODO: check if they are saga and get the NFT address for sagaNFT
-        const result = await axios.post('https://lancelot.talk.xyz/user/has_saga_pass', {});
-        console.log(result?.data);
-        const sagaNFT = false;
+        const result = await axios.post('https://lancelot.talk.xyz/user/wallet_has_saga_pass', {
+          wallet_address: wallet.publicKey
+        });
+        const sagaNFT = result?.data?.has_saga_pass;
         if (sagaNFT) {
           setHasSagaPass(true);
           mintSaga(sagaNFT);
