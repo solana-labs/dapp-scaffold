@@ -16,6 +16,7 @@ import {
 import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import Button from 'components/Button';
 
@@ -25,6 +26,7 @@ const Tx = ({ setShowMint }) => {
     const [candyMachine, setCandyMachine] = useState(null);
     const [candyGuard, setCandyGuard] = useState(null);
     const [canMint, setCanMint] = useState(false);
+    const [hasSagaPass, setHasSagaPass] = useState(false);
     const router = useRouter();
     
 
@@ -54,11 +56,28 @@ const Tx = ({ setShowMint }) => {
 
     useEffect(() => {
       if (canMint) {
-        mintOne();
+        mint();
       }
     }, [canMint])
 
-    const mintOne = async () => {
+    const mint = async () => {
+      try {
+        const result = await axios.post('https://lancelot.talk.xyz/user/wallet_has_saga_pass', {
+          wallet_address: wallet.publicKey
+        });
+        const sagaNFT = result?.data?.has_saga_pass;
+        if (sagaNFT) {
+          setHasSagaPass(true);
+          mintSaga(sagaNFT);
+        } else {
+          mintPublic();
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    const mintPublic = async () => {
         setIsMinting(true);
         try {
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
@@ -76,6 +95,41 @@ const Tx = ({ setShowMint }) => {
                 group: some('public'),
                 mintArgs: {
                   solPayment: some({ destination: mainWalletSigner }),
+                  mintLimit: some({ id: 2 })
+                }
+              })
+            )
+            .sendAndConfirm(umi, {
+              confirm: { commitment: "confirmed" },
+            });
+            router.push(`/success${router?.query?.redirect ? `?redirect=${router.query.redirect}` : ''}`)
+        } catch (e) {
+          console.log(e)
+          setShowMint(false);
+        }
+        setIsMinting(false);
+      }
+
+      const mintSaga = async (sagaNFT) => {
+        setIsMinting(true);
+        try {
+          const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
+          const nftMint = generateSigner(umi)
+          await transactionBuilder()
+            .add(setComputeUnitLimit(umi, { units: 800_000 }))
+            .add(
+              mintV2(umi, {
+                candyMachine: candyMachine.publicKey,
+                candyGuard: candyGuard.publicKey,
+                nftMint,
+                collectionMint: candyMachine.collectionMint,
+                collectionUpdateAuthority: candyMachine.authority,
+                tokenStandard: candyMachine.tokenStandard,
+                group: some('public'),
+                mintArgs: {
+                  solPayment: some({ destination: mainWalletSigner }),
+                  nftGate: some({ mint: publicKey(sagaNFT) }),
+                  mintLimit: some({ id: 3 })
                 }
               })
             )
@@ -96,12 +150,17 @@ const Tx = ({ setShowMint }) => {
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
+        {hasSagaPass && (
+          <h4 className='text-center text-xl tracking-tight text-primary'>
+            Hello Saga phone holder, we gave you a discount
+          </h4>
+        )}
       </>
     ) : (
       <div className='max-w-md w-full'>
         <Button
           disabled={!canMint}
-          onClick={mintOne}
+          onClick={mint}
         >
           Mint my Founders Pass
         </Button>
