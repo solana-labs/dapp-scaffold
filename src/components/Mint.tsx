@@ -13,9 +13,10 @@ import {
   fetchCandyGuard,
   mintV2
 } from '@metaplex-foundation/mpl-candy-machine';
-import { setComputeUnitLimit } from '@metaplex-foundation/mpl-toolbox';
+import { setComputeUnitLimit, setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox';
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useRouter } from 'next/router';
+import { Connection } from "@solana/web3.js"
 import axios from 'axios';
 
 import Button from 'components/Button';
@@ -80,6 +81,7 @@ const Tx = ({ setShowMint }) => {
     const mintPublic = async () => {
         setIsMinting(true);
         try {
+          const fees = await getFees();
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
           const nftMint = generateSigner(umi)
           await transactionBuilder()
@@ -99,6 +101,7 @@ const Tx = ({ setShowMint }) => {
                 }
               })
             )
+            .prepend(setComputeUnitPrice(umi, { microLamports: fees }))
             .sendAndConfirm(umi, {
               send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
@@ -114,6 +117,7 @@ const Tx = ({ setShowMint }) => {
       const mintSaga = async (sagaNFT) => {
         setIsMinting(true);
         try {
+          const fees = await getFees();
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
           const nftMint = generateSigner(umi)
           await transactionBuilder()
@@ -134,6 +138,7 @@ const Tx = ({ setShowMint }) => {
                 }
               })
             )
+            .prepend(setComputeUnitPrice(umi, { microLamports: fees }))
             .sendAndConfirm(umi, {
               send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
@@ -145,6 +150,24 @@ const Tx = ({ setShowMint }) => {
         }
         setIsMinting(false);
       }
+
+    const getFees = async () => {
+      const rpcConnection = new Connection(process.env.NEXT_PUBLIC_MAINNET_ENDPOINT)
+
+      const latestPriorityFees = await rpcConnection.getRecentPrioritizationFees()
+      let highestPriorityFee = 0
+      let maxPriorityFee = 5000
+      for (const feeObj of latestPriorityFees) {
+          if (feeObj.prioritizationFee > highestPriorityFee) {
+              highestPriorityFee = feeObj.prioritizationFee
+          }
+      }
+      if (highestPriorityFee > maxPriorityFee) {
+          highestPriorityFee = maxPriorityFee
+      }
+
+      return highestPriorityFee;
+    }
 
     return isMinting ? (
       <>
