@@ -100,6 +100,7 @@ const Tx = ({ setShowMint }) => {
               })
             )
             .sendAndConfirm(umi, {
+              send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
             });
             router.push(`/success${router?.query?.redirect ? `?redirect=${router.query.redirect}` : ''}`)
@@ -134,6 +135,7 @@ const Tx = ({ setShowMint }) => {
               })
             )
             .sendAndConfirm(umi, {
+              send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
             });
             router.push(`/success${router?.query?.redirect ? `?redirect=${router.query.redirect}` : ''}`)
