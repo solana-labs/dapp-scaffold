@@ -85,7 +85,8 @@ const Tx = ({ setShowMint }) => {
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
           const nftMint = generateSigner(umi)
           await transactionBuilder()
-            .add(setComputeUnitLimit(umi, { units: 800_000 }))
+            .add(setComputeUnitLimit(umi, { units: 4000 }))
+            .add(setComputeUnitPrice(umi, { microLamports: fees }))
             .add(
               mintV2(umi, {
                 candyMachine: candyMachine.publicKey,
@@ -101,7 +102,6 @@ const Tx = ({ setShowMint }) => {
                 }
               })
             )
-            .prepend(setComputeUnitPrice(umi, { microLamports: fees }))
             .sendAndConfirm(umi, {
               send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
@@ -121,7 +121,8 @@ const Tx = ({ setShowMint }) => {
           const mainWalletSigner = publicKey(process.env.NEXT_PUBLIC_MAIN_WALLET);
           const nftMint = generateSigner(umi)
           await transactionBuilder()
-            .add(setComputeUnitLimit(umi, { units: 800_000 }))
+            .add(setComputeUnitLimit(umi, { units: 4000 }))
+            .add(setComputeUnitPrice(umi, { microLamports: fees }))
             .add(
               mintV2(umi, {
                 candyMachine: candyMachine.publicKey,
@@ -138,7 +139,6 @@ const Tx = ({ setShowMint }) => {
                 }
               })
             )
-            .prepend(setComputeUnitPrice(umi, { microLamports: fees }))
             .sendAndConfirm(umi, {
               send: { maxRetries: 5 },
               confirm: { commitment: "confirmed" },
