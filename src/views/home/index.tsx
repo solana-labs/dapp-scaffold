@@ -47,7 +47,7 @@ export const HomeView: FC = ({ }) => {
                 />
             </svg>
           </Link>
-          <h1 className="text-base-content text-center text-balance text-2xl font-semibold md:text-left leading-tight">Secure yourself a limited edition Talk founders pass.</h1>
+          <h1 className="text-base-content text-center text-balance text-2xl font-semibold md:text-left leading-tight">Secure the Bag.<br/>Buy a Founders Pass.</h1>
         </div>
         <FounderBox setShowMint={setShowMint} />
       </div>
