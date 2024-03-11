@@ -130,7 +130,7 @@ const Tx = ({ setShowMint }) => {
                 collectionMint: candyMachine.collectionMint,
                 collectionUpdateAuthority: candyMachine.authority,
                 tokenStandard: candyMachine.tokenStandard,
-                group: some('public'),
+                group: some('saga'),
                 mintArgs: {
                   solPayment: some({ destination: mainWalletSigner }),
                   nftGate: some({ mint: publicKey(sagaNFT) }),
