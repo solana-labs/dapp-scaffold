@@ -177,12 +177,12 @@ const Tx = ({ setShowMint }) => {
         </div>
         {hasSagaPass && (
           <h4 className='text-center text-xl tracking-tight text-primary'>
-            Hello Saga phone holder, we gave you a discount
+            Hello Saga phone holder, we gave you a discount!
           </h4>
         )}
       </>
     ) : (
-      <div className='max-w-md w-full'>
+      <div className='max-w-md w-full px-4'>
         <Button
           disabled={!canMint}
           onClick={mint}
