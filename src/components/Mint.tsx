@@ -28,8 +28,8 @@ const Tx = ({ setShowMint }) => {
     const [candyGuard, setCandyGuard] = useState(null);
     const [canMint, setCanMint] = useState(false);
     const [hasSagaPass, setHasSagaPass] = useState(false);
+    const [balance, setBalance] = useState(0);
     const router = useRouter();
-    
 
     const umi = createUmi(process.env.NEXT_PUBLIC_MAINNET_ENDPOINT)
         .use(walletAdapterIdentity(wallet))
@@ -46,6 +46,18 @@ const Tx = ({ setShowMint }) => {
     useEffect(() => {
       fetchCandyMachineAndGuard()
     }, [])
+
+    useEffect(() => {
+      if (wallet.publicKey) {
+        getBalance();
+      }
+    }, [wallet.publicKey])
+
+    const getBalance = async () => {
+      const balance = await umi.rpc.getBalance(publicKey(wallet.publicKey));
+      setBalance(Number(balance.basisPoints) / 1000000000)
+
+    }
 
     useEffect(() => {
       setCanMint(
@@ -175,11 +187,19 @@ const Tx = ({ setShowMint }) => {
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
-        {hasSagaPass && (
+        {hasSagaPass && balance < 2 ? (
+          <h4 className='text-center text-xl tracking-tight text-error'>
+            Are you short on funds? You&apos;ll need at least 2 SOL. It looks like you only have {balance.toFixed(2)}
+          </h4>
+        ) : hasSagaPass ? (
           <h4 className='text-center text-xl tracking-tight text-primary'>
             Hello Saga phone holder, we gave you a discount!
           </h4>
-        )}
+        ) : balance < 3 ? (
+          <h4 className='text-center text-xl tracking-tight text-error'>
+            Are you short on funds? You&apos;ll need at least 3 SOL. It looks like you only have {balance.toFixed(2)}
+          </h4>
+        ) : null}
       </>
     ) : (
       <div className='max-w-md w-full px-4'>
