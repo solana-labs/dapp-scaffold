@@ -15,6 +15,9 @@ import {
 } from '@metaplex-foundation/mpl-candy-machine';
 import { setComputeUnitLimit, setComputeUnitPrice } from '@metaplex-foundation/mpl-toolbox';
 import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  WalletMultiButton
+} from '@solana/wallet-adapter-react-ui';
 import { useRouter } from 'next/router';
 import { Connection } from "@solana/web3.js"
 import axios from 'axios';
@@ -183,7 +186,8 @@ const Tx = ({ setShowMint }) => {
 
     return isMinting ? (
       <>
-        <h2 className='text-center text-2xl font-semibold tracking-tight'>Minting in progress</h2>
+        <WalletMultiButton />
+        <h2 className='text-center text-2xl font-semibold tracking-tight mt-4'>Minting in progress</h2>
         <div className="h-[100px] w-full flex items-center justify-center">
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
@@ -203,9 +207,11 @@ const Tx = ({ setShowMint }) => {
       </>
     ) : (
       <div className='max-w-md w-full px-4'>
+        <WalletMultiButton />
         <Button
           disabled={!canMint}
           onClick={mint}
+          className='mt-4'
         >
           Mint my Founders Pass
         </Button>
