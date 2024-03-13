@@ -70,12 +70,6 @@ const Tx = ({ setShowMint }) => {
       );
     }, [candyMachine, wallet?.publicKey])
 
-    useEffect(() => {
-      if (canMint) {
-        mint();
-      }
-    }, [canMint])
-
     const mint = async () => {
       try {
         const result = await axios.post('https://lancelot.talk.xyz/user/wallet_has_saga_pass', {
@@ -207,7 +201,9 @@ const Tx = ({ setShowMint }) => {
       </>
     ) : (
       <div className='max-w-md w-full px-4'>
-        <WalletMultiButton />
+        <div className='flex justify-center'>
+          <WalletMultiButton />
+        </div>
         <Button
           disabled={!canMint}
           onClick={mint}

@@ -86,7 +86,7 @@ const FounderBox = ({ setShowMint }) => {
             </div>
             <div className="py-4">
                 <Button onClick={handleClick} className="md:w-4/5 md:mx-auto md:flex md:-mt-10 md:z-10 md:relative">
-                    Mint my Founders Pass
+                    Become a Founder
                 </Button>
             </div>
         </>
