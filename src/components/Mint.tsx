@@ -186,15 +186,15 @@ const Tx = ({ setShowMint }) => {
             <div className="loading loading-spinner loading-lg text-accent"></div>
         </div>
         {hasSagaPass && balance < 2 ? (
-          <h4 className='text-center text-xl tracking-tight text-error'>
+          <h4 className='text-center text-xs px-4 text-balance tracking-tight text-error'>
             Are you short on funds? You&apos;ll need at least 2 SOL. It looks like you only have {balance.toFixed(2)}
           </h4>
         ) : hasSagaPass ? (
-          <h4 className='text-center text-xl tracking-tight text-primary'>
+          <h4 className='text-center text-xs px-4 text-balance tracking-tight text-primary'>
             Hello Saga phone holder, we gave you a discount!
           </h4>
         ) : balance < 3 ? (
-          <h4 className='text-center text-xl tracking-tight text-error'>
+          <h4 className='text-center text-xs px-4 text-balance tracking-tight text-error'>
             Are you short on funds? You&apos;ll need at least 3 SOL. It looks like you only have {balance.toFixed(2)}
           </h4>
         ) : null}
