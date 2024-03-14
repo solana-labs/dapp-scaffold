@@ -51,3 +51,24 @@ a {
 .wallet-adapter-button span {
   color: #CBE9FF;
 }
+
+.wallet-adapter-dropdown-list-active {
+  background-color: #143349;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  filter: drop-shadow(rgba(0, 0, 0, 0.1) 0px 1px 2px) drop-shadow(rgba(0, 0, 0, 0.06) 0px 1px 1px);
+  box-shadow: none;
+  grid-row-gap: 0;
+  border-radius: 1.4em;
+}
+
+.wallet-adapter-dropdown-list-item {
+  font-weight: normal;
+  height: 32px;
+  border-radius: 1em;
+}
+
+.wallet-adapter-button {
+  border-radius: 3em;
+}
