@@ -1,9 +1,9 @@
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 
 // Concatenates classes into a single className string
 const cn = (...args: string[]) => args.join(' ');
 
-const formatDate = (date: string) => format(new Date(date), 'MM/dd/yyyy h:mm:ss');
+const formatDate = (date: string) => dayjs(date).format('MM/dd/yyyy h:mm:ss');
 
 /**
  * Formats number as currency string.
